@@ -1,4 +1,4 @@
-import { Controller, Get, Post, Body, Patch, Param, Delete, Query, HttpStatus, Res, UseInterceptors, HttpException } from '@nestjs/common';
+import { Controller, Get, Post, Body, Patch, Param, Delete, Query, HttpStatus, Res, UseInterceptors, HttpException, UsePipes, ValidationPipe } from '@nestjs/common';
 import { ProductosService } from './productos.service';
 import { CreateProductoDto } from './dto/create-producto.dto';
 import { UpdateProductoDto } from './dto/update-producto.dto';
@@ -15,10 +15,17 @@ export class ProductosController {
   constructor(private readonly productosService: ProductosService) {}
 
   @Post()
+
   @ApiResponse({ status: 201, description: 'Producto creado exitosamente.' })
-  create(@Body() createProductoDto: CreateProductoDto) {
-    return this.productosService.create(createProductoDto);
+  @ApiResponse({ status: 400, description: 'Error en los datos enviados' }) 
+  @UsePipes(new ValidationPipe({ whitelist: true, forbidNonWhitelisted: true }))
+  async create(@Body() createProductoDto: CreateProductoDto) {
+    const crearProducto = await this.productosService.create(createProductoDto);
+    if (!crearProducto) {
+      throw new HttpException('Producto mal creado, ingresalos bien', HttpStatus.BAD_REQUEST);
+    }
   }
+
 
   @Get()
   @ApiQuery({ name: 'tipo', enum: Tipos, required: false, description: 'Filtrar por tipo de producto (opcional)' })
