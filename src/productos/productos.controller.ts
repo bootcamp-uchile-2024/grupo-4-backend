@@ -28,6 +28,7 @@ export class ProductosController {
 
   @Get()
   @ApiQuery({ name: 'tipo', enum: Tipos, required: false, description: 'Filtrar por tipo de producto (opcional)' })
+  @ApiResponse({ status: 200, description: 'Producto encontrado.' })
   findAll(
     @Query('tipo') tipo: Tipos,
   ) {
