@@ -3,9 +3,12 @@ import { AppController } from './app.controller';
 import { AppService } from './app.service';
 import { ProductosModule } from './productos/productos.module';
 import { GeneralMiddleware } from './general/general.middleware';
+import { UsuarioModule } from './usuario/usuario.module';
+import { PedidoModule } from './pedido/pedido.module';
+import { CarritoDeComprasModule } from './carrito-de-compras/carrito-de-compras.module';
 
 @Module({
-  imports: [ProductosModule],
+  imports: [ProductosModule, UsuarioModule, PedidoModule, CarritoDeComprasModule],
   controllers: [AppController],
   providers: [AppService],
 })
