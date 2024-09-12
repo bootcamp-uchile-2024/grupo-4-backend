@@ -18,7 +18,4 @@ export class GeneralInterceptor implements NestInterceptor {
 
   }
 }
-function pipe(arg0: any, arg1: any) {
-  throw new Error('Function not implemented.');
-}
 

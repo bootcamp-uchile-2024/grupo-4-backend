@@ -1,40 +1,65 @@
 import { ApiProperty } from "@nestjs/swagger";
+import { Type } from "class-transformer";
+import { IsString, IsNumber, IsEmail, Length, Matches, IsArray, ValidateNested, IsNotEmpty } from "class-validator";
 import { CarritoDeCompra } from "src/carrito-de-compras/entities/carrito-de-compra.entity";
 import { Pedido } from "src/pedido/entities/pedido.entity";
 
 export class CreateUsuarioDto {
 
-    @ApiProperty({ default: 'Nombre' })
+    @ApiProperty({ description: 'Nombre del usuario', default: 'Nombre', example: 'Juan' })
+    @IsString()
+    @IsNotEmpty()
     nombre: string;
     
-    @ApiProperty({ default: 'Apellido' })
+    @ApiProperty({ description: 'Apellido del usuario', default: 'Apellido', example: 'Pérez' })
+    @IsString()
+    @IsNotEmpty()
     apellido: string;
     
-    @ApiProperty({ default: 'Direccion 1234' })
+    @ApiProperty({ description: 'Dirección del usuario', default: 'Direccion 1234', example: 'Calle Falsa 123' })
+    @IsString()
+    @IsNotEmpty()
     direccion: string;
     
-    @ApiProperty({ default: 'Comuna' })
+    @ApiProperty({ description: 'Comuna del usuario', default: 'Comuna', example: 'Providencia' })
+    @IsString()
+    @IsNotEmpty()
     comuna: string;
     
-    @ApiProperty({ default: 'Ciudad' })
+    @ApiProperty({ description: 'Ciudad del usuario', default: 'Ciudad', example: 'Santiago' })
+    @IsString()
+    @IsNotEmpty()
     ciudad: string;
     
-    @ApiProperty({ default: 'Region' })
+    @ApiProperty({ description: 'Región del usuario', default: 'Region', example: 'Metropolitana' })
+    @IsString()
+    @IsNotEmpty()
     region: string;
   
-    @ApiProperty({ default: '912345678' })
+    @ApiProperty({ description: 'Teléfono del usuario', default: '912345678', example: '912345678' })
+    @IsNumber()
     telefono: number;
   
-    @ApiProperty({ default: 'test@dominio.cl' })
+    @ApiProperty({ description: 'Correo electrónico del usuario', default: 'test@dominio.cl', example: 'juan.perez@dominio.cl' })
+    @IsEmail()
     correo: string;
   
-    @ApiProperty({ default: '1234' })
+    @ApiProperty({ description: 'Contraseña del usuario', default: '1234', example: 'password123' })
+    @IsString()
+    @Length(4, 20)
     contrasenna: string;
    
-    @ApiProperty({ default: '12345678-9' })
+    @ApiProperty({ description: 'RUT del usuario', default: '12345678-9', example: '12345678-9' })
+    @IsString()    
     rut: string;
 
+    @ApiProperty({ description: 'Pedidos del usuario', type: [Pedido], example: [] })
+    @IsArray()    
+    @Type(() => Pedido)
     pedidos: Pedido[];
     
+    @ApiProperty({ description: 'Carrito de compras del usuario', type: [CarritoDeCompra], example: [] })
+    @IsArray()    
+    @Type(() => CarritoDeCompra)
     carritoDeCompras: CarritoDeCompra[];
-};
+}

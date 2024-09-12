@@ -19,8 +19,8 @@ export class ProductosController {
   @ApiResponse({ status: 201, description: 'Producto creado exitosamente.' })
   @ApiResponse({ status: 400, description: 'Error en los datos enviados' }) 
   @UsePipes(new ValidationPipe({ whitelist: true, forbidNonWhitelisted: true }))
-  async create(@Body() createProductoDto: CreateProductoDto) {
-    const crearProducto = await this.productosService.create(createProductoDto);
+   create(@Body() createProductoDto: CreateProductoDto) {
+    const crearProducto =  this.productosService.create(createProductoDto);
     if (!crearProducto) {
       throw new HttpException('Producto mal creado, ingresalos bien', HttpStatus.BAD_REQUEST);
     }
@@ -47,6 +47,7 @@ export class ProductosController {
   @Patch(':id')
   @ApiResponse({ status: 200, description: 'Producto actualizado.' })
   @ApiResponse({ status: 404, description: 'Producto no encontrado.' })
+  @UsePipes(new ValidationPipe({ whitelist: true, forbidNonWhitelisted: true }))
   update(@Param('id') id: number, @Body() updateProductoDto: UpdateProductoDto) {
     const productoFueActualizado = this.productosService.update(id, updateProductoDto);
     if (!productoFueActualizado) {

@@ -1,8 +1,10 @@
 import { ApiProperty } from "@nestjs/swagger";
+import { IsNumber } from "class-validator";
 
 export class PedidoUsuarioDto {
 
     @ApiProperty({ default: 1 })
+    @IsNumber()
     usuarioId: number;
 
     nombre: string;

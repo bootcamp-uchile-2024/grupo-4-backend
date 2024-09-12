@@ -1,4 +1,4 @@
-import { Controller, Get, Post, Body, Patch, Param, Delete, HttpStatus, Res, Query } from '@nestjs/common';
+import { Controller, Get, Post, Body, Patch, Param, Delete, HttpStatus, Res, Query, HttpException, ValidationPipe, UsePipes } from '@nestjs/common';
 import { PedidoService } from './pedido.service';
 import { CreatePedidoDto } from './dto/create-pedido.dto';
 import { UpdatePedidoDto } from './dto/update-pedido.dto';
@@ -10,102 +10,58 @@ import { TipoDespacho } from './entities/pedido.entity';
 @Controller('pedido')
 export class PedidoController {
 
-  private ERROR_USUARIO_NO_ENCONTRADO = {};
-  private ERROR_PEDIDO_NO_ENCONTRADO = {};
-
-  constructor(private readonly pedidoService: PedidoService) {
-
-    this.ERROR_USUARIO_NO_ENCONTRADO = {
-      status: HttpStatus.NOT_FOUND,
-      mensaje: 'Usuario no encontrado'
-    };
-  
-    this.ERROR_PEDIDO_NO_ENCONTRADO = {
-      status: HttpStatus.NOT_FOUND,
-      mensaje: 'Pedido no encontrado'
-    };
-
-  };
+  constructor(private readonly pedidoService: PedidoService) {}
 
   @Post()
   @ApiResponse({ status: 201, description: 'Pedido creado exitosamente.' })
   @ApiResponse({ status: 404, description: 'Usuario no existe.' })
-  create(
-    @Body() createPedidoDto: CreatePedidoDto,
-    @Res() res: Response 
-
-  ) {
-
+  @UsePipes(new ValidationPipe({ whitelist: true, forbidNonWhitelisted: true }))
+  create(@Body() createPedidoDto: CreatePedidoDto) {
     const pedido = this.pedidoService.create(createPedidoDto);
-
-    pedido ?
-      res.status(HttpStatus.CREATED).json(pedido) : 
-      res.status(HttpStatus.NOT_FOUND).send(
-        this.ERROR_USUARIO_NO_ENCONTRADO
-      );
-
+    if (!pedido) {
+      throw new HttpException('Usuario no encontrado', HttpStatus.NOT_FOUND);
+    }
+    return pedido;
   }
 
   @Get()
   @ApiResponse({ status: 200, description: 'Se entregan pedidos encontrados.' })
   @ApiQuery({ name: 'tipo', enum: TipoDespacho, required: false, description: 'Filtrar por tipo despacho (opcional)' })
-  findAll(
-    @Query('tipo') tipo: TipoDespacho,
-  ) {
+  findAll(@Query('tipo') tipo: TipoDespacho) {
     return this.pedidoService.findAll(tipo);
-  };
+  }
 
   @Get(':id')
   @ApiResponse({ status: 200, description: 'Pedido encontrado.' })
   @ApiResponse({ status: 404, description: 'Pedido no encontrado.' })
-  findOne(
-    @Param('id') id: number,
-    @Res() res: Response 
-  ) {
-
+  findOne(@Param('id') id: number) {
     const pedido = this.pedidoService.findOne(id);
-
-    pedido ?
-      res.status(HttpStatus.OK).json(pedido) : 
-      res.status(HttpStatus.NOT_FOUND).send(
-        this.ERROR_PEDIDO_NO_ENCONTRADO
-      );
+    if (!pedido) {
+      throw new HttpException('Pedido no encontrado', HttpStatus.NOT_FOUND);
+    }
+    return pedido;
   }
 
   @Patch(':id')
   @ApiResponse({ status: 200, description: 'Pedido modificado.' })
   @ApiResponse({ status: 404, description: 'Pedido no encontrado.' })
-  update(
-    @Param('id') id: number, 
-    @Body() updatePedidoDto: UpdatePedidoDto,
-    @Res() res: Response 
-
-  ) {
-
+  @UsePipes(new ValidationPipe({ whitelist: true, forbidNonWhitelisted: true }))
+  update(@Param('id') id: number, @Body() updatePedidoDto: UpdatePedidoDto) {
     const pedido = this.pedidoService.update(id, updatePedidoDto);
-
-    pedido ?
-      res.status(HttpStatus.OK).send() : 
-      res.status(HttpStatus.NOT_FOUND).send(
-        this.ERROR_PEDIDO_NO_ENCONTRADO
-      );
-
-  };
+    if (!pedido) {
+      throw new HttpException('Pedido no encontrado', HttpStatus.NOT_FOUND);
+    }
+    return { message: 'Pedido actualizado' };
+  }
 
   @Delete(':id')
   @ApiResponse({ status: 200, description: 'Pedido eliminado.' })
   @ApiResponse({ status: 404, description: 'Pedido no encontrado.' })
-  remove(
-    @Param('id') id: number,
-    @Res() res: Response 
-  ) {
-
+  remove(@Param('id') id: number) {
     const pedido = this.pedidoService.remove(id);
-
-    pedido ?
-      res.status(HttpStatus.OK).send() : 
-      res.status(HttpStatus.NOT_FOUND).send(
-        this.ERROR_PEDIDO_NO_ENCONTRADO
-      );
-  };
-};
+    if (!pedido) {
+      throw new HttpException('Pedido no encontrado', HttpStatus.NOT_FOUND);
+    }
+    return { message: 'Pedido eliminado' };
+  }
+}
