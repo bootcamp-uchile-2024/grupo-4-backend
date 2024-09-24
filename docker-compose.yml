@@ -1,6 +1,9 @@
+#Docker compose para el desarrollo de la aplicación
 services:
   node-app:
-    image: ent_produccion:v-001
+    build:
+      context: .
+      dockerfile: dockerfile.dev #Dockerfile para desarrollo
     working_dir: /home/node/nest
     environment:
       - ARCHIVO_ENV=.develop

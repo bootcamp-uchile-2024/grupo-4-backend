@@ -1,6 +1,6 @@
 services:
   node-api:
-    image: ent_produccion:v-001
+    image: suescun85/grupo4-backend:v-001
     environment:
       - ARCHIVO_ENV=.production
     ports:
