@@ -1,0 +1,7 @@
+services:
+  node-api:
+    image: ent_produccion:v-001
+    environment:
+      - ARCHIVO_ENV=.production
+    ports:
+      - "3000:8000"

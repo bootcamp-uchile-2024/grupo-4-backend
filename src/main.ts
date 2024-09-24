@@ -3,9 +3,12 @@ import { AppModule } from './app.module';
 import { DocumentBuilder, SwaggerModule } from '@nestjs/swagger';
 import { GeneralInterceptor } from './general/general.interceptor';
 import { GeneralFilter } from './general/general.filter';
+import { ConfigService } from '@nestjs/config';
 
 async function bootstrap() {
   const app = await NestFactory.create(AppModule);
+  const configService: ConfigService = app.get(ConfigService);//Configuracion de variables de entorno
+  const puerto:number = configService.get<number>('PORT');//Asignacion del puerto segun la variable de entorno
 
   const config = new DocumentBuilder()
     .setTitle('Cafeinados API')
@@ -16,12 +19,14 @@ async function bootstrap() {
     .addTag('pedidos')
     .addTag('carrito-de-compras')
     .build();
+    console.log('PORT:', configService.get('PORT'));//Impresion de la variable de entorno
+    console.log('Ambiente:', configService.get('AMBIENTE'));//Impresion de la variable de entorno
 
   const document = SwaggerModule.createDocument(app, config);
   SwaggerModule.setup('api', app, document);
   app.useGlobalInterceptors(new GeneralInterceptor());
   app.useGlobalFilters(new GeneralFilter());
 
-  await app.listen(3000);
+  await app.listen(puerto);
 }
 bootstrap();

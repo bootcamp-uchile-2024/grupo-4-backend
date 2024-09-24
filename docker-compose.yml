@@ -1,0 +1,12 @@
+services:
+  node-app:
+    image: ent_produccion:v-001
+    working_dir: /home/node/nest
+    environment:
+      - ARCHIVO_ENV=.develop
+    volumes:
+      - ./:/home/node/nest    
+    ports:
+      - "4000:5000"
+    command: npm run start:dev
+    
