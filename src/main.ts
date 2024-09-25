@@ -9,10 +9,14 @@ async function bootstrap() {
   const app = await NestFactory.create(AppModule);
   const configService: ConfigService = app.get(ConfigService);//Configuracion de variables de entorno
   const puerto:number = configService.get<number>('PORT');//Asignacion del puerto segun la variable de entorno
+  const descripcion:string = configService.get<string>('npm_package_description');//Asignacion de la descripcion segun la variable de entorno
+  const autor:string = configService.get<string>('npm_package_author');//Asignacion del autor segun la variable de entorno
+  console.log('Descripcion:', descripcion);//Impresion de la variable de entorno
+  console.log('Author:', autor);
 
   const config = new DocumentBuilder()
     .setTitle('Cafeinados API')
-    .setDescription('API para el ecommerce de Cafeinados')
+    .setDescription(descripcion)
     .setVersion('1.0')
     .addTag('productos')
     .addTag('usuarios')
