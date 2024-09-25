@@ -1,8 +1,13 @@
 {
   "name": "ecommerce-backend",
   "version": "0.0.1",
+<<<<<<< HEAD
   "description": "sss",
   "author": "ddd",
+=======
+  "description": "aaaa",
+  "author": "",
+>>>>>>> 71655fa69296a533abe7733fc4caf3baf1f2ca1e
   "private": true,
   "license": "UNLICENSED",
   "scripts": {
