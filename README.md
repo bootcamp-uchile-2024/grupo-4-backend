@@ -1,4 +1,4 @@
-# Tostado Perfecto - API
+### Tostado Perfecto - API
 
 Somos una e-commerce diseñada para personalizar tu experiencia de café en casa. Ofrecemos granos de café de especialidad, maquinaria y accesorios personalizados según tus gustos. Nuestra API permite gestionar un proceso de compra sencillo y entregas rápidas y confiables.
 
@@ -26,32 +26,18 @@ Antes de ejecutar el proyecto, asegúrate de tener instalados los siguientes com
 
 Ya teniendo instalados los programas anteriormente recomendados, a continuación deberá:
 
-### 2.1. Clonar el repositorio:
+- 2.1. Clonar el repositorio:
 
 
 git clone https://github.com/bootcamp-uchile-2024/grupo-4-backend.git
 
-## 2. Instalación 
-
-Ya teniendo instalados los programas anteriormente recomendados, a continuación deberá:
-
-2.1. Clonar el repositorio:
-
-
-git clone https://github.com/bootcamp-uchile-2024/grupo-4-backend.git
-
-
-2.2. Entrar en el directorio del proyecto:
-
+- 2.2. Entrar en el directorio del proyecto:
 
 cd grupo-4-backend
 
-
-2.3. Instalar las dependencias:
-
+- 2.3. Instalar las dependencias:
 
 npm install
-
 
 ## 3. Configuración
 
