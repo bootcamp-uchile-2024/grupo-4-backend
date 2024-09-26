@@ -50,7 +50,7 @@ Según el ambiente en el que se desee desarrollar la API, se deben completar la 
 - Las variables de entorno estarán definidas en el archivo .env.develop; dicho archivo tendrá en su interior definidas las variables nombradas en la sección anterior (PORT - Ambiente). 
 - Se inicia el docker desktop y a continuación, desde la ruta grupo-4-backend se debe colocar el siguiente comando:
 ````bash
-/grupo-4-backend/docker compose up
+.../grupo-4-backend/docker compose up
 ````
 
 ## 5. Ejecución - Producción
@@ -58,7 +58,7 @@ Según el ambiente en el que se desee desarrollar la API, se deben completar la 
 - Las variables de entorno estarán definidas en el archivo .env.production; dicho archivo tendrá en su interior definidas las variables nombradas en la sección anterior (PORT - Ambiente). 
 - Se inicia el docker desktop y a continuación, desde la ruta grupo-4-backend/prod se debe colocar el siguiente comando:
 ````bash
-/grupo-4-backend/prod/docker compose up
+.../grupo-4-backend/prod/docker compose up
 ````
 ## 6. Estructura del Proyecto
 
@@ -134,6 +134,19 @@ src
 ````
 
 ## 7. Documentación de la API
+
+La documentación de esta API esta hecha en SWAGGER. Puedes acceder a la documentación despues de iniciar el servidor.
+
+- 7.1. Se inicia el proyecto, segun el ambiente:
+````bash
+ docker compose up
+ ````
+ - 7.2. Accede al Swagger desde el navegador: 
+ ````bash
+  Debe dirigirse a la siguiente URL: http://localhost:3000/api (se deberá ajustar el puerto según sea el ambiente seleccionado)
+  ````
+
+
 ## 8. Flujo de Trabajo
 ## 9. Contacto
 
