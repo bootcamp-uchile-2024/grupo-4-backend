@@ -28,7 +28,7 @@ Ya teniendo instalados los programas anteriormente recomendados, a continuación
 
 ### 2.1. Clonar el repositorio:
 
-```bash
+
 git clone https://github.com/bootcamp-uchile-2024/grupo-4-backend.git
 
 ## 2. Instalación 
@@ -37,7 +37,7 @@ Ya teniendo instalados los programas anteriormente recomendados, a continuación
 
 2.1. Clonar el repositorio:
 
-```bash
+
 git clone https://github.com/bootcamp-uchile-2024/grupo-4-backend.git
 
 
@@ -51,21 +51,21 @@ cd grupo-4-backend
 
 
 npm install
-```bash
+
 
 ## 3. Configuración
-```bash
+
     Según el ambiente en el que se desee desarrollar la API, se deben completar la siguiente información en las variables de entorno:
 
 - PORT: Indica el número del puerto en el que se ejecutará la API, este variará según el ambiente en que se desea ejecutar la API.
 - Ambiente: Indica el nombre del ambiente (Desarrollo o Producción) en el cual se ejecutará la API.
- ````bash  
+ 
 ## 4. Ejecución - Desarrollo
 
 ## 5. Ejecución - Producción
 ## 6. Estructura del Proyecto
 
-````bash
+
 src
 ├── carrito-de-compras
 │   ├── dto
@@ -132,7 +132,7 @@ src
 ├── app.service.ts
 ├── main.ts
 
-````bash
+
 
 ## 7. Documentación de la API
 ## 8. Flujo de Trabajo
