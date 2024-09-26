@@ -39,19 +39,19 @@ Ya teniendo instalados los programas anteriormente recomendados, a continuación
 
 ```bash
 git clone https://github.com/bootcamp-uchile-2024/grupo-4-backend.git
-```
+
 
 2.2. Entrar en el directorio del proyecto:
 
-```bash
+
 cd grupo-4-backend
-```
+
 
 2.3. Instalar las dependencias:
 
-```bash
+
 npm install
-```
+```bash
 
 ## 3. Configuración
 ```bash
@@ -59,7 +59,7 @@ npm install
 
 - PORT: Indica el número del puerto en el que se ejecutará la API, este variará según el ambiente en que se desea ejecutar la API.
 - Ambiente: Indica el nombre del ambiente (Desarrollo o Producción) en el cual se ejecutará la API.
- ```   
+ ````bash  
 ## 4. Ejecución - Desarrollo
 
 ## 5. Ejecución - Producción
@@ -132,6 +132,7 @@ src
 ├── app.service.ts
 ├── main.ts
 
+````bash
 
 ## 7. Documentación de la API
 ## 8. Flujo de Trabajo
