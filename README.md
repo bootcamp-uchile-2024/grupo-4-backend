@@ -12,7 +12,7 @@ Somos una e-commerce diseñada para personalizar tu experiencia de café en casa
 6. [Estructura del Proyecto](#estructura-del-proyecto)
 7. [Documentación de la API](#documentación-de-la-api)
 8. [Flujo de Trabajo](#flujo-de-trabajo)
-9. [Contacto](contacto)
+9. [Contacto](#contacto)
 
 ## 1. Requisitos Previos
 
@@ -132,16 +132,15 @@ src
 ├── app.service.ts
 ├── main.ts
 
-```
 
 ## 7. Documentación de la API
 ## 8. Flujo de Trabajo
 ## 9. Contacto
-````bash
+
 Si tienes alguna duda, puedes contactarnos a través de:
 
 - [@Gfigueroa](https://github.com/GEFR00) Gabriela Figueroa - Lider Backend
 - [@Rdonoso](https://github.com/ShagoDonosoP) Roberto Donoso - Integrante Backend 
 - [@Csuescun](https://github.com/Suescun85) Carlos Suescun - Integrante Backend 
-```
+
 
