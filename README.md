@@ -42,13 +42,27 @@ npm install
 
 Según el ambiente en el que se desee desarrollar la API, se deben completar la siguiente información en las variables de entorno:
 
-- PORT: Indica el número del puerto en el que se ejecutará la API, este variará según el ambiente en que se desea ejecutar la API.
+- PORT: Indica el número del puerto en el que se ejecutará la API.
 - Ambiente: Indica el nombre del ambiente (Desarrollo o Producción) en el cual se ejecutará la API.
  
 ## 4. Ejecución - Desarrollo
 
+- Las variables de entorno estarán definidas en el archivo .env.develop; dicho archivo tendrá en su interior definidas las variables nombradas en la sección anterior (PORT - Ambiente). 
+- Se inicia el docker desktop y a continuación, desde la ruta grupo-4-backend se debe colocar el siguiente comando:
+````bash
+/grupo-4-backend/docker compose up
+````
+
 ## 5. Ejecución - Producción
+
+- Las variables de entorno estarán definidas en el archivo .env.production; dicho archivo tendrá en su interior definidas las variables nombradas en la sección anterior (PORT - Ambiente). 
+- Se inicia el docker desktop y a continuación, desde la ruta grupo-4-backend/prod se debe colocar el siguiente comando:
+````bash
+/grupo-4-backend/prod/docker compose up
+````
 ## 6. Estructura del Proyecto
+
+A continuación se presentará un diagrama de árbol de la estructura actual del proyecto:
 
 ````bash
 src
