@@ -56,7 +56,71 @@ npm install
 ## 5. Ejecución - Producción
 ## 6. Estructura del Proyecto
 
-
+src
+├── carrito-de-compras
+│   ├── dto
+│   │   ├── create-carrito-de-compra.dto.ts
+│   │   ├── update-carrito-de-compra.dto.ts
+│   │   ├── usuario-carrito-de-compra.dto.ts
+│   ├── entities
+│   │   ├── carrito-de-compra.entity.ts
+│   │   ├── carrito-item.entity.ts
+│   ├── carrito-de-compras.controller.spec.ts
+│   ├── carrito-de-compras.controller.ts
+│   ├── carrito-de-compras.module.ts
+│   ├── carrito-de-compras.service.spec.ts
+│   ├── carrito-de-compras.service.ts
+├── general
+│   ├── general.filter.spec.ts
+│   ├── general.filter.ts
+│   ├── general.interceptor.spec.ts
+│   ├── general.interceptor.ts
+│   ├── general.middleware.spec.ts
+│   ├── general.middleware.ts
+├── models
+│   ├── categorias.ts
+│   ├── tipos.ts
+├── pedido
+│   ├── dto
+│   │   ├── create-pedido.dto.ts
+│   │   ├── update-pedido.dto.ts
+│   ├── entities
+│   │   ├── pedido-item.entity.ts
+│   │   ├── pedido.entity.ts
+│   ├── pedido.controller.spec.ts
+│   ├── pedido.controller.ts
+│   ├── pedido.module.ts
+│   ├── pedido.service.spec.ts
+│   ├── pedido.service.ts
+├── productos
+│   ├── dto
+│   │   ├── carrito-producto.dto.ts
+│   │   ├── create-producto.dto.ts
+│   │   ├── update-producto.dto.ts
+│   ├── entities
+│   │   ├── producto.entity.ts
+│   ├── productos.controller.spec.ts
+│   ├── productos.controller.ts
+│   ├── productos.module.ts
+│   ├── productos.service.spec.ts
+│   ├── productos.service.ts
+├── usuario
+│   ├── dto
+│   │   ├── create-usuario.dto.ts
+│   │   ├── pedido-usuario.dto.ts
+│   │   ├── update-usuario.dto.ts
+│   ├── entities
+│   │   ├── usuario.entity.ts
+│   ├── usuario.controller.spec.ts
+│   ├── usuario.controller.ts
+│   ├── usuario.module.ts
+│   ├── usuario.service.spec.ts
+│   ├── usuario.service.ts
+├── app.controller.spec.ts
+├── app.controller.ts
+├── app.module.ts
+├── app.service.ts
+├── main.ts
 
 ## 7. Documentación de la API
 ## 8. Flujo de Trabajo
@@ -64,8 +128,8 @@ npm install
 
 Si tienes alguna duda, puedes contactarnos a través de:
 
-- [@Gfigueroa](https://github.com/GEFR00)
-- [@Rdonoso](https://github.com/ShagoDonosoP)
-- [@Csuescun](https://github.com/Suescun85)
+- [@Gfigueroa](https://github.com/GEFR00) Gabriela Figueroa - Lider Backend
+- [@Rdonoso](https://github.com/ShagoDonosoP) Roberto Donoso - Integrante Backend 
+- [@Csuescun](https://github.com/Suescun85) Carlos Suescun - Integrante Backend 
 
 
