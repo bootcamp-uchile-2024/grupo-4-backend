@@ -65,7 +65,7 @@ npm install
 ## 5. Ejecución - Producción
 ## 6. Estructura del Proyecto
 
-
+````bash
 src
 ├── carrito-de-compras
 │   ├── dto
@@ -132,7 +132,7 @@ src
 ├── app.service.ts
 ├── main.ts
 
-
+````
 
 ## 7. Documentación de la API
 ## 8. Flujo de Trabajo
