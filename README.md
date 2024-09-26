@@ -23,7 +23,7 @@ Antes de ejecutar el proyecto, asegúrate de tener instalados los siguientes com
 - ![VS Code Icon](https://img.icons8.com/color/48/000000/visual-studio-code-2019.png) [Visual Studio Code](https://code.visualstudio.com/download), se recomienda este editor de código.
 
 ## 2. Instalación
-````bash
+
 Ya teniendo instalados los programas anteriormente recomendados, a continuación deberá:
 
 - 2.1. Clonar el repositorio:
