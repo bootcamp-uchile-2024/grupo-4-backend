@@ -28,7 +28,7 @@ Ya teniendo instalados los programas anteriormente recomendados, a continuación
 
 - 2.1. Clonar el repositorio:
 ````bash
-git clone https://github.com/bootcamp-uchile-2024/grupo-4-backend.git
+[git clone https://github.com/bootcamp-uchile-2024/grupo-4-backend.git]
 ````
 - 2.2. Entrar en el directorio del proyecto:
 ````bash
