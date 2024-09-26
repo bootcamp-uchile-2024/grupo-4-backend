@@ -10,13 +10,9 @@ async function bootstrap() {
   const configService: ConfigService = app.get(ConfigService);//Configuracion de variables de entorno
   const puerto:number = configService.get<number>('PORT');//Asignacion del puerto segun la variable de entorno
   const descripcion:string = configService.get<string>('npm_package_description');//Asignacion de la descripcion segun la variable de entorno
-<<<<<<< HEAD
   const autor:string = configService.get<string>('npm_package_author');//Asignacion del autor segun la variable de entorno
   console.log('Descripcion:', descripcion);//Impresion de la variable de entorno
-  console.log('Author:', autor);
-=======
-  console.log('Descripcion:', descripcion);//Impresion de la variable de entorno
->>>>>>> 71655fa69296a533abe7733fc4caf3baf1f2ca1e
+  console.log('Author:', autor); 
 
   const config = new DocumentBuilder()
     .setTitle('Cafeinados API')
