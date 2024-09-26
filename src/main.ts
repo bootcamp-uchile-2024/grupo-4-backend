@@ -9,14 +9,11 @@ async function bootstrap() {
   const app = await NestFactory.create(AppModule);
   const configService: ConfigService = app.get(ConfigService);//Configuracion de variables de entorno
   const puerto:number = configService.get<number>('PORT');//Asignacion del puerto segun la variable de entorno
-  const descripcion:string = configService.get<string>('npm_package_description');//Asignacion de la descripcion segun la variable de entorno
-  const autor:string = configService.get<string>('npm_package_author');//Asignacion del autor segun la variable de entorno
-  console.log('Descripcion:', descripcion);//Impresion de la variable de entorno
-  console.log('Author:', autor); 
+    
 
   const config = new DocumentBuilder()
-    .setTitle('Cafeinados API')
-    .setDescription(descripcion)
+    .setTitle('Tostado Perfecto - API')
+    .setDescription('API de Cafeinados, donde podras realizar pedidos de productos de café de especialidad, ver el estado de tus pedidos y gestionar tu carrito de compras')
     .setVersion('1.0')
     .addTag('productos')
     .addTag('usuarios')

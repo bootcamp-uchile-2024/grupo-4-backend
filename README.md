@@ -145,9 +145,12 @@ La documentación de esta API esta hecha en SWAGGER. Puedes acceder a la documen
  ````bash
   Debe dirigirse a la siguiente URL: http://localhost:3000/api (se deberá ajustar el puerto según sea el ambiente seleccionado)
   ````
-
+Posteriormente, le llevará a la interfaz de Swagger; donde podrá acceder a los endpoints diseñados para la API.
 
 ## 8. Flujo de Trabajo
+
+Actualmente el flujo de trabajo se ha ido realizando conforme a las exigencias del desarrollo del proyecto.   Cada rama representa el avance del proyecto con respecto a las solicitudes para cada entrega del mismo. Las actividades de avance realizadas en cada rama, posteriormente se unen en la rama principal `main` de trabajo. 
+
 ## 9. Contacto
 
 Si tienes alguna duda, puedes contactarnos a través de:
