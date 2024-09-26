@@ -1,4 +1,4 @@
-### Tostado Perfecto - API
+## Tostado Perfecto - API
 
 Somos una e-commerce diseñada para personalizar tu experiencia de café en casa. Ofrecemos granos de café de especialidad, maquinaria y accesorios personalizados según tus gustos. Nuestra API permite gestionar un proceso de compra sencillo y entregas rápidas y confiables.
 
@@ -23,7 +23,7 @@ Antes de ejecutar el proyecto, asegúrate de tener instalados los siguientes com
 - ![VS Code Icon](https://img.icons8.com/color/48/000000/visual-studio-code-2019.png) [Visual Studio Code](https://code.visualstudio.com/download), se recomienda este editor de código.
 
 ## 2. Instalación
-
+````bash
 Ya teniendo instalados los programas anteriormente recomendados, a continuación deberá:
 
 - 2.1. Clonar el repositorio:
@@ -38,10 +38,10 @@ cd grupo-4-backend
 - 2.3. Instalar las dependencias:
 
 npm install
-
+````
 ## 3. Configuración
 
-    Según el ambiente en el que se desee desarrollar la API, se deben completar la siguiente información en las variables de entorno:
+Según el ambiente en el que se desee desarrollar la API, se deben completar la siguiente información en las variables de entorno:
 
 - PORT: Indica el número del puerto en el que se ejecutará la API, este variará según el ambiente en que se desea ejecutar la API.
 - Ambiente: Indica el nombre del ambiente (Desarrollo o Producción) en el cual se ejecutará la API.
