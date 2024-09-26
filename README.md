@@ -152,11 +152,11 @@ Posteriormente, le llevará a la interfaz de Swagger; donde podrá acceder a los
 Actualmente el flujo de trabajo se ha ido realizando conforme a las exigencias del desarrollo del proyecto.   Cada rama representa el avance del proyecto con respecto a las solicitudes para cada entrega del mismo. Las actividades de avance realizadas en cada rama, posteriormente se unen en la rama principal `main` de trabajo. 
 
 ## 9. Contacto
-
+````bash
 Si tienes alguna duda, puedes contactarnos a través de:
 
 - [@Gfigueroa](https://github.com/GEFR00) Gabriela Figueroa - Lider Backend
 - [@Rdonoso](https://github.com/ShagoDonosoP) Roberto Donoso - Integrante Backend 
 - [@Csuescun](https://github.com/Suescun85) Carlos Suescun - Integrante Backend 
-
+```
 
