@@ -54,18 +54,18 @@ npm install
 ```
 
 ## 3. Configuración
-
+```bash
     Según el ambiente en el que se desee desarrollar la API, se deben completar la siguiente información en las variables de entorno:
 
 - PORT: Indica el número del puerto en el que se ejecutará la API, este variará según el ambiente en que se desea ejecutar la API.
 - Ambiente: Indica el nombre del ambiente (Desarrollo o Producción) en el cual se ejecutará la API.
-    
+ ```   
 ## 4. Ejecución - Desarrollo
 
 ## 5. Ejecución - Producción
 ## 6. Estructura del Proyecto
 
-
+````bash
 src
 ├── carrito-de-compras
 │   ├── dto
@@ -132,15 +132,16 @@ src
 ├── app.service.ts
 ├── main.ts
 
+```
 
 ## 7. Documentación de la API
 ## 8. Flujo de Trabajo
 ## 9. Contacto
-
+````bash
 Si tienes alguna duda, puedes contactarnos a través de:
 
 - [@Gfigueroa](https://github.com/GEFR00) Gabriela Figueroa - Lider Backend
 - [@Rdonoso](https://github.com/ShagoDonosoP) Roberto Donoso - Integrante Backend 
 - [@Csuescun](https://github.com/Suescun85) Carlos Suescun - Integrante Backend 
-
+```
 
