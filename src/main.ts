@@ -15,8 +15,8 @@ async function bootstrap() {
   console.log('Author:', autor);
 
   const config = new DocumentBuilder()
-    .setTitle('Cafeinados API')
-    .setDescription(descripcion)
+    .setTitle('Tostado Perfecto - API')
+    .setDescription('API de Cafeinados, donde podras realizar pedidos de productos de café de especialidad, ver el estado de tus pedidos y gestionar tu carrito de compras')
     .setVersion('1.0')
     .addTag('productos')
     .addTag('usuarios')
