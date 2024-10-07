@@ -1,4 +1,18 @@
-import { Controller, Get, Post, Body, Patch, Param, Delete, HttpStatus, Res, Query, HttpException, ValidationPipe, UsePipes } from '@nestjs/common';
+import {
+  Controller,
+  Get,
+  Post,
+  Body,
+  Patch,
+  Param,
+  Delete,
+  HttpStatus,
+  Res,
+  Query,
+  HttpException,
+  ValidationPipe,
+  UsePipes,
+} from '@nestjs/common';
 import { PedidoService } from './pedido.service';
 import { CreatePedidoDto } from './dto/create-pedido.dto';
 import { UpdatePedidoDto } from './dto/update-pedido.dto';
@@ -9,7 +23,6 @@ import { TipoDespacho } from './entities/pedido.entity';
 @ApiTags('pedidos')
 @Controller('pedido')
 export class PedidoController {
-
   constructor(private readonly pedidoService: PedidoService) {}
 
   @Post()
@@ -26,7 +39,12 @@ export class PedidoController {
 
   @Get()
   @ApiResponse({ status: 200, description: 'Se entregan pedidos encontrados.' })
-  @ApiQuery({ name: 'tipo', enum: TipoDespacho, required: false, description: 'Filtrar por tipo despacho (opcional)' })
+  @ApiQuery({
+    name: 'tipo',
+    enum: TipoDespacho,
+    required: false,
+    description: 'Filtrar por tipo despacho (opcional)',
+  })
   findAll(@Query('tipo') tipo: TipoDespacho) {
     return this.pedidoService.findAll(tipo);
   }

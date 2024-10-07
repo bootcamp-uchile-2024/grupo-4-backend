@@ -7,21 +7,19 @@ import { PedidoUsuarioDto } from 'src/usuario/dto/pedido-usuario.dto';
 
 @Injectable()
 export class PedidoService {
-
   pedidos: Pedido[] = [];
 
   constructor(
     @Inject(forwardRef(() => UsuarioService))
-    private readonly usuarioService: UsuarioService
+    private readonly usuarioService: UsuarioService,
   ) {}
 
   create(createPedidoDto: CreatePedidoDto): Pedido {
-
     const usuario = this.usuarioService.findOne(
-      createPedidoDto.usuario.usuarioId
+      createPedidoDto.usuario.usuarioId,
     );
 
-    if(!usuario) return null;
+    if (!usuario) return null;
 
     const pedido = new Pedido();
 
@@ -65,39 +63,29 @@ export class PedidoService {
     this.pedidos.push(pedido);
 
     //Añade pedido al usuario
-    this.usuarioService.addPedido(
-      usuario.id, 
-      pedido.usuario
-    );
+    this.usuarioService.addPedido(usuario.id, pedido.usuario);
 
     return pedido;
-
-  };
+  }
 
   findAll(tipo: TipoDespacho): Pedido[] {
-
-    if(tipo !== undefined) {
-      return this.pedidos.filter(
-        pedido => pedido.tipoDespacho == tipo
-      );
-    };
+    if (tipo !== undefined) {
+      return this.pedidos.filter((pedido) => pedido.tipoDespacho == tipo);
+    }
 
     return this.pedidos;
   }
 
   findOne(id: number): Pedido {
-    const pedido = this.pedidos.find(
-      item => item.id == id
-    );
+    const pedido = this.pedidos.find((item) => item.id == id);
 
     return pedido ? pedido : null;
-  };
+  }
 
   update(id: number, updatePedidoDto: UpdatePedidoDto): boolean {
-
     const pedido = this.findOne(id);
 
-    if(!pedido) return false;
+    if (!pedido) return false;
 
     pedido.fecha = updatePedidoDto.fecha;
     pedido.montoTotal = updatePedidoDto.montoTotal;
@@ -107,19 +95,15 @@ export class PedidoService {
     pedido.estado = updatePedidoDto.estado;
 
     return true;
-
-  };
+  }
 
   remove(id: number): boolean {
-
     const pedido = this.findOne(id);
 
-    if(!pedido) return false;
+    if (!pedido) return false;
 
-    this.pedidos = this.pedidos.filter(
-      item => item.id != id
-    );
+    this.pedidos = this.pedidos.filter((item) => item.id != id);
 
     return true;
-  };
+  }
 }

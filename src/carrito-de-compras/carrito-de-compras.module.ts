@@ -7,6 +7,6 @@ import { ProductosModule } from 'src/productos/productos.module';
 @Module({
   controllers: [CarritoDeComprasController],
   providers: [CarritoDeComprasService],
-  imports: [forwardRef(() =>UsuarioModule), forwardRef(() =>ProductosModule)]
+  imports: [forwardRef(() => UsuarioModule), forwardRef(() => ProductosModule)],
 })
 export class CarritoDeComprasModule {}

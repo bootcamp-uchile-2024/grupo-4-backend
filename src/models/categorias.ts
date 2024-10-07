@@ -1,10 +1,10 @@
 class Valores {
-    id: number;
-    valor: string;
-};
+  id: number;
+  valor: string;
+}
 
 export class Categorias {
-    id: number;
-    nombre: string;
-    // valores: Valores[];
-};
+  id: number;
+  nombre: string;
+  // valores: Valores[];
+}

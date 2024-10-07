@@ -3,44 +3,40 @@ import { CarritoDeCompra } from 'src/carrito-de-compras/entities/carrito-de-comp
 import { PedidoUsuarioDto } from '../dto/pedido-usuario.dto';
 
 export class Usuario {
+  @ApiProperty()
+  id: number;
 
-    @ApiProperty()
-    id: number;
-    
-    @ApiProperty()
-    nombre: string;
-    
-    @ApiProperty()
-    apellido: string;
-    
-    @ApiProperty()
-    direccion: string;
-    
-    @ApiProperty()
-    comuna: string;
-    
-    @ApiProperty()
-    ciudad: string;
-    
-    @ApiProperty()
-    region: string;
-  
-    @ApiProperty()
-    telefono: number;
-  
-    @ApiProperty()
-    correo: string;
-  
-    @ApiProperty()
-    contrasenna: string;
-   
-    @ApiProperty()
-    rut: string;
-   
-    pedidos: PedidoUsuarioDto[];
+  @ApiProperty()
+  nombre: string;
 
-    carritoDeCompras: CarritoDeCompra;
+  @ApiProperty()
+  apellido: string;
 
+  @ApiProperty()
+  direccion: string;
 
+  @ApiProperty()
+  comuna: string;
 
+  @ApiProperty()
+  ciudad: string;
+
+  @ApiProperty()
+  region: string;
+
+  @ApiProperty()
+  telefono: number;
+
+  @ApiProperty()
+  correo: string;
+
+  @ApiProperty()
+  contrasenna: string;
+
+  @ApiProperty()
+  rut: string;
+
+  pedidos: PedidoUsuarioDto[];
+
+  carritoDeCompras: CarritoDeCompra;
 }

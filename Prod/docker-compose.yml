@@ -4,4 +4,4 @@ services:
     environment:
       - ARCHIVO_ENV=.production
     ports:
-      - "3000:8000"
+      - '3000:8000'

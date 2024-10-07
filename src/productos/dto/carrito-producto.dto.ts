@@ -1,11 +1,9 @@
-import { ApiProperty } from "@nestjs/swagger";
+import { ApiProperty } from '@nestjs/swagger';
 
 export class CarritoProductoDto {
+  @ApiProperty({ default: '0' })
+  productoId: number;
 
-    @ApiProperty({ default: '0' })
-    productoId: number;
-    
-    @ApiProperty({ default: '0' })
-    precio: number;
-
-};
+  @ApiProperty({ default: '0' })
+  precio: number;
+}

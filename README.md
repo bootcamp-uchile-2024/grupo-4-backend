@@ -27,43 +27,50 @@ Antes de ejecutar el proyecto, asegúrate de tener instalados los siguientes com
 Ya teniendo instalados los programas anteriormente recomendados, a continuación deberá:
 
 - 2.1. Clonar el repositorio:
-git clone https://github.com/bootcamp-uchile-2024/grupo-4-backend.git
-````
+  git clone https://github.com/bootcamp-uchile-2024/grupo-4-backend.git
+
+`````
 - 2.2. Entrar en el directorio del proyecto:
 ````bash
 cd grupo-4-backend
-````
+`````
+
 - 2.3. Instalar las dependencias:
-````bash
+
+```bash
 npm install
-````
+```
+
 ## 3. Configuración
 
 Según el ambiente en el que se desee desarrollar la API, se deben completar la siguiente información en las variables de entorno:
 
 - PORT: Indica el número del puerto en el que se ejecutará la API.
 - Ambiente: Indica el nombre del ambiente (Desarrollo o Producción) en el cual se ejecutará la API.
- 
+
 ## 4. Ejecución - Desarrollo
 
-- Las variables de entorno estarán definidas en el archivo .env.develop; dicho archivo tendrá en su interior definidas las variables nombradas en la sección anterior (PORT - Ambiente). 
+- Las variables de entorno estarán definidas en el archivo .env.develop; dicho archivo tendrá en su interior definidas las variables nombradas en la sección anterior (PORT - Ambiente).
 - Se inicia el docker desktop y a continuación, desde la ruta grupo-4-backend se debe colocar el siguiente comando:
-````bash
+
+```bash
 .../grupo-4-backend/docker compose up
-````
+```
 
 ## 5. Ejecución - Producción
 
-- Las variables de entorno estarán definidas en el archivo .env.production; dicho archivo tendrá en su interior definidas las variables nombradas en la sección anterior (PORT - Ambiente). 
+- Las variables de entorno estarán definidas en el archivo .env.production; dicho archivo tendrá en su interior definidas las variables nombradas en la sección anterior (PORT - Ambiente).
 - Se inicia el docker desktop y a continuación, desde la ruta grupo-4-backend/prod se debe colocar el siguiente comando:
-````bash
+
+```bash
 .../grupo-4-backend/prod/docker compose up
-````
+```
+
 ## 6. Estructura del Proyecto
 
 A continuación se presentará un diagrama de árbol de la estructura actual del proyecto:
 
-````bash
+```bash
 src
 ├── carrito-de-compras
 │   ├── dto
@@ -130,32 +137,34 @@ src
 ├── app.service.ts
 ├── main.ts
 
-````
+```
 
 ## 7. Documentación de la API
 
 La documentación de esta API esta hecha en SWAGGER. Puedes acceder a la documentación despues de iniciar el servidor.
 
 - 7.1. Se inicia el proyecto, segun el ambiente:
-````bash
+
+```bash
  docker compose up
- ````
- - 7.2. Accede al Swagger desde el navegador: 
- ````bash
-  Debe dirigirse a la siguiente URL: http://localhost:3000/api (se deberá ajustar el puerto según sea el ambiente seleccionado)
-  ````
+```
+
+- 7.2. Accede al Swagger desde el navegador:
+
+```bash
+ Debe dirigirse a la siguiente URL: http://localhost:3000/api (se deberá ajustar el puerto según sea el ambiente seleccionado)
+```
+
 Posteriormente, le llevará a la interfaz de Swagger; donde podrá acceder a los endpoints diseñados para la API.
 
 ## 8. Flujo de Trabajo
 
-Actualmente el flujo de trabajo se ha ido realizando conforme a las exigencias del desarrollo del proyecto.   Cada rama representa el avance del proyecto con respecto a las solicitudes para cada entrega del mismo. Las actividades de avance realizadas en cada rama, posteriormente se unen en la rama principal `main` de trabajo. 
+Actualmente el flujo de trabajo se ha ido realizando conforme a las exigencias del desarrollo del proyecto. Cada rama representa el avance del proyecto con respecto a las solicitudes para cada entrega del mismo. Las actividades de avance realizadas en cada rama, posteriormente se unen en la rama principal `main` de trabajo.
 
 ## 9. Contacto
 
 Si tienes alguna duda, puedes contactarnos a través de:
 
 - [@Gfigueroa](https://github.com/GEFR00) Gabriela Figueroa - Lider Backend
-- [@Rdonoso](https://github.com/ShagoDonosoP) Roberto Donoso - Integrante Backend 
-- [@Csuescun](https://github.com/Suescun85) Carlos Suescun - Integrante Backend 
-
-
+- [@Rdonoso](https://github.com/ShagoDonosoP) Roberto Donoso - Integrante Backend
+- [@Csuescun](https://github.com/Suescun85) Carlos Suescun - Integrante Backend

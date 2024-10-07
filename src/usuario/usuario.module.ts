@@ -7,6 +7,6 @@ import { PedidoModule } from 'src/pedido/pedido.module';
   controllers: [UsuarioController],
   providers: [UsuarioService],
   exports: [UsuarioService],
-  imports: [forwardRef(() => PedidoModule)]
+  imports: [forwardRef(() => PedidoModule)],
 })
 export class UsuarioModule {}

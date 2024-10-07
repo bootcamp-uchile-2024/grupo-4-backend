@@ -1,3 +1,3 @@
 export declare class UsuarioCarritoDeCompraDto {
-    id: number;
+  id: number;
 }

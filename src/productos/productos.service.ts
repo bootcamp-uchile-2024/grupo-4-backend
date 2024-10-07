@@ -5,11 +5,9 @@ import { Producto, Tipos } from './entities/producto.entity';
 
 @Injectable()
 export class ProductosService {
-
   productos: Producto[] = [];
 
   create(createProductoDto: CreateProductoDto): Producto {
-
     const nuevoProducto = new Producto();
 
     nuevoProducto.id = this.productos.length + 1;
@@ -29,38 +27,28 @@ export class ProductosService {
     this.productos.push(nuevoProducto);
 
     return nuevoProducto;
-
-  };
+  }
 
   findAll(tipo: Tipos): Producto[] {
-
-    if(tipo !== undefined) {
-      return this.productos.filter(
-        producto => producto.tipo === tipo
-      );
+    if (tipo !== undefined) {
+      return this.productos.filter((producto) => producto.tipo === tipo);
     }
 
     return this.productos;
-
-  };
+  }
 
   findOne(id: number): Producto {
-
-    const producto = this.productos.find(
-      producto => producto.id == id
-    );
+    const producto = this.productos.find((producto) => producto.id == id);
 
     return producto ? producto : null;
-
-  };
+  }
 
   update(id: number, updateProductoDto: UpdateProductoDto): boolean {
-
     const producto = this.findOne(id);
 
     console.log('producto: ', producto);
 
-    if(!producto) return false;
+    if (!producto) return false;
 
     producto.nombre = updateProductoDto.nombre;
     producto.descripcion = updateProductoDto.descripcion;
@@ -76,20 +64,19 @@ export class ProductosService {
     producto.destacado = updateProductoDto.destacado;
 
     return true;
-
-  };
+  }
 
   remove(id: number): boolean {
     const producto = this.findOne(id);
 
-    if(!producto) return false;
+    if (!producto) return false;
 
-    this.productos.forEach(producto => {
-      if(producto.id == id) {
+    this.productos.forEach((producto) => {
+      if (producto.id == id) {
         this.productos.splice(this.productos.indexOf(producto), 1);
       }
     });
 
     return true;
-  };
+  }
 }

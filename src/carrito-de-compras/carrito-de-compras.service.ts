@@ -10,7 +10,6 @@ import { CarritoProductoDto } from 'src/productos/dto/carrito-producto.dto';
 
 @Injectable()
 export class CarritoDeComprasService {
-
   carritoDeCompras: CarritoDeCompra[] = [];
 
   constructor(
@@ -19,24 +18,22 @@ export class CarritoDeComprasService {
   ) {}
 
   create(createCarritoDeCompraDto: CreateCarritoDeCompraDto): CarritoDeCompra {
-
     const usuario = this.usuarioService.findOne(
-      createCarritoDeCompraDto.usuario.id
+      createCarritoDeCompraDto.usuario.id,
     );
 
     //Verifica que el usuario exista
-    if(!usuario) return null;
-
+    if (!usuario) return null;
 
     //Verifica que los productos existan
     const productosId = createCarritoDeCompraDto.items.map(
-      item => item.producto.productoId
+      (item) => item.producto.productoId,
     );
 
     console.log('productosId', productosId);
 
-    productosId.forEach(productoId => {
-      if(!this.productoService.findOne(productoId)) return null;
+    productosId.forEach((productoId) => {
+      if (!this.productoService.findOne(productoId)) return null;
     });
 
     //Se crea el carrito de compra
@@ -52,70 +49,60 @@ export class CarritoDeComprasService {
     const item = new CarritoItem();
 
     createCarritoDeCompraDto.items.forEach((itemDto, index) => {
-
       const producto = this.productoService.findOne(
-        itemDto.producto.productoId
+        itemDto.producto.productoId,
       );
 
       item.id = index + 1;
-      item.producto = new CarritoProductoDto(); 
+      item.producto = new CarritoProductoDto();
       item.producto.productoId = itemDto.producto.productoId;
       item.producto.precio = producto.precio;
-      
+
       item.cantidad = itemDto.cantidad;
       item.carritoDeComprasId = carrito.id;
       items.push(item);
-
     });
 
     carrito.items = items;
     this.carritoDeCompras.push(carrito);
 
     //Actualiza el carrito de compra del usuario
-    this.usuarioService.updateCarrito(
-      usuario.id, 
-      carrito
-    );
+    this.usuarioService.updateCarrito(usuario.id, carrito);
 
     return carrito;
-
-  };
+  }
 
   findCarritoByUsuarioId(usuarioId: number): CarritoDeCompra[] {
-
     const usuario = this.usuarioService.findOne(usuarioId);
 
-    if(!usuario) return null;
-      
-    const carrito = this.carritoDeCompras.filter(
-      carrito => carrito.usuario.id == usuarioId
-    );
-  
-    return carrito;
+    if (!usuario) return null;
 
+    const carrito = this.carritoDeCompras.filter(
+      (carrito) => carrito.usuario.id == usuarioId,
+    );
+
+    return carrito;
   }
 
   findOne(id: number): CarritoDeCompra {
-  
-    const carrito = this.carritoDeCompras.find(
-      carrito => carrito.id == id
-    );
+    const carrito = this.carritoDeCompras.find((carrito) => carrito.id == id);
 
     return carrito ? carrito : null;
-
   }
 
-  update(id: number, updateCarritoDeCompraDto: UpdateCarritoDeCompraDto): boolean {
-    
+  update(
+    id: number,
+    updateCarritoDeCompraDto: UpdateCarritoDeCompraDto,
+  ): boolean {
     const carrito = this.findOne(id);
 
-    if(!carrito) return false;
+    if (!carrito) return false;
 
     const usuario = this.usuarioService.findOne(
-      updateCarritoDeCompraDto.usuario.id
+      updateCarritoDeCompraDto.usuario.id,
     );
 
-    if(!usuario) return false;
+    if (!usuario) return false;
 
     carrito.usuario.id = usuario.id;
 
@@ -123,58 +110,50 @@ export class CarritoDeComprasService {
     const item = new CarritoItem();
 
     updateCarritoDeCompraDto.items.forEach((itemDto, index) => {
-
       const producto = this.productoService.findOne(
-        itemDto.producto.productoId
+        itemDto.producto.productoId,
       );
 
       item.id = index + 1;
-      item.producto = new CarritoProductoDto(); 
+      item.producto = new CarritoProductoDto();
       item.producto.productoId = itemDto.producto.productoId;
       item.producto.precio = producto.precio;
-      
+
       item.cantidad = itemDto.cantidad;
       item.carritoDeComprasId = carrito.id;
       items.push(item);
-
     });
 
     carrito.items = items;
 
     return true;
-
-  };
+  }
 
   remove(id: number): boolean {
-      
     const carrito = this.findOne(id);
-  
-    if(!carrito) return false;
-  
-    this.carritoDeCompras.forEach(carrito => {
-      if(carrito.id == id) {
+
+    if (!carrito) return false;
+
+    this.carritoDeCompras.forEach((carrito) => {
+      if (carrito.id == id) {
         this.carritoDeCompras.splice(this.carritoDeCompras.indexOf(carrito), 1);
       }
     });
 
     //Elimina el carrito de compra del usuario
-    this.usuarioService.deleteCarrito(
-      carrito.usuario.id
-    );
-  
+    this.usuarioService.deleteCarrito(carrito.usuario.id);
+
     return true;
-  };
+  }
 
   updateEstado(id: number, estado: number): boolean {
-    
     const carrito = this.findOne(id);
 
-    if(!carrito) return false;
-    if(estado < 0 || estado > 2) return false;
+    if (!carrito) return false;
+    if (estado < 0 || estado > 2) return false;
 
     carrito.estadoCarrito = estado;
 
     return true;
-
-  };
-};
+  }
+}

@@ -1,16 +1,26 @@
-import { Controller, Get, Post, Body, Patch, Param, Delete, HttpStatus, Res, HttpException, ValidationPipe, UsePipes } from '@nestjs/common';
+import {
+  Controller,
+  Get,
+  Post,
+  Body,
+  Patch,
+  Param,
+  Delete,
+  HttpStatus,
+  Res,
+  HttpException,
+  ValidationPipe,
+  UsePipes,
+} from '@nestjs/common';
 import { UsuarioService } from './usuario.service';
 import { CreateUsuarioDto } from './dto/create-usuario.dto';
 import { UpdateUsuarioDto } from './dto/update-usuario.dto';
 import { ApiResponse, ApiTags } from '@nestjs/swagger';
 import { Response } from 'express';
 
-
-
 @ApiTags('usuarios')
 @Controller('usuario')
 export class UsuarioController {
-
   constructor(private readonly usuarioService: UsuarioService) {}
 
   @Post()
@@ -41,7 +51,10 @@ export class UsuarioController {
   @ApiResponse({ status: 404, description: 'Usuario no encontrado.' })
   @UsePipes(new ValidationPipe({ whitelist: true, forbidNonWhitelisted: true }))
   update(@Param('id') id: number, @Body() updateUsuarioDto: UpdateUsuarioDto) {
-    const usuarioFueModificado = this.usuarioService.update(id, updateUsuarioDto);
+    const usuarioFueModificado = this.usuarioService.update(
+      id,
+      updateUsuarioDto,
+    );
     if (!usuarioFueModificado) {
       throw new HttpException('Usuario no encontrado', HttpStatus.NOT_FOUND);
     }
@@ -63,7 +76,10 @@ export class UsuarioController {
   @ApiResponse({ status: 200, description: 'Carrito modificado.' })
   @ApiResponse({ status: 404, description: 'Usuario no encontrado.' })
   updateCarrito(@Param('id') id: number, @Body() updateCarritoDeCompraDto) {
-    const carritoFueModificado = this.usuarioService.updateCarrito(id, updateCarritoDeCompraDto);
+    const carritoFueModificado = this.usuarioService.updateCarrito(
+      id,
+      updateCarritoDeCompraDto,
+    );
     if (!carritoFueModificado) {
       throw new HttpException('Usuario no encontrado', HttpStatus.NOT_FOUND);
     }
