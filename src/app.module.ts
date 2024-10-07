@@ -25,16 +25,17 @@ import { ConfigModule } from '@nestjs/config';
           AMBIENTE: config.AMBIENTE,          
         };
     
-    }
-  })],
+      }
+    })],
   controllers: [AppController],
   providers: [AppService],
 })
+
 export class AppModule implements NestModule {
   configure(consumer: MiddlewareConsumer) {
-  consumer
-  .apply(GeneralMiddleware) // MIDDLEWARE A APLICAR
-  .forRoutes('*'); // RUTAS A LAS QUE APLICA
+    consumer
+      .apply(GeneralMiddleware) // MIDDLEWARE A APLICAR
+      .forRoutes('*'); // RUTAS A LAS QUE APLICA
   }
- }
+};
  
