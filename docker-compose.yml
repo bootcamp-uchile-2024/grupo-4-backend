@@ -1,10 +1,7 @@
 #Docker compose para el desarrollo de la aplicación
 services:
   node-app:
-    build:
-      context: .
-      dockerfile: dockerfile.dev #Dockerfile para desarrollo
-    working_dir: /home/node/nest
+    image: suescun85/grupo4-backend:v-001
     environment:
       - ARCHIVO_ENV=.develop
     volumes:
@@ -12,3 +9,10 @@ services:
     ports:
       - '4000:5000'
     command: npm run start:dev
+
+  bd-server:
+    image: mysql:8.0.39-debian
+    environment:
+      MYSQL_ROOT_PASSWORD: cafeinados24      
+    ports:
+      - "3700:3306"
