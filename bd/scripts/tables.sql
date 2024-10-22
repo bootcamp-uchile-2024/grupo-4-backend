@@ -1,4 +1,4 @@
-USE ecommerce_db;
+USE cafeinados;
 
 -- Tabla TipoUsuario
 CREATE TABLE TipoUsuario (

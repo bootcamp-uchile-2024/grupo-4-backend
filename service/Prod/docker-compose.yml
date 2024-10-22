@@ -1,7 +1,0 @@
-services:
-  node-api:
-    image: suescun85/grupo4-backend:v-001
-    environment:
-      - ARCHIVO_ENV=.production
-    ports:
-      - '3000:8000'
