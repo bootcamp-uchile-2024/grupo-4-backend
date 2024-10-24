@@ -2,13 +2,14 @@ import { Injectable } from '@nestjs/common';
 import { CreateProductoDto } from './dto/create-producto.dto';
 import { UpdateProductoDto } from './dto/update-producto.dto';
 import { Producto, Tipos } from './entities/producto.entity';
+import { ProductoDTO } from './dto/producto.dto';
 
 @Injectable()
 export class ProductosService {
   productos: Producto[] = [];
 
-  create(createProductoDto: CreateProductoDto): Producto {
-    const nuevoProducto = new Producto();
+  create(createProductoDto: CreateProductoDto): ProductoDTO {
+    const nuevoProducto = new ProductoDTO();
 
     nuevoProducto.id = this.productos.length + 1;
     nuevoProducto.nombre = createProductoDto.nombre;
@@ -29,7 +30,7 @@ export class ProductosService {
     return nuevoProducto;
   }
 
-  findAll(tipo: Tipos): Producto[] {
+  findAll(tipo: Tipos): ProductoDTO[] {
     if (tipo !== undefined) {
       return this.productos.filter((producto) => producto.tipo === tipo);
     }
@@ -37,7 +38,7 @@ export class ProductosService {
     return this.productos;
   }
 
-  findOne(id: number): Producto {
+  findOne(id: number): ProductoDTO {
     const producto = this.productos.find((producto) => producto.id == id);
 
     return producto ? producto : null;

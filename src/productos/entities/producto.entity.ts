@@ -1,5 +1,5 @@
 import { ApiProperty } from '@nestjs/swagger';
-import { Categorias } from 'src/models/categorias';
+import { Categorias } from 'src/productos/models/categorias';
 
 export enum Tipos {
   Accesorios = 'Accesorios',
