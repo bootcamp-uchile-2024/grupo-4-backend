@@ -45,22 +45,24 @@ export class Producto {
     paisOrigenId: number;
  
     @ManyToOne(()=> Categoria)
-    @JoinColumn({name: 'id'})
+    @JoinColumn({name: 'id_categoria'})
     categoria: Categoria;
 
     @ManyToOne(()=> TipoProducto)
-    @JoinColumn({name: 'id'})
+    @JoinColumn({name: 'id_tipoProducto'})
     tipo: TipoProducto;
 
     @ManyToOne(()=> PaisOrigen)
-    @JoinColumn({name: 'id'})
-    pais: PaisOrigen;
+    @JoinColumn({name: 'id_paisOrigen'})
+    paisOrigen: PaisOrigen;
 
     @ManyToOne(()=> PedidoItem)
     @JoinColumn({name: 'productoId'})
-    producto: PedidoItem;
+    pedidoItem: PedidoItem;
 
     @ManyToOne(()=> CarritoItem)
     @JoinColumn({name: 'productoId'})
-   productoCarrito: CarritoItem;
+    carritoItem: CarritoItem;
+    
+   
 }

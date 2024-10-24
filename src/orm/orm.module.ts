@@ -7,6 +7,13 @@ import { PaisOrigen } from './entity/paisOrigen';
 import { TipoProducto } from './entity/tipoProducto';
 import { TipoUsuario } from './entity/tipoUsuario';
 import { PedidoItem } from './entity/pedidoItem';
+import { CarritoItem } from './entity/carritoItem';
+import { CarritoDeCompras } from './entity/carritoDeCompras';
+import { Despacho } from './entity/despacho';
+import { Pedido } from './entity/pedido';
+import { DireccionEnvio } from './entity/direccionEnvio';
+import { Usuario } from './entity/usuario';
+import { Producto } from './entity/producto';
 
 @Module({
     imports: [
@@ -23,7 +30,15 @@ import { PedidoItem } from './entity/pedidoItem';
         PaisOrigen, 
         TipoProducto, 
         TipoUsuario, 
-        PedidoItem     
+        PedidoItem,
+        CarritoItem,
+        CarritoDeCompras,
+        Despacho,
+        Pedido,
+        DireccionEnvio,
+        Usuario,
+        Producto
+             
          ],
     }),
     OrmModule

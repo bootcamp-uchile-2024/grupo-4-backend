@@ -1,4 +1,6 @@
-import { Column, Entity, PrimaryColumn } from "typeorm";
+import { Column, Entity, OneToMany, PrimaryColumn } from "typeorm";
+import { CarritoDeCompras } from "./carritoDeCompras";
+import { Producto } from "./producto";
 
 
 @Entity({name: 'CarritoItem'})
@@ -14,5 +16,13 @@ export class CarritoItem {
 
     @Column()
     carritoDeComprasId: number; 
+
+    @OneToMany(()=> CarritoDeCompras, (carritoDeCompras) => carritoDeCompras.carritoItem)
+    carritosDeCompras: CarritoDeCompras[];
+
+    @OneToMany(()=> Producto, (producto) => producto.carritoItem)
+    productos: Producto[];
+
+
     
 }

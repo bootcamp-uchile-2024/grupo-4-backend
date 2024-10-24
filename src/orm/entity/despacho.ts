@@ -1,10 +1,11 @@
-import { Column, Entity, JoinColumn, ManyToOne, PrimaryColumn } from "typeorm";
+import { Column, Entity, JoinColumn, ManyToOne, OneToMany, PrimaryColumn } from "typeorm";
 import { Categoria } from "./categoria";
 import { TipoProducto } from "./tipoProducto";
 import { PaisOrigen } from "./paisOrigen";
 import { PedidoItem } from "./pedidoItem";
 import { CarritoItem } from "./carritoItem";
 import { EstadoDespacho } from "./estadoDespacho";
+import { DireccionEnvio } from "./direccionEnvio";
 
 
 @Entity({name: 'Despacho'})	 
@@ -26,8 +27,10 @@ export class Despacho {
     direccionEnvioId: number;
 
     @ManyToOne(()=> EstadoDespacho)
-    @JoinColumn({name: 'id'})
+    @JoinColumn({name: 'id_estadoDespacho'})
     estadoDespacho: EstadoDespacho;
 
+    @OneToMany(()=> DireccionEnvio, (direccionEnvio) => direccionEnvio.despacho)
+    direccionEnvio: DireccionEnvio[];
    
 }

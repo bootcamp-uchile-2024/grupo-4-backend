@@ -1,4 +1,6 @@
-import { Column, Entity, PrimaryColumn } from "typeorm";
+import { Column, Entity, OneToMany, PrimaryColumn } from "typeorm";
+import { Pedido } from "./pedido";
+import { Producto } from "./producto";
 
 
 @Entity({name: 'PedidoItem'})
@@ -13,5 +15,13 @@ export class PedidoItem {
     cantidad: number;
 
     @Column()
-    pedidoId: number;    
+    pedidoId: number;
+    
+    @OneToMany(()=> Pedido, (pedido) => pedido.pedidoItem)
+    pedidos: Pedido[];
+
+    @OneToMany(()=> Producto, (producto) => producto.pedidoItem)
+    productos: Producto[];
+
+
 }
