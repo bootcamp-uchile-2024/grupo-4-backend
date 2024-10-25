@@ -30,11 +30,7 @@ export class ProductosService {
     return nuevoProducto;
   }
 
-  findAll(tipo: Tipos): ProductoDTO[] {
-    if (tipo !== undefined) {
-      return this.productos.filter((producto) => producto.tipo === tipo);
-    }
-
+  findAll(): ProductoDTO[] {
     return this.productos;
   }
 

@@ -42,14 +42,14 @@ export class ProductosController {
   }
 
   @Get()
-  @ApiQuery({
+  /*@ApiQuery({
     name: 'tipo',
     enum: Tipos,
     required: false,
     description: 'Filtrar por tipo de producto (opcional)',
-  })
-  findAll(@Query('tipo') tipo: Tipos) {
-    return this.productosService.findAll(tipo);
+  })*/
+  findAll( ) {
+    return this.productosService.findAll();
   }
 
   @Get(':id')
