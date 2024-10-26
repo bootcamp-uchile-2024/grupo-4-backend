@@ -1,7 +1,7 @@
 #Docker compose para el desarrollo de la aplicación
 services:
   node-app:
-    image: suescun85/grupo4-backend:v-001
+    image: suescun85/grupo4-backend:v-002
     environment:
       - ARCHIVO_ENV=.develop
     volumes:
