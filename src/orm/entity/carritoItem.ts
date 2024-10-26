@@ -1,6 +1,6 @@
 import { Column, Entity, OneToMany, PrimaryColumn } from "typeorm";
 import { CarritoDeCompras } from "./carritoDeCompras";
-import { Producto } from "./producto";
+import { Productos } from "./producto";
 
 
 @Entity({name: 'CarritoItem'})
@@ -20,8 +20,8 @@ export class CarritoItem {
     @OneToMany(()=> CarritoDeCompras, (carritoDeCompras) => carritoDeCompras.carritoItem)
     carritosDeCompras: CarritoDeCompras[];
 
-    @OneToMany(()=> Producto, (producto) => producto.carritoItem)
-    productos: Producto[];
+    @OneToMany(()=> Productos, (producto) => producto.carritoItem)
+    productos: Productos[];
 
 
     

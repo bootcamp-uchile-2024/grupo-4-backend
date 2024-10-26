@@ -13,7 +13,7 @@ import { Despacho } from './entity/despacho';
 import { Pedido } from './entity/pedido';
 import { DireccionEnvio } from './entity/direccionEnvio';
 import { Usuario } from './entity/usuario';
-import { Producto } from './entity/producto';
+import { Productos } from './entity/producto';
 
 @Module({
     imports: [
@@ -37,7 +37,7 @@ import { Producto } from './entity/producto';
         Pedido,
         DireccionEnvio,
         Usuario,
-        Producto
+        Productos
              
          ],
     }),

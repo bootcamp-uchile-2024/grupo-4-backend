@@ -7,7 +7,7 @@ import { CarritoItem } from "./carritoItem";
 
 
 @Entity({name: 'Producto'}) 
-export class Producto {
+export class Productos {
     @PrimaryColumn()
     id: number;
 
@@ -45,15 +45,15 @@ export class Producto {
     paisOrigenId: number;
  
     @ManyToOne(()=> Categoria)
-    @JoinColumn({name: 'id_categoria'})
+    @JoinColumn({name: 'categoriaId'})
     categoria: Categoria;
 
     @ManyToOne(()=> TipoProducto)
-    @JoinColumn({name: 'id_tipoProducto'})
+    @JoinColumn({name: 'tipoProductoId'})
     tipo: TipoProducto;
 
     @ManyToOne(()=> PaisOrigen)
-    @JoinColumn({name: 'id_paisOrigen'})
+    @JoinColumn({name: 'paisOrigenId'})
     paisOrigen: PaisOrigen;
 
     @ManyToOne(()=> PedidoItem)
