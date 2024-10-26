@@ -21,6 +21,7 @@ import { ApiQuery, ApiResponse, ApiTags } from '@nestjs/swagger';
 import { Tipos } from './entities/producto.entity';
 import { Response } from 'express';
 import { GeneralInterceptor } from 'src/general/general.interceptor';
+import { ProductoDTO } from './dto/producto.dto';
 
 @ApiTags('productos')
 @Controller('productos')
@@ -55,15 +56,15 @@ export class ProductosController {
   @Get(':id')
   @ApiResponse({ status: 200, description: 'Producto encontrado.' })
   @ApiResponse({ status: 404, description: 'Producto no encontrado.' })
-  findOne(@Param('id') id: number) {
-    const producto = this.productosService.findOne(id);
+  async findOne(@Param('id') id: string): Promise<ProductoDTO> {
+    const producto = await this.productosService.findOne(+id);
     if (!producto) {
       throw new HttpException('Producto no encontrado', HttpStatus.NOT_FOUND);
     }
     return producto;
   }
 
-  @Patch(':id')
+ /* @Patch(':id')
   @ApiResponse({ status: 200, description: 'Producto actualizado.' })
   @ApiResponse({ status: 404, description: 'Producto no encontrado.' })
   @UsePipes(new ValidationPipe({ whitelist: true, forbidNonWhitelisted: true }))
@@ -79,7 +80,7 @@ export class ProductosController {
       throw new HttpException('Producto no encontrado', HttpStatus.NOT_FOUND);
     }
     return { message: 'Producto actualizado' };
-  }
+  }*/
 
   @Delete(':id')
   @ApiResponse({ status: 200, description: 'Producto eliminado.' })

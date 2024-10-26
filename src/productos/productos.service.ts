@@ -46,13 +46,12 @@ export class ProductosService {
     return ProductoMapper.entityListToDtoList(listadoProductos);
   }
 
-  findOne(id: number): ProductoDTO {
-    const producto = this.productos.find((producto) => producto.id == id);
-
-    return producto ? producto : null;
+  async findOne(id: number): Promise<ProductoDTO> {
+    const producto: Productos = await this.productosRepository.findOneBy({id: id});
+    return ProductoMapper.entityToDto(producto);
   }
 
-  update(id: number, updateProductoDto: UpdateProductoDto): boolean {
+  /*update(id: number, updateProductoDto: UpdateProductoDto): boolean {
     const producto = this.findOne(id);
 
     console.log('producto: ', producto);
@@ -73,7 +72,7 @@ export class ProductosService {
     producto.destacado = updateProductoDto.destacado;
 
     return true;
-  }
+  }*/
 
   remove(id: number): boolean {
     const producto = this.findOne(id);

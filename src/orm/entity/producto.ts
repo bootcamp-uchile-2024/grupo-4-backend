@@ -56,7 +56,7 @@ export class Productos {
     @JoinColumn({name: 'paisOrigenId'})
     paisOrigen: PaisOrigen;
 
-    /*@ManyToOne(()=> PedidoItem)
+    /*@ManyToOne(()=> PedidoItem)//Se inhabilita por el momento
     @JoinColumn({name: 'productoId'})
     pedidoItem: PedidoItem;
 
