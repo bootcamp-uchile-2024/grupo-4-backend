@@ -125,19 +125,19 @@ Para poder utilizar las tablas en la base de datos , se deeben realizar el sigui
 ### Configurar el Workbench con:
 - Nombre de la conexion:se sugieren 2 nombres Desarollo y Produccion.
 
-![Configuracion](\Imagenes\BD1.jpg)
+![Configuracion](/Imagenes/BD1.jpg)
 
 ### Ingresar la contraseña:
 
 - El password se encuentra en las variables de entorno ya sea para el ambiente de Desarrollo o de Produccion.
 
-![Password](\Imagenes\BD2.jpg)
+![Password](/Imagenes/BD2.jpg)
 
 ### Ingreso a la Base de Datos.
 
 - Una vez ingresada la informacion que estará contenida en las variables de entorno para cada ambiente se podrá ingresar exitosamente a la base de datos "Cafeinados".
 
-![Interior BD](\Imagenes\BD3.jpg)
+![Interior BD](/Imagenes/BD3.jpg)
 
 
 ## 8. Estructura del Proyecto
