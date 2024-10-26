@@ -1,7 +1,7 @@
 #Docker compose para el desarrollo de la aplicación
 services:
   node-app:
-    image: suescun85/grupo4-backend:v-001
+    image: suescun85/grupo4-backend:v-002
     environment:
       - ARCHIVO_ENV=.develop
     volumes:
@@ -13,6 +13,8 @@ services:
   bd-server:
     image: mysql:8.0.39-debian
     environment:
-      MYSQL_ROOT_PASSWORD: cafeinados24      
+      MYSQL_ROOT_PASSWORD: ${MYSQL_ROOT_PASSWORD} 
+    volumes:
+      - ./bd-server/sql:/var/lib/mysql
     ports:
-      - "3700:3306"
+      - '3700:3306'

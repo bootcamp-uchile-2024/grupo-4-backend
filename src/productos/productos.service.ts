@@ -2,13 +2,25 @@ import { Injectable } from '@nestjs/common';
 import { CreateProductoDto } from './dto/create-producto.dto';
 import { UpdateProductoDto } from './dto/update-producto.dto';
 import { Producto, Tipos } from './entities/producto.entity';
+import { ProductoDTO } from './dto/producto.dto';
+import { Productos } from 'src/orm/entity/producto';
+import { InjectRepository } from '@nestjs/typeorm';
+import { Repository } from 'typeorm';
+import { ProductoMapper } from './mappers/producto.mappers';
 
 @Injectable()
 export class ProductosService {
+
+  constructor(
+    @InjectRepository(Productos)
+    private productosRepository: Repository<Productos>,
+  ) {}
+
+
   productos: Producto[] = [];
 
-  create(createProductoDto: CreateProductoDto): Producto {
-    const nuevoProducto = new Producto();
+  create(createProductoDto: CreateProductoDto): ProductoDTO {
+    const nuevoProducto = new ProductoDTO();
 
     nuevoProducto.id = this.productos.length + 1;
     nuevoProducto.nombre = createProductoDto.nombre;
@@ -29,21 +41,17 @@ export class ProductosService {
     return nuevoProducto;
   }
 
-  findAll(tipo: Tipos): Producto[] {
-    if (tipo !== undefined) {
-      return this.productos.filter((producto) => producto.tipo === tipo);
-    }
-
-    return this.productos;
+  async findAll(): Promise<ProductoDTO[]> {
+    const listadoProductos: Productos[]= await this.productosRepository.find();
+    return ProductoMapper.entityListToDtoList(listadoProductos);
   }
 
-  findOne(id: number): Producto {
-    const producto = this.productos.find((producto) => producto.id == id);
-
-    return producto ? producto : null;
+  async findOne(id: number): Promise<ProductoDTO> {
+    const producto: Productos = await this.productosRepository.findOneBy({id: id});
+    return ProductoMapper.entityToDto(producto);
   }
 
-  update(id: number, updateProductoDto: UpdateProductoDto): boolean {
+  /*update(id: number, updateProductoDto: UpdateProductoDto): boolean {
     const producto = this.findOne(id);
 
     console.log('producto: ', producto);
@@ -64,7 +72,7 @@ export class ProductosService {
     producto.destacado = updateProductoDto.destacado;
 
     return true;
-  }
+  }*/
 
   remove(id: number): boolean {
     const producto = this.findOne(id);

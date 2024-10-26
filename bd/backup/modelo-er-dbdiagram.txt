@@ -1,0 +1,104 @@
+Table Usuario {
+    id int [pk, increment]
+    nombre varchar(50)
+    apellido varchar(50)
+    email varchar(100) [unique]
+    constrasenna varchar(10)
+    rut varchar(10) [unique]
+    tipoUsuarioId int
+}
+
+Table Producto {
+    id int [pk, increment]
+    nombre varchar(100)
+    descripción varchar(200)
+    imagen varchar(200)
+    marca varchar(50)
+    formato varchar(10)
+    fechaVencimiento date
+    precio float
+    stock int
+    categoriaId int
+    tipoProductoId int
+    paisOrigenId int
+}
+
+Table Categoria {
+    id int [pk, increment]
+    nombre varchar(100)
+}
+
+Table TipoProducto {
+    id int [pk, increment]
+    nombre varchar(100)
+}
+
+Table Pedido {
+    id int [pk, increment]
+    fecha date
+    usuarioId int
+}
+
+Table CarritoDeCompras {
+    id int [pk, increment]
+    usuarioId int
+}
+
+Table CarritoItem {
+    id int [pk, increment]
+    productoId int
+    cantidad int
+    carritoDeComprasId int
+}
+
+Table PedidoItem {
+    id int [pk, increment]
+    productoId int
+    cantidad int
+    pedidoId int
+}
+
+Table DireccionEnvio {
+    id int [pk, increment]
+    direccion varchar(100)
+    ciudad varchar(50)
+    codigoPostal varchar(10)
+    usuarioId int
+}
+
+Table Despacho {
+    id int [pk, increment]
+    estado int
+    fechaDespacho date
+    fechaEntregaEstimada date
+    direccionEnvioId int
+}
+
+Table PaisOrigen {
+    id int [pk, increment]
+    nombre varchar(30)
+}
+
+Table TipoUsuario {
+    id int [pk, increment]
+    nombreTipo varchar(20)
+}
+
+Table EstadoDespacho {
+  id int [pk, increment]
+  nombreEstado varchar(20)
+}
+
+Ref: Usuario.id > CarritoDeCompras.usuarioId
+Ref: Usuario.id > Pedido.usuarioId
+Ref: Usuario.id > DireccionEnvio.usuarioId
+Ref: Usuario.tipoUsuarioId > TipoUsuario.id
+Ref: Producto.id > Categoria.id
+Ref: Producto.id > TipoProducto.id
+Ref: Producto.id > PaisOrigen.id
+Ref: Pedido.id > PedidoItem.pedidoId
+Ref: CarritoDeCompras.id > CarritoItem.carritoDeComprasId
+Ref: Producto.id > CarritoItem.productoId
+Ref: Producto.id > PedidoItem.productoId
+Ref: DireccionEnvio.id > Despacho.direccionEnvioId
+Ref: Despacho.id > EstadoDespacho.id

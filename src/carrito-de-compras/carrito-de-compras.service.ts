@@ -56,7 +56,7 @@ export class CarritoDeComprasService {
       item.id = index + 1;
       item.producto = new CarritoProductoDto();
       item.producto.productoId = itemDto.producto.productoId;
-      item.producto.precio = producto.precio;
+      //item.producto.precio = producto.precio;//Se inhabilita para entrega taller 8
 
       item.cantidad = itemDto.cantidad;
       item.carritoDeComprasId = carrito.id;
@@ -117,7 +117,7 @@ export class CarritoDeComprasService {
       item.id = index + 1;
       item.producto = new CarritoProductoDto();
       item.producto.productoId = itemDto.producto.productoId;
-      item.producto.precio = producto.precio;
+      //item.producto.precio = producto.precio;//Se inhabilita para entrega de taller 8
 
       item.cantidad = itemDto.cantidad;
       item.carritoDeComprasId = carrito.id;

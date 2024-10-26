@@ -13,6 +13,7 @@ import { UsuarioModule } from './usuario/usuario.module';
 import { PedidoModule } from './pedido/pedido.module';
 import { CarritoDeComprasModule } from './carrito-de-compras/carrito-de-compras.module';
 import { ConfigModule } from '@nestjs/config';
+import { OrmModule } from './orm/orm.module';
 
 @Module({
   imports: [
@@ -42,6 +43,7 @@ import { ConfigModule } from '@nestjs/config';
         };
       },
     }),
+    OrmModule,
   ],
   controllers: [AppController],
   providers: [AppService],

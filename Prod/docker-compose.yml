@@ -1,7 +1,17 @@
+# Contenedor para la produccion de la aplicacion
 services:
   node-api:
-    image: suescun85/grupo4-backend:v-001
+    image: suescun85/grupo4-backend:v-002
     environment:
       - ARCHIVO_ENV=.production
     ports:
       - '3000:8000'
+
+  bd-server:
+    image: mysql:8.0.39-debian
+    environment:
+      MYSQL_ROOT_PASSWORD: ${MYSQL_ROOT_PASSWORD} 
+    volumes:
+      - ./bd-server/sql:/var/lib/mysql
+    ports:
+      - '4700:3306'

@@ -1,0 +1,15 @@
+erDiagram
+    Usuario ||--|{ CarritoDeCompras: tiene
+    Usuario ||--|{ Pedido: realiza
+    Usuario ||--|| TipoUsuario: pertenece
+    Pedido ||--|{ PedidoItem: contiene
+    Pedido ||--|| Despacho: asociado_a
+    Despacho ||--|| DireccionEnvio: asociado_a
+    Despacho ||--|| EstadoDespacho: tiene
+    CarritoDeCompras ||--|{ CarritoItem: contiene
+    CarritoItem }|--|| Producto: incluye
+    PedidoItem }|--|| Producto: incluye
+    Producto }|--|| Categoria: pertenece_a
+    Producto }|--|| TipoProducto: se_clasifica_por
+    Producto }|--|| Origen : tiene
+
