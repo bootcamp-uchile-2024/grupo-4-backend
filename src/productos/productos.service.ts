@@ -3,9 +3,20 @@ import { CreateProductoDto } from './dto/create-producto.dto';
 import { UpdateProductoDto } from './dto/update-producto.dto';
 import { Producto, Tipos } from './entities/producto.entity';
 import { ProductoDTO } from './dto/producto.dto';
+import { Productos } from 'src/orm/entity/producto';
+import { InjectRepository } from '@nestjs/typeorm';
+import { Repository } from 'typeorm';
+import { ProductoMapper } from './mappers/producto.mappers';
 
 @Injectable()
 export class ProductosService {
+
+  constructor(
+    @InjectRepository(Productos)
+    private productosRepository: Repository<Productos>,
+  ) {}
+
+
   productos: Producto[] = [];
 
   create(createProductoDto: CreateProductoDto): ProductoDTO {
@@ -30,8 +41,9 @@ export class ProductosService {
     return nuevoProducto;
   }
 
-  findAll(): ProductoDTO[] {
-    return this.productos;
+  async findAll(): Promise<ProductoDTO[]> {
+    const listadoProductos: Productos[]= await this.productosRepository.find();
+    return ProductoMapper.entityListToDtoList(listadoProductos);
   }
 
   findOne(id: number): ProductoDTO {

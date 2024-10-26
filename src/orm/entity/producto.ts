@@ -39,7 +39,7 @@ export class Productos {
     categoriaId: number;
 
     @Column()
-    tipoProducto: number;
+    tipoProductoId: number;
 
     @Column()
     paisOrigenId: number;
@@ -56,13 +56,13 @@ export class Productos {
     @JoinColumn({name: 'paisOrigenId'})
     paisOrigen: PaisOrigen;
 
-    @ManyToOne(()=> PedidoItem)
+    /*@ManyToOne(()=> PedidoItem)
     @JoinColumn({name: 'productoId'})
     pedidoItem: PedidoItem;
 
     @ManyToOne(()=> CarritoItem)
     @JoinColumn({name: 'productoId'})
-    carritoItem: CarritoItem;
+    carritoItem: CarritoItem;*/
     
    
 }

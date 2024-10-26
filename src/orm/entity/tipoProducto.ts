@@ -10,6 +10,6 @@ export class TipoProducto {
     @Column()
     nombre: string;
    
-    @OneToMany(() => Productos, producto => producto.tipoProducto)
+    @OneToMany(() => Productos, producto => producto.tipoProductoId)
     productos: Productos[];
 }
