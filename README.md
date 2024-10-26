@@ -9,10 +9,12 @@ Somos una e-commerce diseñada para personalizar tu experiencia de café en casa
 3. [Configuración](#configuración)
 4. [Ejecución - Desarrollo](#ejecución---desarrollo)
 5. [Ejecución - Producción](#ejecución---producción)
-6. [Estructura del Proyecto](#estructura-del-proyecto)
-7. [Documentación de la API](#documentación-de-la-api)
-8. [Flujo de Trabajo](#flujo-de-trabajo)
-9. [Contacto](#contacto)
+6. [Configuración del ORM](#conexión---base de datos)
+7. [Configuracion de MySql](#gestión---base de datos)
+8. [Estructura del Proyecto](#estructura-del-proyecto)
+9. [Documentación de la API](#documentación-de-la-api)
+10. [Flujo de Trabajo](#flujo-de-trabajo)
+11. [Contacto](#contacto)
 
 ## 1. Requisitos Previos
 
@@ -66,7 +68,79 @@ Según el ambiente en el que se desee desarrollar la API, se deben completar la 
 .../grupo-4-backend/prod/docker compose up
 ```
 
-## 6. Estructura del Proyecto
+## 6. Configuración del ORM
+
+ Para poder conectar la API con la base de datos es necesario realizar lo siguiente:
+
+ ### Instalación del ORM en nuetro proyecto NEST
+```bash
+    npm install @nestjs/typeorm typeorm mysql2
+```
+Luego de ello toca configurar el ORM de forma modular, creando el modulo
+
+```bash
+    nest g module 
+```
+y luego en la sección de import desarrollar la siguiente estructura:
+
+```bash
+
+@Module({
+    imports: [
+        TypeOrmModule.forRoot({
+         type: 'mysql',
+         host: 'bd-server',
+         port: 3306,
+         username: 'root',
+         password: '*******',
+         database: 'cafeinados',
+        entities: [
+        Categoria, 
+        EstadoDespacho, 
+        PaisOrigen, 
+        TipoProducto, 
+        TipoUsuario, 
+        PedidoItem,
+        CarritoItem,
+        CarritoDeCompras,
+        Despacho,
+        Pedido,
+        DireccionEnvio,
+        Usuario,
+        Productos
+             
+         ],
+    }),
+    OrmModule
+    ],
+})
+export class OrmModule {}
+
+```
+
+## 7. Configuación de MySQL.
+
+Para poder utilizar las tablas en la base de datos , se deeben realizar el siguiente procedimiento:
+
+### Configurar el Workbench con:
+- Nombre de la conexion:se sugieren 2 nombres Desarollo y Produccion.
+
+![Configuracion](\Imagenes\BD1.jpg)
+
+### Ingresar la contraseña:
+
+- El password se encuentra en las variables de entorno ya sea para el ambiente de Desarrollo o de Produccion.
+
+![Password](\Imagenes\BD2.jpg)
+
+### Ingreso a la Base de Datos.
+
+- Una vez ingresada la informacion que estará contenida en las variables de entorno para cada ambiente se podrá ingresar exitosamente a la base de datos "Cafeinados".
+
+![Interior BD](\Imagenes\BD3.jpg)
+
+
+## 8. Estructura del Proyecto
 
 A continuación se presentará un diagrama de árbol de la estructura actual del proyecto:
 
@@ -139,7 +213,7 @@ src
 
 ```
 
-## 7. Documentación de la API
+## 9. Documentación de la API
 
 La documentación de esta API esta hecha en SWAGGER. Puedes acceder a la documentación despues de iniciar el servidor.
 
@@ -157,14 +231,13 @@ La documentación de esta API esta hecha en SWAGGER. Puedes acceder a la documen
 
 Posteriormente, le llevará a la interfaz de Swagger; donde podrá acceder a los endpoints diseñados para la API.
 
-## 8. Flujo de Trabajo
+## 10. Flujo de Trabajo
 
 Actualmente el flujo de trabajo se ha ido realizando conforme a las exigencias del desarrollo del proyecto. Cada rama representa el avance del proyecto con respecto a las solicitudes para cada entrega del mismo. Las actividades de avance realizadas en cada rama, posteriormente se unen en la rama principal `main` de trabajo.
 
-## 9. Contacto
+## 11. Contacto
 
 Si tienes alguna duda, puedes contactarnos a través de:
 
 - [@Gfigueroa](https://github.com/GEFR00) Gabriela Figueroa - Lider Backend
-- [@Rdonoso](https://github.com/ShagoDonosoP) Roberto Donoso - Integrante Backend
 - [@Csuescun](https://github.com/Suescun85) Carlos Suescun - Integrante Backend
