@@ -1,19 +1,7 @@
 import { ApiProperty } from '@nestjs/swagger';
-import {
-  EstadoPedido,
-  TipoBoleta,
-  TipoDespacho,
-  TipoPago,
-} from '../entities/pedido.entity';
+import {EstadoPedido,TipoBoleta,TipoDespacho,TipoPago,} from '../entities/pedido.entity';
 import { PedidoUsuarioDto } from 'src/usuario/dto/pedido-usuario.dto';
-import {
-  IsDate,
-  IsEnum,
-  IsNumber,
-  IsObject,
-  Min,
-  ValidateNested,
-} from 'class-validator';
+import {IsDate, IsEnum, IsNumber, IsObject, Min, ValidateNested,} from 'class-validator';
 import { Type } from 'class-transformer';
 
 export class CreatePedidoDto {

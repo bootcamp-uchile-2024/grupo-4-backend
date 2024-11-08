@@ -1,16 +1,10 @@
-import { ApiProperty } from '@nestjs/swagger';
 import { CarritoItem } from './carrito-item.entity';
-import { UsuarioCarritoDeCompraDto } from '../dto/usuario-carrito-de-compra.dto';
+import { UsuarioCarritoDeCompra } from './usuario-carrito-compra.entity';
 
 export class CarritoDeCompra {
-  @ApiProperty()
-  id: number;
-
-  @ApiProperty()
-  usuario: UsuarioCarritoDeCompraDto;
-
-  @ApiProperty()
+  
+  id: number; 
+  usuario: UsuarioCarritoDeCompra; 
   items: CarritoItem[];
-
   estadoCarrito: number;
 }

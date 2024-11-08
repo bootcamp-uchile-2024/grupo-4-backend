@@ -1,17 +1,9 @@
-import { ApiProperty } from '@nestjs/swagger';
-import { CarritoDeCompra } from './carrito-de-compra.entity';
-import { CarritoProductoDto } from 'src/productos/dto/carrito-producto.dto';
+import { CarritoProducto } from 'src/productos/entities/carrito-producto.entity';
 
 export class CarritoItem {
-  @ApiProperty()
-  id: number;
-
-  @ApiProperty()
-  producto: CarritoProductoDto;
-
-  @ApiProperty()
-  cantidad: number;
-
-  @ApiProperty()
+  
+  id: number;  
+  producto: CarritoProducto;  
+  cantidad: number;  
   carritoDeComprasId: number;
 }

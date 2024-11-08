@@ -1,19 +1,10 @@
-import { ApiProperty } from '@nestjs/swagger';
 import { Pedido } from './pedido.entity';
 
 export class PedidoItem {
-  @ApiProperty()
-  id: number;
-
-  @ApiProperty()
-  productoId: number;
-
-  @ApiProperty()
-  cantidad: number;
-
-  @ApiProperty()
-  precio: number;
-
-  @ApiProperty()
+  
+  id: number;  
+  productoId: number;  
+  cantidad: number;  
+  precio: number;  
   pedido: Pedido;
 }

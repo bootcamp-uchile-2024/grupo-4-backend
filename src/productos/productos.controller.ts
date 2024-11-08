@@ -1,26 +1,8 @@
 import {
-  Controller,
-  Get,
-  Post,
-  Body,
-  Patch,
-  Param,
-  Delete,
-  Query,
-  HttpStatus,
-  Res,
-  UseInterceptors,
-  HttpException,
-  UsePipes,
-  ValidationPipe,
-} from '@nestjs/common';
+  Controller, Get, Post, Body, Param, Delete, Query,  HttpStatus, Res, UseInterceptors, HttpException, UsePipes, ValidationPipe,} from '@nestjs/common';
 import { ProductosService } from './productos.service';
 import { CreateProductoDto } from './dto/create-producto.dto';
-import { UpdateProductoDto } from './dto/update-producto.dto';
 import { ApiQuery, ApiResponse, ApiTags } from '@nestjs/swagger';
-import { Tipos } from './entities/producto.entity';
-import { Response } from 'express';
-import { GeneralInterceptor } from 'src/general/general.interceptor';
 import { ProductoDTO } from './dto/producto.dto';
 
 @ApiTags('productos')

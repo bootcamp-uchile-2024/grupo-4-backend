@@ -1,49 +1,25 @@
-import { ApiProperty } from '@nestjs/swagger';
-import { Categorias } from 'src/productos/models/categorias';
+import { Tipos } from '../models/tipos';
+import { Categoria } from './categorias.entity';
 
-export enum Tipos {
-  Accesorios = 'Accesorios',
-  Bebidas = 'Bebidas',
-  Box = 'Box',
-}
+
 
 export class Producto {
-  @ApiProperty()
-  id: number;
 
-  @ApiProperty()
-  nombre: string;
-
-  @ApiProperty()
-  descripcion: string;
-
-  @ApiProperty()
-  precio: number;
-
-  @ApiProperty()
-  imagen: string;
-
-  @ApiProperty()
-  stock: number;
-
-  @ApiProperty()
-  marca: string;
-
-  @ApiProperty()
-  origen: string;
-
-  @ApiProperty()
-  tipo: Tipos;
-
-  @ApiProperty()
-  formato: string;
-
-  @ApiProperty()
-  fecha: Date;
-
-  @ApiProperty()
-  categorias: Categorias[];
-
-  @ApiProperty()
+  id: number;  
+  nombre: string;  
+  descripcion: string;  
+  precio: number;  
+  imagen: string; 
+  stock: number;  
+  marca: string;  
+  origen: string;  
+  tipo: Tipos;  
+  formato: string;  
+  fecha: Date;  
+  categorias: Categoria[];  
   destacado: boolean;
 }
+
+
+
+
