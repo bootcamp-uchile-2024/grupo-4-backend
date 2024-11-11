@@ -11,8 +11,8 @@ export class CarritoDeCompras {
     @Column()
     usuarioId: number;
 
-    /*@OneToMany(()=> Usuarios, (usuario) => usuario.carritoDeCompras)
-    usuarios: Usuarios[];*/
+    @OneToMany(()=> Usuarios, (usuario) => usuario.carritoDeCompras)
+    usuarios: Usuarios[];
 
     @ManyToOne(()=> CarritoItem)
     @JoinColumn({name: 'id_carritoItem'})

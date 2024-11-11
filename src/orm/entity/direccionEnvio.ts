@@ -29,6 +29,6 @@ export class DireccionEnvio {
     @JoinColumn({name: 'direccionEnvioId'})
     despacho: Despacho;  
     
-    /*@OneToMany(()=> Usuarios, (usuario) => usuario.direccionEnvio)
-    usuarios: Usuarios[];*/
+    @OneToMany(()=> Usuarios, (usuario) => usuario.direccionEnvio)
+    usuarios: Usuarios[];
 }  

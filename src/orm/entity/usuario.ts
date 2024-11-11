@@ -33,15 +33,15 @@ export class Usuarios {
     @JoinColumn({name: 'tipoUsuarioId'})
     tipoUsuario: TipoUsuario;
 
-    /*@ManyToOne(()=> Pedido)
-    @JoinColumn({name: 'id_pedido'})
-    pedido: Pedido;*/
+    @ManyToOne(()=> Pedido)
+    @JoinColumn({name: 'id'})
+    pedido: Pedido;
 
-    /*@ManyToOne(()=> CarritoDeCompras)
-    @JoinColumn({name: 'id_carritoDeCompras'})
+    @ManyToOne(()=> CarritoDeCompras)
+    @JoinColumn({name: 'id'})
     carritoDeCompras: CarritoDeCompras;
 
     @ManyToOne(()=> DireccionEnvio) 
-    @JoinColumn({name: 'id_direccionEnvio'})
-    direccionEnvio: DireccionEnvio;*/
+    @JoinColumn({name: 'id'})
+    direccionEnvio: DireccionEnvio;
 }

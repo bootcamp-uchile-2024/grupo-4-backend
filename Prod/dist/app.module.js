@@ -33,7 +33,7 @@ exports.AppModule = AppModule = __decorate([
             pedido_module_1.PedidoModule,
             carrito_de_compras_module_1.CarritoDeComprasModule,
             config_1.ConfigModule.forRoot({
-                envFilePath: '.env.production',
+                envFilePath: '.env.develop',
                 isGlobal: true,
                 validate: (config) => {
                     if (!config.PORT) {

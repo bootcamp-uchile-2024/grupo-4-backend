@@ -20,8 +20,8 @@ export class PedidoItem {
     @OneToMany(()=> Pedido, (pedido) => pedido.pedidoItem)
     pedidos: Pedido[];
 
-    /*@OneToMany(()=> Productos, (producto) => producto.pedidoItem)
-    productos: Productos[];*/
+    @OneToMany(()=> Productos, (producto) => producto.pedidoItem)
+    productos: Productos[];
 
 
 }

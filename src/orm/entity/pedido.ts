@@ -14,8 +14,8 @@ export class Pedido {
     @Column()
     usuarioId: number;     
     
-    /*@OneToMany(()=> Usuarios, (usuario) => usuario.pedido)
-    usuarios: Usuarios[];*/
+    @OneToMany(()=> Usuarios, (usuario) => usuario.pedido)
+    usuarios: Usuarios[];
 
     @ManyToOne(()=> PedidoItem)
     @JoinColumn({name: 'id_pedidoItem'})

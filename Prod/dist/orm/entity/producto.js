@@ -14,6 +14,8 @@ const typeorm_1 = require("typeorm");
 const categoria_1 = require("./categoria");
 const tipoProducto_1 = require("./tipoProducto");
 const paisOrigen_1 = require("./paisOrigen");
+const pedidoItem_1 = require("./pedidoItem");
+const carritoItem_1 = require("./carritoItem");
 let Productos = class Productos {
 };
 exports.Productos = Productos;
@@ -80,6 +82,16 @@ __decorate([
     (0, typeorm_1.JoinColumn)({ name: 'paisOrigenId' }),
     __metadata("design:type", paisOrigen_1.PaisOrigen)
 ], Productos.prototype, "paisOrigen", void 0);
+__decorate([
+    (0, typeorm_1.ManyToOne)(() => pedidoItem_1.PedidoItem),
+    (0, typeorm_1.JoinColumn)({ name: 'id' }),
+    __metadata("design:type", pedidoItem_1.PedidoItem)
+], Productos.prototype, "pedidoItem", void 0);
+__decorate([
+    (0, typeorm_1.ManyToOne)(() => carritoItem_1.CarritoItem),
+    (0, typeorm_1.JoinColumn)({ name: 'id' }),
+    __metadata("design:type", carritoItem_1.CarritoItem)
+], Productos.prototype, "carritoItem", void 0);
 exports.Productos = Productos = __decorate([
     (0, typeorm_1.Entity)({ name: 'Producto' })
 ], Productos);

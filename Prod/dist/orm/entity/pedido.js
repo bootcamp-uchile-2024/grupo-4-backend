@@ -11,6 +11,7 @@ var __metadata = (this && this.__metadata) || function (k, v) {
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.Pedido = void 0;
 const typeorm_1 = require("typeorm");
+const usuario_1 = require("./usuario");
 const pedidoItem_1 = require("./pedidoItem");
 let Pedido = class Pedido {
 };
@@ -27,6 +28,10 @@ __decorate([
     (0, typeorm_1.Column)(),
     __metadata("design:type", Number)
 ], Pedido.prototype, "usuarioId", void 0);
+__decorate([
+    (0, typeorm_1.OneToMany)(() => usuario_1.Usuarios, (usuario) => usuario.pedido),
+    __metadata("design:type", Array)
+], Pedido.prototype, "usuarios", void 0);
 __decorate([
     (0, typeorm_1.ManyToOne)(() => pedidoItem_1.PedidoItem),
     (0, typeorm_1.JoinColumn)({ name: 'id_pedidoItem' }),

@@ -12,6 +12,7 @@ Object.defineProperty(exports, "__esModule", { value: true });
 exports.PedidoItem = void 0;
 const typeorm_1 = require("typeorm");
 const pedido_1 = require("./pedido");
+const producto_1 = require("./producto");
 let PedidoItem = class PedidoItem {
 };
 exports.PedidoItem = PedidoItem;
@@ -35,6 +36,10 @@ __decorate([
     (0, typeorm_1.OneToMany)(() => pedido_1.Pedido, (pedido) => pedido.pedidoItem),
     __metadata("design:type", Array)
 ], PedidoItem.prototype, "pedidos", void 0);
+__decorate([
+    (0, typeorm_1.OneToMany)(() => producto_1.Productos, (producto) => producto.pedidoItem),
+    __metadata("design:type", Array)
+], PedidoItem.prototype, "productos", void 0);
 exports.PedidoItem = PedidoItem = __decorate([
     (0, typeorm_1.Entity)({ name: 'PedidoItem' })
 ], PedidoItem);

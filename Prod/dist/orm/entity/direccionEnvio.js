@@ -12,6 +12,7 @@ Object.defineProperty(exports, "__esModule", { value: true });
 exports.DireccionEnvio = void 0;
 const typeorm_1 = require("typeorm");
 const despacho_1 = require("./despacho");
+const usuario_1 = require("./usuario");
 let DireccionEnvio = class DireccionEnvio {
 };
 exports.DireccionEnvio = DireccionEnvio;
@@ -40,6 +41,10 @@ __decorate([
     (0, typeorm_1.JoinColumn)({ name: 'direccionEnvioId' }),
     __metadata("design:type", despacho_1.Despacho)
 ], DireccionEnvio.prototype, "despacho", void 0);
+__decorate([
+    (0, typeorm_1.OneToMany)(() => usuario_1.Usuarios, (usuario) => usuario.direccionEnvio),
+    __metadata("design:type", Array)
+], DireccionEnvio.prototype, "usuarios", void 0);
 exports.DireccionEnvio = DireccionEnvio = __decorate([
     (0, typeorm_1.Entity)({ name: 'DireccionEnvio' })
 ], DireccionEnvio);

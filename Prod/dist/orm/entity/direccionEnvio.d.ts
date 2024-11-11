@@ -1,4 +1,5 @@
 import { Despacho } from "./despacho";
+import { Usuarios } from "./usuario";
 export declare class DireccionEnvio {
     id: number;
     direccion: string;
@@ -6,4 +7,5 @@ export declare class DireccionEnvio {
     codigoPostal: string;
     usuarioId: number;
     despacho: Despacho;
+    usuarios: Usuarios[];
 }

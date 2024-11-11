@@ -1,6 +1,8 @@
 import { Categoria } from "./categoria";
 import { TipoProducto } from "./tipoProducto";
 import { PaisOrigen } from "./paisOrigen";
+import { PedidoItem } from "./pedidoItem";
+import { CarritoItem } from "./carritoItem";
 export declare class Productos {
     id: number;
     nombre: string;
@@ -17,4 +19,6 @@ export declare class Productos {
     categoria: Categoria;
     tipo: TipoProducto;
     paisOrigen: PaisOrigen;
+    pedidoItem: PedidoItem;
+    carritoItem: CarritoItem;
 }

@@ -20,8 +20,8 @@ export class CarritoItem {
     @OneToMany(()=> CarritoDeCompras, (carritoDeCompras) => carritoDeCompras.carritoItem)
     carritosDeCompras: CarritoDeCompras[];
 
-    /*@OneToMany(()=> Productos, (producto) => producto.carritoItem)
-    productos: Productos[];*/
+    @OneToMany(()=> Productos, (producto) => producto.carritoItem)
+    productos: Productos[];
 
 
     

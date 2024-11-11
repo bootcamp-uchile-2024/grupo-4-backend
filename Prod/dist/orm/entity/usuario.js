@@ -12,6 +12,9 @@ Object.defineProperty(exports, "__esModule", { value: true });
 exports.Usuarios = void 0;
 const typeorm_1 = require("typeorm");
 const tipoUsuario_1 = require("./tipoUsuario");
+const pedido_1 = require("./pedido");
+const carritoDeCompras_1 = require("./carritoDeCompras");
+const direccionEnvio_1 = require("./direccionEnvio");
 let Usuarios = class Usuarios {
 };
 exports.Usuarios = Usuarios;
@@ -48,6 +51,21 @@ __decorate([
     (0, typeorm_1.JoinColumn)({ name: 'tipoUsuarioId' }),
     __metadata("design:type", tipoUsuario_1.TipoUsuario)
 ], Usuarios.prototype, "tipoUsuario", void 0);
+__decorate([
+    (0, typeorm_1.ManyToOne)(() => pedido_1.Pedido),
+    (0, typeorm_1.JoinColumn)({ name: 'id' }),
+    __metadata("design:type", pedido_1.Pedido)
+], Usuarios.prototype, "pedido", void 0);
+__decorate([
+    (0, typeorm_1.ManyToOne)(() => carritoDeCompras_1.CarritoDeCompras),
+    (0, typeorm_1.JoinColumn)({ name: 'id' }),
+    __metadata("design:type", carritoDeCompras_1.CarritoDeCompras)
+], Usuarios.prototype, "carritoDeCompras", void 0);
+__decorate([
+    (0, typeorm_1.ManyToOne)(() => direccionEnvio_1.DireccionEnvio),
+    (0, typeorm_1.JoinColumn)({ name: 'id' }),
+    __metadata("design:type", direccionEnvio_1.DireccionEnvio)
+], Usuarios.prototype, "direccionEnvio", void 0);
 exports.Usuarios = Usuarios = __decorate([
     (0, typeorm_1.Entity)({ name: 'Usuario' })
 ], Usuarios);
