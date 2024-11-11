@@ -1,7 +1,7 @@
-import { CarritoProductoDto } from 'src/productos/dto/carrito-producto.dto';
+import { CarritoProducto } from 'src/productos/entities/carrito-producto.entity';
 export declare class CarritoItem {
-  id: number;
-  producto: CarritoProductoDto;
-  cantidad: number;
-  carritoDeComprasId: number;
+    id: number;
+    producto: CarritoProducto;
+    cantidad: number;
+    carritoDeComprasId: number;
 }

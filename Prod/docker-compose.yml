@@ -1,7 +1,7 @@
 # Contenedor para la produccion de la aplicacion
 services:
   node-api:
-    image: suescun85/grupo4-backend:v-002
+    image: suescun85/grupo4-backend:v-005
     environment:
       - ARCHIVO_ENV=.production
     ports:

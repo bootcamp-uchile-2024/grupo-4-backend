@@ -1,6 +1,6 @@
 import { UsuarioCarritoDeCompraDto } from './usuario-carrito-de-compra.dto';
-import { CarritoItem } from '../entities/carrito-item.entity';
+import { CarritoItemDTO } from './carrito-item.dto';
 export declare class CreateCarritoDeCompraDto {
-  usuario: UsuarioCarritoDeCompraDto;
-  items: CarritoItem[];
+    usuario: UsuarioCarritoDeCompraDto;
+    items: CarritoItemDTO[];
 }

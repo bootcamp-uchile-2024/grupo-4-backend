@@ -1,11 +1,14 @@
 import { CreateProductoDto } from './dto/create-producto.dto';
-import { UpdateProductoDto } from './dto/update-producto.dto';
-import { Producto, Tipos } from './entities/producto.entity';
+import { Producto } from './entities/producto.entity';
+import { ProductoDTO } from './dto/producto.dto';
+import { Productos } from 'src/orm/entity/producto';
+import { Repository } from 'typeorm';
 export declare class ProductosService {
-  productos: Producto[];
-  create(createProductoDto: CreateProductoDto): Producto;
-  findAll(tipo: Tipos): Producto[];
-  findOne(id: number): Producto;
-  update(id: number, updateProductoDto: UpdateProductoDto): boolean;
-  remove(id: number): boolean;
+    private productosRepository;
+    constructor(productosRepository: Repository<Productos>);
+    productos: Producto[];
+    create(createProductoDto: CreateProductoDto): ProductoDTO;
+    findAll(): Promise<ProductoDTO[]>;
+    findOne(id: number): Promise<ProductoDTO>;
+    remove(id: number): boolean;
 }
