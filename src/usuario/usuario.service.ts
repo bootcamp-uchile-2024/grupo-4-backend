@@ -5,23 +5,29 @@ import { Usuario } from './entities/usuario.entity';
 import { CarritoDeCompra } from 'src/carrito-de-compras/entities/carrito-de-compra.entity';
 import { PedidoService } from 'src/pedido/pedido.service';
 import { PedidoUsuarioDto } from './dto/pedido-usuario.dto';
+import { Usuarios } from 'src/orm/entity/usuario';
+import { Repository } from 'typeorm';
+import { InjectRepository } from '@nestjs/typeorm';
+import { UsuarioDTO } from './dto/usuario.dto';
+import { UsuarioMapper } from './mapper/usuario.mappers';
 
 @Injectable()
 export class UsuarioService {
   usuarios: Usuario[] = [];
 
   constructor(
+    @InjectRepository(Usuarios)private usuariosRepository: Repository<Usuarios>,
     @Inject(forwardRef(() => PedidoService))
     private readonly pedidoService: PedidoService,
   ) {}
 
-  create(createUsuarioDto: CreateUsuarioDto): Usuario {
+  create(createUsuarioDto: CreateUsuarioDto): UsuarioDTO {
     const usuario = new Usuario();
 
     usuario.id = this.usuarios.length + 1;
     usuario.nombre = createUsuarioDto.nombre;
     usuario.apellido = createUsuarioDto.apellido;
-    usuario.direccion = createUsuarioDto.direccion;
+    usuario.direccion = createUsuarioDto.direccion;    
     usuario.comuna = createUsuarioDto.comuna;
     usuario.ciudad = createUsuarioDto.ciudad;
     usuario.region = createUsuarioDto.region;
@@ -35,8 +41,9 @@ export class UsuarioService {
     return usuario;
   }
 
-  findAll(): Usuario[] {
-    return this.usuarios;
+  async findAll(): Promise<UsuarioDTO[]> {
+    const listadoUsuarios: Usuarios[] = await this.usuariosRepository.find();
+    return UsuarioMapper.entityListToDtoList(listadoUsuarios);
   }
 
   findOne(id: number): Usuario {
@@ -56,7 +63,7 @@ export class UsuarioService {
     usuario.region = updateUsuarioDto.region;
     usuario.telefono = updateUsuarioDto.telefono;
     usuario.correo = updateUsuarioDto.correo;
-    usuario.contrasenna = updateUsuarioDto.contrasenna;
+    usuario.constrasenna = updateUsuarioDto.contrasenna;
 
     return true;
   }

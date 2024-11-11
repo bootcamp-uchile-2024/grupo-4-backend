@@ -1,8 +1,8 @@
 import { Column, Entity, OneToMany, PrimaryColumn } from "typeorm";
-import { Usuario } from "./usuario";
+import { Usuarios } from "./usuario";
 
 
-@Entity({name: 'TipoUsuario'})
+@Entity({name: 'TipoUsuarioId'})
 export class TipoUsuario {
     @PrimaryColumn()
     id: number;
@@ -10,7 +10,7 @@ export class TipoUsuario {
     @Column()
     nombreTipo: string;
    
-    @OneToMany(()=> Usuario, (usuario) => usuario.tipoUsuarioId)
-    usuarios: Usuario[];
+    @OneToMany(()=> Usuarios, (usuario) => usuario.tipoUsuarioId)
+    usuarios: Usuarios[];
     
 }

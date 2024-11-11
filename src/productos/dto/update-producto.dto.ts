@@ -1,8 +1,6 @@
-import { PartialType } from '@nestjs/mapped-types';
-import { CreateProductoDto } from './create-producto.dto';
 import { ApiProperty } from '@nestjs/swagger';
-import { Categorias } from 'src/productos/models/valores';
-import { Tipos } from '../entities/producto.entity';
+import { Categoria } from 'src/productos/entities/categorias.entity';
+import { TiposProducto } from 'src/productos/enum/tiposProductoEnum';
 import { Type } from 'class-transformer';
 import {
   IsString,
@@ -53,9 +51,9 @@ export class UpdateProductoDto {
   origen: string;
 
   @ApiProperty({ description: 'Tipo del producto', example: 'Bebidas' })
-  @IsEnum(Tipos)
+  @IsEnum(TiposProducto)
   @IsNotEmpty()
-  tipo: Tipos;
+  tipo: TiposProducto;
 
   @ApiProperty({ description: 'Formato del producto', example: 'Formato A' })
   @IsString()
@@ -77,7 +75,7 @@ export class UpdateProductoDto {
   })
   @IsString({ each: true })
   @IsNotEmpty()
-  categorias: Categorias[];
+  categorias: Categoria[];
 
   @ApiProperty({ description: 'Producto destacado', example: true })
   @IsNotEmpty()

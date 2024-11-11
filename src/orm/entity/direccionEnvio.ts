@@ -5,7 +5,7 @@ import { PaisOrigen } from "./paisOrigen";
 import { PedidoItem } from "./pedidoItem";
 import { CarritoItem } from "./carritoItem";
 import { Despacho } from "./despacho";
-import { Usuario } from "./usuario";
+import { Usuarios } from "./usuario";
 
 
 @Entity({name: 'DireccionEnvio'}) 
@@ -29,6 +29,6 @@ export class DireccionEnvio {
     @JoinColumn({name: 'direccionEnvioId'})
     despacho: Despacho;  
     
-    @OneToMany(()=> Usuario, (usuario) => usuario.direccionEnvio)
-    usuarios: Usuario[];
+    /*@OneToMany(()=> Usuarios, (usuario) => usuario.direccionEnvio)
+    usuarios: Usuarios[];*/
 }  

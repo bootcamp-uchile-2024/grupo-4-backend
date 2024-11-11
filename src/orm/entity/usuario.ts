@@ -1,20 +1,13 @@
 import { Column, Entity, JoinColumn, ManyToOne, PrimaryColumn } from "typeorm";
-import { Categoria } from "./categoria";
-import { TipoProducto } from "./tipoProducto";
-import { PaisOrigen } from "./paisOrigen";
-import { PedidoItem } from "./pedidoItem";
-import { CarritoItem } from "./carritoItem";
-import { EstadoDespacho } from "./estadoDespacho";
 import { TipoUsuario } from "./tipoUsuario";
 import { Pedido } from "./pedido";
-import { CarritoDeCompra } from "src/carrito-de-compras/entities/carrito-de-compra.entity";
 import { CarritoDeCompras } from "./carritoDeCompras";
 import { DireccionEnvio } from "./direccionEnvio";
 
 
 
 @Entity({name: 'Usuario'})	 
-export class Usuario {
+export class Usuarios {
     @PrimaryColumn()
     id: number;
 
@@ -34,21 +27,21 @@ export class Usuario {
     rut: string;
 
     @Column()
-    tipoUsuario: number;   
+    tipoUsuarioId: number;   
     
     @ManyToOne(()=> TipoUsuario)
-    @JoinColumn({name: 'tipoUsuario'})
-    tipoUsuarioId: TipoUsuario;
+    @JoinColumn({name: 'tipoUsuarioId'})
+    tipoUsuario: TipoUsuario;
 
-    @ManyToOne(()=> Pedido)
+    /*@ManyToOne(()=> Pedido)
     @JoinColumn({name: 'id_pedido'})
-    pedido: Pedido;
+    pedido: Pedido;*/
 
-    @ManyToOne(()=> CarritoDeCompras)
+    /*@ManyToOne(()=> CarritoDeCompras)
     @JoinColumn({name: 'id_carritoDeCompras'})
     carritoDeCompras: CarritoDeCompras;
 
     @ManyToOne(()=> DireccionEnvio) 
     @JoinColumn({name: 'id_direccionEnvio'})
-    direccionEnvio: DireccionEnvio;
+    direccionEnvio: DireccionEnvio;*/
 }

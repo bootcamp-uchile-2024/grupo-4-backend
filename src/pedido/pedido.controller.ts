@@ -18,7 +18,7 @@ import { CreatePedidoDto } from './dto/create-pedido.dto';
 import { UpdatePedidoDto } from './dto/update-pedido.dto';
 import { ApiQuery, ApiResponse, ApiTags } from '@nestjs/swagger';
 import { Response } from 'express';
-import { TipoDespacho } from './entities/pedido.entity';
+import { TipoDespacho } from 'src/pedido/enum/tipoDespacho';
 
 @ApiTags('pedidos')
 @Controller('pedido')

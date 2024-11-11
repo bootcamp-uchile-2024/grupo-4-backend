@@ -15,5 +15,5 @@ export class Pedido {
   estado: EstadoPedido;  
   usuario: PedidoUsuarioDto;
 }
-export { TipoPago, TipoDespacho, TipoBoleta, EstadoPedido };
+//export { TipoPago, TipoDespacho, TipoBoleta, EstadoPedido };
 

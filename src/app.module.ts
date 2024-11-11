@@ -22,7 +22,7 @@ import { OrmModule } from './orm/orm.module';
     PedidoModule,
     CarritoDeComprasModule,
     ConfigModule.forRoot({
-      envFilePath: '.env.develop', //Se configura por defecto el archivo .env.develop para las variables de entorno
+      envFilePath: '.env.production', //Se configura por defecto el archivo .env.develop para las variables de entorno
       isGlobal: true,
       validate: (config: Record<string, any>) => {
         if (!config.PORT) {

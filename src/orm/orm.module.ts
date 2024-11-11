@@ -2,7 +2,6 @@ import { Module } from '@nestjs/common';
 import { TypeOrmModule } from '@nestjs/typeorm';
 import { Categoria } from './entity/categoria';
 import { EstadoDespacho } from './entity/estadoDespacho';
-import { EstadoPedido } from 'src/pedido/entities/pedido.entity';
 import { PaisOrigen } from './entity/paisOrigen';
 import { TipoProducto } from './entity/tipoProducto';
 import { TipoUsuario } from './entity/tipoUsuario';
@@ -12,7 +11,7 @@ import { CarritoDeCompras } from './entity/carritoDeCompras';
 import { Despacho } from './entity/despacho';
 import { Pedido } from './entity/pedido';
 import { DireccionEnvio } from './entity/direccionEnvio';
-import { Usuario } from './entity/usuario';
+import { Usuarios } from './entity/usuario';
 import { Productos } from './entity/producto';
 
 @Module({
@@ -36,7 +35,7 @@ import { Productos } from './entity/producto';
         Despacho,
         Pedido,
         DireccionEnvio,
-        Usuario,
+        Usuarios,
         Productos
              
          ],

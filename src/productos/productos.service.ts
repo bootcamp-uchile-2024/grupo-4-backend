@@ -1,7 +1,8 @@
 import { Injectable } from '@nestjs/common';
 import { CreateProductoDto } from './dto/create-producto.dto';
 import { UpdateProductoDto } from './dto/update-producto.dto';
-import { Producto, Tipos } from './entities/producto.entity';
+import { Producto} from './entities/producto.entity';
+import { TiposProducto } from "src/productos/enum/tiposProductoEnum";
 import { ProductoDTO } from './dto/producto.dto';
 import { Productos } from 'src/orm/entity/producto';
 import { InjectRepository } from '@nestjs/typeorm';

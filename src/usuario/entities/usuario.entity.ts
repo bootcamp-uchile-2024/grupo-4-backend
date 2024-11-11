@@ -1,19 +1,20 @@
 import { CarritoDeCompra } from 'src/carrito-de-compras/entities/carrito-de-compra.entity';
-import { PedidoUsuarioDto } from '../dto/pedido-usuario.dto';
+import { PedidoUsuario } from './pedido-usuario.entity';
 
 export class Usuario {
   
   id: number; 
   nombre: string;  
   apellido: string;  
-  direccion: string;  
+  direccion: string;
+  
   comuna: string;  
   ciudad: string;  
   region: string;  
   telefono: number;  
-  correo: string;  
-  contrasenna: string;  
+  correo: string; 
+  constrasenna: string;  
   rut: string;
-  pedidos: PedidoUsuarioDto[];
+  pedidos: PedidoUsuario[];
   carritoDeCompras: CarritoDeCompra;
 }

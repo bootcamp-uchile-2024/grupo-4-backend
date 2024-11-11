@@ -1,15 +1,6 @@
 import { ApiProperty } from '@nestjs/swagger';
 import { Type } from 'class-transformer';
-import {
-  IsString,
-  IsNumber,
-  IsEmail,
-  Length,
-  Matches,
-  IsArray,
-  ValidateNested,
-  IsNotEmpty,
-} from 'class-validator';
+import {IsString, IsNumber, IsEmail, Length, Matches, IsArray, ValidateNested, IsNotEmpty,} from 'class-validator';
 import { CarritoDeCompra } from 'src/carrito-de-compras/entities/carrito-de-compra.entity';
 import { Pedido } from 'src/pedido/entities/pedido.entity';
 

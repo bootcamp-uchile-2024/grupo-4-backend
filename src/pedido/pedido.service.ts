@@ -1,9 +1,10 @@
 import { forwardRef, Inject, Injectable } from '@nestjs/common';
 import { CreatePedidoDto } from './dto/create-pedido.dto';
 import { UpdatePedidoDto } from './dto/update-pedido.dto';
-import { Pedido, TipoDespacho } from './entities/pedido.entity';
+import {TipoDespacho } from 'src/pedido/enum/tipoDespacho';
 import { UsuarioService } from 'src/usuario/usuario.service';
 import { PedidoUsuarioDto } from 'src/usuario/dto/pedido-usuario.dto';
+import { Pedido } from './entities/pedido.entity';
 
 @Injectable()
 export class PedidoService {
