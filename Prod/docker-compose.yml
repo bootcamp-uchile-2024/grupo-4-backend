@@ -14,4 +14,4 @@ services:
     volumes:
       - ./bd-server/sql:/var/lib/mysql
     ports:
-      - '4700:3306'
+      - '3306:3306'
