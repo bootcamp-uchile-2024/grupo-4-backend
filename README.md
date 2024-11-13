@@ -163,15 +163,17 @@ En esta etapa se deberá agregar las reglas que permitirán el acceso a la insta
     
     NOTA: La IP pública se mantedrá inalterable hasta que no se detenga la instancia, en caso contrario se actualizará la misma.
     
-- Después de haber ingresado con éxito al servidor lado cliente se deberá realizar la instalación de Docker en el interior del mismo. Para dicha instalación se deberá realizar lo siguiente:
+- Después de haber ingresado con éxito al servidor lado cliente se deberá realizar la instalación de Docker en el interior del mismo. Para dicha instalación se deberán realizar las siguientes instrucciones:
 
-```bash https://docs.docker.com/engine/install/ubuntu/
-    https://docs.docker.com/engine/install/linux-postinstall/```
+    https://docs.docker.com/engine/install/ubuntu/
+    https://docs.docker.com/engine/install/linux-postinstall/ 
 
-    
+- Posteriormente, antes de ingresar los archivos al servidor del lado cliente se deberá:  
 
 - Crear la imágen en el Docker, actualizando el número de versión de la API, la cual será utilizada para establecer la conexión con el server EC2 en AWS.
-- 
+- Adjuntan las variables de entorno con la información necesaria para levantar el docker-compose.
+- Ya teniendo las variables de entorno y el compose, se procede a dar inicio al contenedor.
+- Finalmente quedará apta la instancia con los archivos ingresados para dar funcionalidad a la App en conjunto con el EC2.
 
 ## 9. Estructura del Proyecto
 
