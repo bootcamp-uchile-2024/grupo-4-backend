@@ -11,10 +11,11 @@ Somos una e-commerce diseñada para personalizar tu experiencia de café en casa
 5. [Ejecución - Producción](#ejecución---producción)
 6. [Configuración del ORM](#conexión---base de datos)
 7. [Configuracion de MySql](#gestión---base de datos)
-8. [Estructura del Proyecto](#estructura-del-proyecto)
-9. [Documentación de la API](#documentación-de-la-api)
-10. [Flujo de Trabajo](#flujo-de-trabajo)
-11. [Contacto](#contacto)
+8. [Configuracion de AWS Server](#conexión---base de datos)
+9. [Estructura del Proyecto](#estructura-del-proyecto)
+10. [Documentación de la API](#documentación-de-la-api)
+11. [Flujo de Trabajo](#flujo-de-trabajo)
+12. [Contacto](#contacto)
 
 ## 1. Requisitos Previos
 
@@ -129,7 +130,7 @@ Para poder utilizar las tablas en la base de datos , se deeben realizar el sigui
 
 ### Ingresar la contraseña:
 
-- El password se encuentra en las variables de entorno ya sea para el ambiente de Desarrollo o de Produccion.
+- El password se encuentra en las variables de entorno ya sea para el ambiente de Desarrollo o de Producción.
 
 ![Password](/Imagenes/BD2.jpg)
 
@@ -139,8 +140,24 @@ Para poder utilizar las tablas en la base de datos , se deeben realizar el sigui
 
 ![Interior BD](/Imagenes/BD3.jpg)
 
+## 8. Configuración AWS Server.
+Para establecer una exitosa conexión entre la API - Producción y el servidor en AWS se requieren tener en cuenta las siguientes recomendaciones:
 
-## 8. Estructura del Proyecto
+- Crear la cuenta en AWS.
+- Crear una instancia en EC2 de AWS tomando en cuenta que se deberán configurar los siguientes parámetros:
+    - 
+
+- Una vez creada la instancia, se deberá configurar el servidor del lado del cliente en la PC; para ello es necesario utilizar la clave privada; la cual fue dada por AWS al momento de la creación de la instancia.
+    - Para realizar la configuración del servidor del lado cliente, a parte de la ya mencionada clave privada se deberá tener la IP pública, la cual esta en la sección de detalles -> resumen de la instancia. Con estos (2) elementos se podrá acceder y así proceder a configurar el servidor del lado cliente. 
+    
+    NOTA: La IP pública se mantedrá inalterable hasta que no se detenga la instancia, en caso contrario se actualizará la misma.
+    
+- Después de haber ingresado con éxito al servidor lado cliente se deberá realizar la instalación de Docker en el interior del mismo. Para dicha instalación se deberá realizar lo siguiente:
+
+- Crear la imágen en el Docker, actualizando el número de versión de la API, la cual será utilizada para establecer la conexión con el server EC2 en AWS.
+- 
+
+## 9. Estructura del Proyecto
 
 A continuación se presentará un diagrama de árbol de la estructura actual del proyecto:
 
@@ -213,7 +230,7 @@ src
 
 ```
 
-## 9. Documentación de la API
+## 10. Documentación de la API
 
 La documentación de esta API esta hecha en SWAGGER. Puedes acceder a la documentación despues de iniciar el servidor.
 
@@ -231,11 +248,11 @@ La documentación de esta API esta hecha en SWAGGER. Puedes acceder a la documen
 
 Posteriormente, le llevará a la interfaz de Swagger; donde podrá acceder a los endpoints diseñados para la API.
 
-## 10. Flujo de Trabajo
+## 11. Flujo de Trabajo
 
 Actualmente el flujo de trabajo se ha ido realizando conforme a las exigencias del desarrollo del proyecto. Cada rama representa el avance del proyecto con respecto a las solicitudes para cada entrega del mismo. Las actividades de avance realizadas en cada rama, posteriormente se unen en la rama principal `main` de trabajo.
 
-## 11. Contacto
+## 12. Contacto
 
 Si tienes alguna duda, puedes contactarnos a través de:
 

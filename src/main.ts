@@ -5,10 +5,13 @@ import { GeneralInterceptor } from './general/general.interceptor';
 import { GeneralFilter } from './general/general.filter';
 import { ConfigService } from '@nestjs/config';
 
+
 async function bootstrap() {
   const app = await NestFactory.create(AppModule);
   const configService: ConfigService = app.get(ConfigService); //Configuracion de variables de entorno
   const puerto: number = configService.get<number>('PORT'); //Asignacion del puerto segun la variable de entorno
+
+  app.enableCors();//Habilitar CORS para que el front pueda consumir la API
 
   const config = new DocumentBuilder()
     .setTitle('Tostado Perfecto - API')
