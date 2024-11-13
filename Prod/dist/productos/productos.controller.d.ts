@@ -6,8 +6,5 @@ export declare class ProductosController {
     constructor(productosService: ProductosService);
     create(createProductoDto: CreateProductoDto): void;
     findAll(): Promise<ProductoDTO[]>;
-    findOne(id: string): Promise<ProductoDTO>;
-    remove(id: number): {
-        message: string;
-    };
+    findOne(id: number): Promise<ProductoDTO>;
 }

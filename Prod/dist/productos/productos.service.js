@@ -48,7 +48,11 @@ let ProductosService = class ProductosService {
     }
     async findOne(id) {
         const producto = await this.productosRepository.findOneBy({ id: id });
-        return producto_mappers_1.ProductoMapper.entityToDto(producto);
+        if (producto) {
+            return producto_mappers_1.ProductoMapper.entityToDto(producto);
+        }
+        if (!producto)
+            return null;
     }
     remove(id) {
         const producto = this.findOne(id);

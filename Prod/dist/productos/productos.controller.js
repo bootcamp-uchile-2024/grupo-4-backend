@@ -17,6 +17,7 @@ const common_1 = require("@nestjs/common");
 const productos_service_1 = require("./productos.service");
 const create_producto_dto_1 = require("./dto/create-producto.dto");
 const swagger_1 = require("@nestjs/swagger");
+const tiposProductoEnum_1 = require("./enum/tiposProductoEnum");
 let ProductosController = class ProductosController {
     constructor(productosService) {
         this.productosService = productosService;
@@ -37,13 +38,6 @@ let ProductosController = class ProductosController {
         }
         return producto;
     }
-    remove(id) {
-        const productoFueEliminado = this.productosService.remove(id);
-        if (!productoFueEliminado) {
-            throw new common_1.HttpException('Producto no encontrado', common_1.HttpStatus.NOT_FOUND);
-        }
-        return { message: 'Producto eliminado' };
-    }
 };
 exports.ProductosController = ProductosController;
 __decorate([
@@ -58,6 +52,12 @@ __decorate([
 ], ProductosController.prototype, "create", null);
 __decorate([
     (0, common_1.Get)(),
+    (0, swagger_1.ApiQuery)({
+        name: 'tipo',
+        enum: tiposProductoEnum_1.TiposProducto,
+        required: false,
+        description: 'Filtrar por tipo de producto (opcional)',
+    }),
     __metadata("design:type", Function),
     __metadata("design:paramtypes", []),
     __metadata("design:returntype", void 0)
@@ -68,18 +68,9 @@ __decorate([
     (0, swagger_1.ApiResponse)({ status: 404, description: 'Producto no encontrado.' }),
     __param(0, (0, common_1.Param)('id')),
     __metadata("design:type", Function),
-    __metadata("design:paramtypes", [String]),
+    __metadata("design:paramtypes", [Number]),
     __metadata("design:returntype", Promise)
 ], ProductosController.prototype, "findOne", null);
-__decorate([
-    (0, common_1.Delete)(':id'),
-    (0, swagger_1.ApiResponse)({ status: 200, description: 'Producto eliminado.' }),
-    (0, swagger_1.ApiResponse)({ status: 404, description: 'Producto no encontrado.' }),
-    __param(0, (0, common_1.Param)('id')),
-    __metadata("design:type", Function),
-    __metadata("design:paramtypes", [Number]),
-    __metadata("design:returntype", void 0)
-], ProductosController.prototype, "remove", null);
 exports.ProductosController = ProductosController = __decorate([
     (0, swagger_1.ApiTags)('productos'),
     (0, common_1.Controller)('productos'),

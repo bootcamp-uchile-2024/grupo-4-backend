@@ -4,6 +4,7 @@ import { ProductosService } from './productos.service';
 import { CreateProductoDto } from './dto/create-producto.dto';
 import { ApiQuery, ApiResponse, ApiTags } from '@nestjs/swagger';
 import { ProductoDTO } from './dto/producto.dto';
+import { TiposProducto } from './enum/tiposProductoEnum';
 
 @ApiTags('productos')
 @Controller('productos')
@@ -25,12 +26,12 @@ export class ProductosController {
   }
 
   @Get()
-  /*@ApiQuery({
+  @ApiQuery({
     name: 'tipo',
-    enum: Tipos,
+    enum: TiposProducto,
     required: false,
     description: 'Filtrar por tipo de producto (opcional)',
-  })*/
+  })
   findAll( ) {
     return this.productosService.findAll();
   }
@@ -38,8 +39,9 @@ export class ProductosController {
   @Get(':id')
   @ApiResponse({ status: 200, description: 'Producto encontrado.' })
   @ApiResponse({ status: 404, description: 'Producto no encontrado.' })
-  async findOne(@Param('id') id: string): Promise<ProductoDTO> {
+  async findOne(@Param('id') id: number): Promise<ProductoDTO> {
     const producto = await this.productosService.findOne(+id);
+    
     if (!producto) {
       throw new HttpException('Producto no encontrado', HttpStatus.NOT_FOUND);
     }
@@ -64,7 +66,7 @@ export class ProductosController {
     return { message: 'Producto actualizado' };
   }*/
 
-  @Delete(':id')
+  /*@Delete(':id')
   @ApiResponse({ status: 200, description: 'Producto eliminado.' })
   @ApiResponse({ status: 404, description: 'Producto no encontrado.' })
   remove(@Param('id') id: number) {
@@ -73,5 +75,5 @@ export class ProductosController {
       throw new HttpException('Producto no encontrado', HttpStatus.NOT_FOUND);
     }
     return { message: 'Producto eliminado' };
-  }
+  }*/
 }
