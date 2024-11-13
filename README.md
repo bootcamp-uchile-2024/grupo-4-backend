@@ -145,7 +145,18 @@ Para establecer una exitosa conexión entre la API - Producción y el servidor e
 
 - Crear la cuenta en AWS.
 - Crear una instancia en EC2 de AWS tomando en cuenta que se deberán configurar los siguientes parámetros:
-    - 
+1. Nombre de la instancia.
+2. Seleccionar AMI (Amazon Machine Image).
+3. Seleccionar el tipo de instancia (t2.micro).
+4. Configurar la capacidad permitida.
+5. Configurar la Key Pair, si no se tiene una clave de acceso - hacer click en CREAR PAR DE CLAVES; de allí se procederá a asignar un nombre a la clave para posteriormente descargar el (archivo.pem). 
+    NOTA: Evitar la pérdida de la llave de acceso ya que sin esta no será posible realizar la conexión con la instancia.
+6. Configurar el grupo de seguridad (Security Group):
+En esta etapa se deberá agregar las reglas que permitirán el acceso a la instancia, tales como:
+- SSH (puerto 22): permitirá el ingreso de las IP al interior de la instancia (IP pública actual de la/las computadoras).
+- Node (puerto NODE): Anywhere (0.0.0.0/0) por medio de esta regla se podrá realizar la conexión con el Frontend.
+- Mysql (puerto MYSQL): permitirá la conexión con la base de datos relacional (IP pública actual).
+7. Una vez realizados los pasos anteriores dar a LANZAR INSTANCIA, y ya quedará lista para utilizar.
 
 - Una vez creada la instancia, se deberá configurar el servidor del lado del cliente en la PC; para ello es necesario utilizar la clave privada; la cual fue dada por AWS al momento de la creación de la instancia.
     - Para realizar la configuración del servidor del lado cliente, a parte de la ya mencionada clave privada se deberá tener la IP pública, la cual esta en la sección de detalles -> resumen de la instancia. Con estos (2) elementos se podrá acceder y así proceder a configurar el servidor del lado cliente. 
@@ -153,6 +164,11 @@ Para establecer una exitosa conexión entre la API - Producción y el servidor e
     NOTA: La IP pública se mantedrá inalterable hasta que no se detenga la instancia, en caso contrario se actualizará la misma.
     
 - Después de haber ingresado con éxito al servidor lado cliente se deberá realizar la instalación de Docker en el interior del mismo. Para dicha instalación se deberá realizar lo siguiente:
+
+```bash https://docs.docker.com/engine/install/ubuntu/
+    https://docs.docker.com/engine/install/linux-postinstall/```
+
+    
 
 - Crear la imágen en el Docker, actualizando el número de versión de la API, la cual será utilizada para establecer la conexión con el server EC2 en AWS.
 - 
