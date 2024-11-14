@@ -10,10 +10,11 @@ async function bootstrap() {
     const app = await core_1.NestFactory.create(app_module_1.AppModule);
     const configService = app.get(config_1.ConfigService);
     const puerto = configService.get('PORT');
+    app.enableCors();
     const config = new swagger_1.DocumentBuilder()
         .setTitle('Tostado Perfecto - API')
         .setDescription('API de Cafeinados, donde podras realizar pedidos de productos de café de especialidad, ver el estado de tus pedidos y gestionar tu carrito de compras')
-        .setVersion('1.0')
+        .setVersion('3.0')
         .addTag('productos')
         .addTag('usuarios')
         .addTag('pedidos')

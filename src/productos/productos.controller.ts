@@ -5,10 +5,14 @@ import { ProductosService } from './productos.service';
 import { CreateProductoDto } from './dto/create-producto.dto';
 import { ApiQuery, ApiResponse, ApiTags } from '@nestjs/swagger';
 import { ProductoDTO } from './dto/producto.dto';
+<<<<<<< HEAD
 import { ResponseDto } from './outputDto/responseDto';
 import { Response } from 'express';
 import { ResponseAllProductsDto } from './outputDto/responseAllProductsDto';
 import { UpdateProductoDto } from './dto/update-producto.dto';
+=======
+import { TiposProducto } from './enum/tiposProductoEnum';
+>>>>>>> 23cb33c23a9df542c0b0d5c31518f1a86f82bd02
 
 @ApiTags('productos')
 @Controller('productos')
@@ -46,6 +50,7 @@ export class ProductosController {
   }
 
   @Get()
+<<<<<<< HEAD
   @ApiResponse({
     status: 200,
     description: 'Lista de productos obtenida exitosamente.',
@@ -61,13 +66,24 @@ export class ProductosController {
     pageSize = Number(pageSize);
 
     return await this.productosService.findAll(page, pageSize);
+=======
+  @ApiQuery({
+    name: 'tipo',
+    enum: TiposProducto,
+    required: false,
+    description: 'Filtrar por tipo de producto (opcional)',
+  })
+  findAll( ) {
+    return this.productosService.findAll();
+>>>>>>> 23cb33c23a9df542c0b0d5c31518f1a86f82bd02
   }
 
   @Get(':id')
   @ApiResponse({ status: 200, description: 'Producto encontrado.' })
   @ApiResponse({ status: 404, description: 'Producto no encontrado.' })
-  async findOne(@Param('id') id: string): Promise<ProductoDTO> {
+  async findOne(@Param('id') id: number): Promise<ProductoDTO> {
     const producto = await this.productosService.findOne(+id);
+    
     if (!producto) {
       throw new HttpException('Producto no encontrado', HttpStatus.NOT_FOUND);
     }
@@ -93,7 +109,7 @@ export class ProductosController {
     return await this.productosService.update(id, updateProductoDto);
   }
 
-  @Delete(':id')
+  /*@Delete(':id')
   @ApiResponse({ status: 200, description: 'Producto eliminado.' })
   @ApiResponse({ status: 404, description: 'Producto no encontrado.' })
   async remove(@Param('id') id: number, @Res() res: Response): Promise<Response> {
@@ -106,5 +122,10 @@ export class ProductosController {
     } else {
       return res.status(HttpStatus.BAD_REQUEST).json(result);
     }
+<<<<<<< HEAD
   }
+=======
+    return { message: 'Producto eliminado' };
+  }*/
+>>>>>>> 23cb33c23a9df542c0b0d5c31518f1a86f82bd02
 }

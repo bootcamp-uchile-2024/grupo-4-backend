@@ -17,8 +17,12 @@ const common_1 = require("@nestjs/common");
 const productos_service_1 = require("./productos.service");
 const create_producto_dto_1 = require("./dto/create-producto.dto");
 const swagger_1 = require("@nestjs/swagger");
+<<<<<<< HEAD
 const responseDto_1 = require("./outputDto/responseDto");
 const update_producto_dto_1 = require("./dto/update-producto.dto");
+=======
+const tiposProductoEnum_1 = require("./enum/tiposProductoEnum");
+>>>>>>> 23cb33c23a9df542c0b0d5c31518f1a86f82bd02
 let ProductosController = class ProductosController {
     constructor(productosService) {
         this.productosService = productosService;
@@ -44,6 +48,7 @@ let ProductosController = class ProductosController {
         }
         return producto;
     }
+<<<<<<< HEAD
     async update(id, updateProductoDto) {
         return await this.productosService.update(id, updateProductoDto);
     }
@@ -59,6 +64,8 @@ let ProductosController = class ProductosController {
             return res.status(common_1.HttpStatus.BAD_REQUEST).json(result);
         }
     }
+=======
+>>>>>>> 23cb33c23a9df542c0b0d5c31518f1a86f82bd02
 };
 exports.ProductosController = ProductosController;
 __decorate([
@@ -87,6 +94,7 @@ __decorate([
 ], ProductosController.prototype, "create", null);
 __decorate([
     (0, common_1.Get)(),
+<<<<<<< HEAD
     (0, swagger_1.ApiResponse)({
         status: 200,
         description: 'Lista de productos obtenida exitosamente.',
@@ -96,6 +104,14 @@ __decorate([
     (0, swagger_1.ApiQuery)({ name: 'pageSize', required: false, type: Number, description: 'Tamaño de página' }),
     __param(0, (0, common_1.Query)('page')),
     __param(1, (0, common_1.Query)('pageSize')),
+=======
+    (0, swagger_1.ApiQuery)({
+        name: 'tipo',
+        enum: tiposProductoEnum_1.TiposProducto,
+        required: false,
+        description: 'Filtrar por tipo de producto (opcional)',
+    }),
+>>>>>>> 23cb33c23a9df542c0b0d5c31518f1a86f82bd02
     __metadata("design:type", Function),
     __metadata("design:paramtypes", [Object, Object]),
     __metadata("design:returntype", Promise)
@@ -106,9 +122,10 @@ __decorate([
     (0, swagger_1.ApiResponse)({ status: 404, description: 'Producto no encontrado.' }),
     __param(0, (0, common_1.Param)('id')),
     __metadata("design:type", Function),
-    __metadata("design:paramtypes", [String]),
+    __metadata("design:paramtypes", [Number]),
     __metadata("design:returntype", Promise)
 ], ProductosController.prototype, "findOne", null);
+<<<<<<< HEAD
 __decorate([
     (0, common_1.Put)(':id'),
     (0, swagger_1.ApiResponse)({
@@ -138,6 +155,8 @@ __decorate([
     __metadata("design:paramtypes", [Number, Object]),
     __metadata("design:returntype", Promise)
 ], ProductosController.prototype, "remove", null);
+=======
+>>>>>>> 23cb33c23a9df542c0b0d5c31518f1a86f82bd02
 exports.ProductosController = ProductosController = __decorate([
     (0, swagger_1.ApiTags)('productos'),
     (0, common_1.Controller)('productos'),

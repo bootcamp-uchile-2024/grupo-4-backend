@@ -1,17 +1,17 @@
 # Contenedor para la produccion de la aplicacion
 services:
   node-api:
-    image: suescun85/grupo4-backend:v-005
+    image: ${NODE_APP_IMAGE_PROD}
     environment:
       - ARCHIVO_ENV=.production
     ports:
-      - '3000:8000'
+      - '${NODE_APP_PORT_PROD}:${NODE_APP_CONTAINER_PORT_PROD}'
 
   bd-server:
-    image: mysql:8.0.39-debian
+    image: ${MYSQL_IMAGE_PROD}
     environment:
       MYSQL_ROOT_PASSWORD: ${MYSQL_ROOT_PASSWORD} 
     volumes:
       - ./bd-server/sql:/var/lib/mysql
     ports:
-      - '4700:3306'
+      - '${MYSQL_HOST_PORT_PROD}:${MYSQL_CONTAINER_PORT_PROD}'

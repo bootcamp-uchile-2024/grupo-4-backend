@@ -4,17 +4,18 @@ Somos una e-commerce diseñada para personalizar tu experiencia de café en casa
 
 ## Tabla de Contenidos
 
-1. [Requisitos Previos](#requisitos-previos)
-2. [Instalación](#instalación)
-3. [Configuración](#configuración)
-4. [Ejecución - Desarrollo](#ejecución---desarrollo)
-5. [Ejecución - Producción](#ejecución---producción)
-6. [Configuración del ORM](#conexión---base de datos)
-7. [Configuracion de MySql](#gestión---base de datos)
-8. [Estructura del Proyecto](#estructura-del-proyecto)
-9. [Documentación de la API](#documentación-de-la-api)
-10. [Flujo de Trabajo](#flujo-de-trabajo)
-11. [Contacto](#contacto)
+1. [Requisitos Previos](#1-requisitos-previos)
+2. [Instalación](#2-instalación)
+3. [Configuración](#3-configuración)
+4. [Ejecución - Desarrollo](#4-ejecución---desarrollo)
+5. [Ejecución - Producción](#5-ejecución---producción)
+6. [Configuración del ORM](#6-configuración-del-orm)
+7. [Configuración de MySql](#7-configuación-de-mysql)
+8. [Configuracion de AWS Server](#8-configuración-aws-server)
+9. [Estructura del Proyecto](#9-estructura-del-proyecto)
+10. [Documentación de la API](#10-documentación-de-la-api)
+11. [Flujo de Trabajo](#11-flujo-de-trabajo)
+12. [Contacto](#12-contacto)
 
 ## 1. Requisitos Previos
 
@@ -129,7 +130,7 @@ Para poder utilizar las tablas en la base de datos , se deeben realizar el sigui
 
 ### Ingresar la contraseña:
 
-- El password se encuentra en las variables de entorno ya sea para el ambiente de Desarrollo o de Produccion.
+- El password se encuentra en las variables de entorno ya sea para el ambiente de Desarrollo o de Producción.
 
 ![Password](/Imagenes/BD2.jpg)
 
@@ -139,8 +140,42 @@ Para poder utilizar las tablas en la base de datos , se deeben realizar el sigui
 
 ![Interior BD](/Imagenes/BD3.jpg)
 
+## 8. Configuración AWS Server.
+Para establecer una exitosa conexión entre la API - Producción y el servidor en AWS se requieren tener en cuenta las siguientes recomendaciones:
 
-## 8. Estructura del Proyecto
+- Crear la cuenta en AWS.
+- Crear una instancia en EC2 de AWS tomando en cuenta que se deberán configurar los siguientes parámetros:
+1. Nombre de la instancia.
+2. Seleccionar AMI (Amazon Machine Image).
+3. Seleccionar el tipo de instancia (t2.micro).
+4. Configurar la capacidad permitida.
+5. Configurar la Key Pair, si no se tiene una clave de acceso - hacer click en CREAR PAR DE CLAVES; de allí se procederá a asignar un nombre a la clave para posteriormente descargar el (archivo.pem). 
+    NOTA: Evitar la pérdida de la llave de acceso ya que sin esta no será posible realizar la conexión con la instancia.
+6. Configurar el grupo de seguridad (Security Group):
+En esta etapa se deberá agregar las reglas que permitirán el acceso a la instancia, tales como:
+- SSH (puerto 22): permitirá el ingreso de las IP al interior de la instancia (IP pública actual de la/las computadoras).
+- Node (puerto NODE): Anywhere (0.0.0.0/0) por medio de esta regla se podrá realizar la conexión con el Frontend.
+- Mysql (puerto MYSQL): permitirá la conexión con la base de datos relacional (IP pública actual).
+7. Una vez realizados los pasos anteriores dar a LANZAR INSTANCIA, y ya quedará lista para utilizar.
+
+- Una vez creada la instancia, se deberá configurar el servidor del lado del cliente en la PC; para ello es necesario utilizar la clave privada; la cual fue dada por AWS al momento de la creación de la instancia.
+    - Para realizar la configuración del servidor del lado cliente, a parte de la ya mencionada clave privada se deberá tener la IP pública, la cual esta en la sección de detalles -> resumen de la instancia. Con estos (2) elementos se podrá acceder y así proceder a configurar el servidor del lado cliente. 
+    
+    NOTA: La IP pública se mantedrá inalterable hasta que no se detenga la instancia, en caso contrario se actualizará la misma.
+    
+- Después de haber ingresado con éxito al servidor lado cliente se deberá realizar la instalación de Docker en el interior del mismo. Para dicha instalación se deberán realizar las siguientes instrucciones:
+
+    https://docs.docker.com/engine/install/ubuntu/
+    https://docs.docker.com/engine/install/linux-postinstall/ 
+
+- Posteriormente, antes de ingresar los archivos al servidor del lado cliente se deberá:  
+
+- Crear la imágen en el Docker, actualizando el número de versión de la API, la cual será utilizada para establecer la conexión con el server EC2 en AWS.
+- Adjuntan las variables de entorno con la información necesaria para levantar el docker-compose.
+- Ya teniendo las variables de entorno y el compose, se procede a dar inicio al contenedor.
+- Finalmente quedará apta la instancia con los archivos ingresados para dar funcionalidad a la App en conjunto con el EC2.
+
+## 9. Estructura del Proyecto
 
 A continuación se presentará un diagrama de árbol de la estructura actual del proyecto:
 
@@ -213,7 +248,7 @@ src
 
 ```
 
-## 9. Documentación de la API
+## 10. Documentación de la API
 
 La documentación de esta API esta hecha en SWAGGER. Puedes acceder a la documentación despues de iniciar el servidor.
 
@@ -231,11 +266,11 @@ La documentación de esta API esta hecha en SWAGGER. Puedes acceder a la documen
 
 Posteriormente, le llevará a la interfaz de Swagger; donde podrá acceder a los endpoints diseñados para la API.
 
-## 10. Flujo de Trabajo
+## 11. Flujo de Trabajo
 
 Actualmente el flujo de trabajo se ha ido realizando conforme a las exigencias del desarrollo del proyecto. Cada rama representa el avance del proyecto con respecto a las solicitudes para cada entrega del mismo. Las actividades de avance realizadas en cada rama, posteriormente se unen en la rama principal `main` de trabajo.
 
-## 11. Contacto
+## 12. Contacto
 
 Si tienes alguna duda, puedes contactarnos a través de:
 

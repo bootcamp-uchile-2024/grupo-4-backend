@@ -18,7 +18,7 @@ import { Productos } from './entity/producto';
     imports: [
         TypeOrmModule.forRoot({
          type: 'mysql',
-         host: 'localhost',
+         host: 'bd-server',
          port: 3700,
          username: 'root',
          password: 'cafeinados24',

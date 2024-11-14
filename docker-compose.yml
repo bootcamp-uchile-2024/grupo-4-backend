@@ -1,20 +1,22 @@
 #Docker compose para el desarrollo de la aplicación
 services:
-  #node-app:
-    #image: suescun85/grupo4-backend:v-002
-    #environment:
-      #- ARCHIVO_ENV=.develop
-    #volumes:
-      #- ./:/home/node/nest
-    #ports:
-      #- '4000:5000'
-    #command: npm run start:dev
+  node-app:
+    image: ${NODE_APP_IMAGE}
+    environment:
+      - ARCHIVO_ENV=.env
+    volumes:
+      - ./:/home/node/nest
+    ports:
+      - '${NODE_APP_PORT}:${NODE_APP_CONTAINER_PORT}'
+    command: npm run start:dev
+    
 
   bd-server:
-    image: mysql:8.0.39-debian
+    image: ${MYSQL_IMAGE}
     environment:
       MYSQL_ROOT_PASSWORD: ${MYSQL_ROOT_PASSWORD} 
     volumes:
       - ./bd-server/sql:/var/lib/mysql
     ports:
-      - '3700:3306'
+      - '${MYSQL_HOST_PORT}:${MYSQL_CONTAINER_PORT}'
+    

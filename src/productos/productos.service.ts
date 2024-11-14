@@ -99,7 +99,9 @@ export class ProductosService {
 
   async findOne(id: number): Promise<ProductoDTO> {
     const producto: Productos = await this.productosRepository.findOneBy({id: id});
-    return ProductoMapper.entityToDto(producto);
+    if(producto){
+    return ProductoMapper.entityToDto(producto);}
+    if (!producto) return null;
   }
 
   async update(
