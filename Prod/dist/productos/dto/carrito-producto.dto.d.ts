@@ -1,4 +1,4 @@
 export declare class CarritoProductoDto {
-    productoId: number;
+    id: number;
     precio: number;
 }

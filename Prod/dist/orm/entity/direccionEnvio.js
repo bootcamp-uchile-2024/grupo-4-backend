@@ -42,7 +42,7 @@ __decorate([
     __metadata("design:type", despacho_1.Despacho)
 ], DireccionEnvio.prototype, "despacho", void 0);
 __decorate([
-    (0, typeorm_1.OneToMany)(() => usuario_1.Usuarios, (usuario) => usuario.direccionEnvio),
+    (0, typeorm_1.OneToMany)(() => usuario_1.Usuarios, (usuario) => usuario.id),
     __metadata("design:type", Array)
 ], DireccionEnvio.prototype, "usuarios", void 0);
 exports.DireccionEnvio = DireccionEnvio = __decorate([

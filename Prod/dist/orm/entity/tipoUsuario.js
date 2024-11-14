@@ -24,7 +24,7 @@ __decorate([
     __metadata("design:type", String)
 ], TipoUsuario.prototype, "nombreTipo", void 0);
 __decorate([
-    (0, typeorm_1.OneToMany)(() => usuario_1.Usuarios, (usuario) => usuario.tipoUsuarioId),
+    (0, typeorm_1.OneToMany)(() => usuario_1.Usuarios, (usuario) => usuario.tipoUsuario),
     __metadata("design:type", Array)
 ], TipoUsuario.prototype, "usuarios", void 0);
 exports.TipoUsuario = TipoUsuario = __decorate([

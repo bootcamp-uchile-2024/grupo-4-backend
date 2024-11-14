@@ -17,7 +17,7 @@ exports.CarritoProductoDto = CarritoProductoDto;
 __decorate([
     (0, swagger_1.ApiProperty)({ default: '0' }),
     __metadata("design:type", Number)
-], CarritoProductoDto.prototype, "productoId", void 0);
+], CarritoProductoDto.prototype, "id", void 0);
 __decorate([
     (0, swagger_1.ApiProperty)({ default: '0' }),
     __metadata("design:type", Number)

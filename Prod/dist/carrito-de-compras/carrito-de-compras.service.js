@@ -8,111 +8,224 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
+var __param = (this && this.__param) || function (paramIndex, decorator) {
+    return function (target, key) { decorator(target, key, paramIndex); }
+};
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.CarritoDeComprasService = void 0;
 const common_1 = require("@nestjs/common");
-const carrito_de_compra_entity_1 = require("./entities/carrito-de-compra.entity");
 const usuario_service_1 = require("../usuario/usuario.service");
-const usuario_carrito_de_compra_dto_1 = require("./dto/usuario-carrito-de-compra.dto");
-const carrito_item_entity_1 = require("./entities/carrito-item.entity");
 const productos_service_1 = require("../productos/productos.service");
-const carrito_producto_dto_1 = require("../productos/dto/carrito-producto.dto");
+const typeorm_1 = require("@nestjs/typeorm");
+const carritoDeCompras_1 = require("../orm/entity/carritoDeCompras");
+const typeorm_2 = require("typeorm");
+const usuario_1 = require("../orm/entity/usuario");
+const producto_1 = require("../orm/entity/producto");
+const carritoItem_1 = require("../orm/entity/carritoItem");
+const carrito_de_compras_dto_1 = require("./dto/carrito-de-compras.dto");
+const carrito_item_dto_1 = require("./dto/carrito-item.dto");
 let CarritoDeComprasService = class CarritoDeComprasService {
-    constructor(usuarioService, productoService) {
+    constructor(CarritoDeComprasRepository, UsuariosRepository, ProductosRepository, CarritoItemRepository, usuarioService, productoService) {
+        this.CarritoDeComprasRepository = CarritoDeComprasRepository;
+        this.UsuariosRepository = UsuariosRepository;
+        this.ProductosRepository = ProductosRepository;
+        this.CarritoItemRepository = CarritoItemRepository;
         this.usuarioService = usuarioService;
         this.productoService = productoService;
         this.carritoDeCompras = [];
     }
-    create(createCarritoDeCompraDto) {
-        const usuario = this.usuarioService.findOne(createCarritoDeCompraDto.usuario.id);
-        if (!usuario)
-            return null;
-        const productosId = createCarritoDeCompraDto.items.map((item) => item.producto.productoId);
-        console.log('productosId', productosId);
-        productosId.forEach((productoId) => {
-            if (!this.productoService.findOne(productoId))
-                return null;
+    async create(createCarritoDeCompraDto) {
+        const usuario = await this.UsuariosRepository.findOne({
+            where: { id: createCarritoDeCompraDto.usuarioId },
         });
-        const carrito = new carrito_de_compra_entity_1.CarritoDeCompra();
-        carrito.id = this.carritoDeCompras.length + 1;
-        carrito.usuario = new usuario_carrito_de_compra_dto_1.UsuarioCarritoDeCompraDto();
-        carrito.usuario.id = usuario.id;
-        carrito.estadoCarrito = 0;
+        console.log('usuario', usuario);
+        if (!usuario)
+            return {
+                status: 404,
+                message: 'El usuario no existe'
+            };
+        const productosId = createCarritoDeCompraDto.items.map((item) => item.productoId);
+        const productos = await this.ProductosRepository.findBy({
+            id: (0, typeorm_2.In)(productosId),
+        });
+        console.log('productos', productos);
+        if (productos.length !== productosId.length)
+            return {
+                status: 404,
+                message: 'Uno o más productos no fueron encontrados'
+            };
+        const carrito = new carritoDeCompras_1.CarritoDeCompras();
+        carrito.usuario = usuario;
+        const carritoCreado = await this.CarritoDeComprasRepository.save(carrito);
         const items = [];
-        const item = new carrito_item_entity_1.CarritoItem();
-        createCarritoDeCompraDto.items.forEach((itemDto, index) => {
-            const producto = this.productoService.findOne(itemDto.producto.productoId);
-            item.id = index + 1;
-            item.producto = new carrito_producto_dto_1.CarritoProductoDto();
-            item.producto.productoId = itemDto.producto.productoId;
-            item.cantidad = itemDto.cantidad;
-            item.carritoDeComprasId = carrito.id;
-            items.push(item);
+        for (const itemDto of createCarritoDeCompraDto.items) {
+            const producto = productos.find(p => p.id === itemDto.productoId);
+            const carritoItem = new carritoItem_1.CarritoItem();
+            carritoItem.producto = producto;
+            carritoItem.cantidad = itemDto.cantidad;
+            carritoItem.carritoDeCompras = carritoCreado;
+            await this.CarritoItemRepository.save(carritoItem);
+            items.push(carritoItem);
+        }
+        carritoCreado.items = items;
+        const carritoDto = new carrito_de_compras_dto_1.CarritoDeComprasDto();
+        carritoDto.id = carritoCreado.id;
+        carritoDto.usuarioId = carritoCreado.usuario.id;
+        carritoDto.items = carritoCreado.items.map(item => {
+            const itemDto = new carrito_item_dto_1.CarritoItemDto();
+            itemDto.id = item.id;
+            itemDto.cantidad = item.cantidad;
+            itemDto.productoId = item.producto.id;
+            return itemDto;
         });
-        carrito.items = items;
-        this.carritoDeCompras.push(carrito);
-        this.usuarioService.updateCarrito(usuario.id, carrito);
-        return carrito;
+        return {
+            status: 201,
+            data: carritoDto,
+        };
     }
-    findCarritoByUsuarioId(usuarioId) {
-        const usuario = this.usuarioService.findOne(usuarioId);
-        if (!usuario)
-            return null;
-        const carrito = this.carritoDeCompras.filter((carrito) => carrito.usuario.id == usuarioId);
-        return carrito;
-    }
-    findOne(id) {
-        const carrito = this.carritoDeCompras.find((carrito) => carrito.id == id);
-        return carrito ? carrito : null;
-    }
-    update(id, updateCarritoDeCompraDto) {
-        const carrito = this.findOne(id);
-        if (!carrito)
-            return false;
-        const usuario = this.usuarioService.findOne(updateCarritoDeCompraDto.usuario.id);
-        if (!usuario)
-            return false;
-        carrito.usuario.id = usuario.id;
-        const items = [];
-        const item = new carrito_item_entity_1.CarritoItem();
-        updateCarritoDeCompraDto.items.forEach((itemDto, index) => {
-            const producto = this.productoService.findOne(itemDto.producto.productoId);
-            item.id = index + 1;
-            item.producto = new carrito_producto_dto_1.CarritoProductoDto();
-            item.producto.productoId = itemDto.producto.productoId;
-            item.cantidad = itemDto.cantidad;
-            item.carritoDeComprasId = carrito.id;
-            items.push(item);
+    async findCarritoByUsuarioId(usuarioId) {
+        const usuario = await this.UsuariosRepository.findOne({
+            where: { id: usuarioId },
         });
-        carrito.items = items;
-        return true;
+        if (!usuario)
+            return {
+                status: 404,
+                message: 'El usuario no existe'
+            };
+        const carritos = await this.CarritoDeComprasRepository.find({
+            where: { usuario: { id: usuarioId } },
+            relations: ['items', 'items.producto'],
+        });
+        const carritoDtos = carritos.map(carrito => {
+            const carritoDto = new carrito_de_compras_dto_1.CarritoDeComprasDto();
+            carritoDto.id = carrito.id;
+            carritoDto.usuarioId = carrito.usuario.id;
+            carritoDto.items = carrito.items.map(item => {
+                const itemDto = new carrito_item_dto_1.CarritoItemDto();
+                itemDto.id = item.id;
+                itemDto.cantidad = item.cantidad;
+                itemDto.productoId = item.producto.id;
+                return itemDto;
+            });
+            return carritoDto;
+        });
+        return {
+            status: 200,
+            data: carritoDtos,
+        };
     }
-    remove(id) {
-        const carrito = this.findOne(id);
+    async findOne(id) {
+        const carrito = await this.CarritoDeComprasRepository.findOne({
+            where: { id },
+            relations: ['usuario', 'items', 'items.producto'],
+        });
         if (!carrito)
-            return false;
-        this.carritoDeCompras.forEach((carrito) => {
-            if (carrito.id == id) {
-                this.carritoDeCompras.splice(this.carritoDeCompras.indexOf(carrito), 1);
+            return {
+                status: 404,
+                message: 'Carrito no encontrado'
+            };
+        const carritoDto = new carrito_de_compras_dto_1.CarritoDeComprasDto();
+        carritoDto.id = carrito.id;
+        carritoDto.usuarioId = carrito.usuario.id;
+        carritoDto.items = carrito.items.map(item => {
+            const itemDto = new carrito_item_dto_1.CarritoItemDto();
+            itemDto.id = item.id;
+            itemDto.cantidad = item.cantidad;
+            itemDto.productoId = item.producto.id;
+            return itemDto;
+        });
+        return {
+            status: 200,
+            data: carritoDto,
+        };
+    }
+    async update(id, updateCarritoDeCompraDto) {
+        const carrito = await this.CarritoDeComprasRepository.findOne({
+            where: { id },
+            relations: ['items'],
+        });
+        if (!carrito)
+            return {
+                status: 404,
+                message: 'Carrito no encontrado'
+            };
+        if (updateCarritoDeCompraDto.usuarioId) {
+            const usuario = await this.UsuariosRepository.findOne({
+                where: { id: updateCarritoDeCompraDto.usuarioId },
+            });
+            if (!usuario)
+                return {
+                    status: 404,
+                    message: 'El usuario no existe'
+                };
+            carrito.usuario = usuario;
+        }
+        if (updateCarritoDeCompraDto.items) {
+            await this.CarritoItemRepository.delete({ carritoDeCompras: { id } });
+            const productosId = updateCarritoDeCompraDto.items.map(item => item.productoId);
+            const productos = await this.ProductosRepository.findBy({ id: (0, typeorm_2.In)(productosId) });
+            if (productos.length !== productosId.length)
+                return {
+                    status: 404,
+                    message: 'Uno o más productos no fueron encontrados'
+                };
+            const items = [];
+            for (const itemDto of updateCarritoDeCompraDto.items) {
+                const producto = productos.find(p => p.id === itemDto.productoId);
+                const carritoItem = new carritoItem_1.CarritoItem();
+                carritoItem.producto = producto;
+                carritoItem.cantidad = itemDto.cantidad;
+                carritoItem.carritoDeCompras = carrito;
+                await this.CarritoItemRepository.save(carritoItem);
+                items.push(carritoItem);
             }
+            carrito.items = items;
+        }
+        const carritoActualizado = await this.CarritoDeComprasRepository.save(carrito);
+        const carritoDto = new carrito_de_compras_dto_1.CarritoDeComprasDto();
+        carritoDto.id = carritoActualizado.id;
+        carritoDto.usuarioId = carritoActualizado.usuario.id;
+        carritoDto.items = carritoActualizado.items.map(item => {
+            const itemDto = new carrito_item_dto_1.CarritoItemDto();
+            itemDto.id = item.id;
+            itemDto.cantidad = item.cantidad;
+            itemDto.productoId = item.producto.id;
+            return itemDto;
         });
-        this.usuarioService.deleteCarrito(carrito.usuario.id);
-        return true;
+        return {
+            status: 200,
+            data: carritoDto,
+        };
     }
-    updateEstado(id, estado) {
-        const carrito = this.findOne(id);
+    async remove(id) {
+        const carrito = await this.CarritoDeComprasRepository.findOne({
+            where: { id },
+        });
         if (!carrito)
-            return false;
-        if (estado < 0 || estado > 2)
-            return false;
-        carrito.estadoCarrito = estado;
-        return true;
+            return {
+                status: 404,
+                message: 'Carrito no encontrado'
+            };
+        await this.CarritoItemRepository.delete({ carritoDeCompras: { id } });
+        await this.CarritoDeComprasRepository.delete(id);
+        return {
+            status: 200,
+            message: 'Carrito eliminado correctamente',
+        };
     }
 };
 exports.CarritoDeComprasService = CarritoDeComprasService;
 exports.CarritoDeComprasService = CarritoDeComprasService = __decorate([
     (0, common_1.Injectable)(),
-    __metadata("design:paramtypes", [usuario_service_1.UsuarioService,
+    __param(0, (0, typeorm_1.InjectRepository)(carritoDeCompras_1.CarritoDeCompras)),
+    __param(1, (0, typeorm_1.InjectRepository)(usuario_1.Usuarios)),
+    __param(2, (0, typeorm_1.InjectRepository)(producto_1.Productos)),
+    __param(3, (0, typeorm_1.InjectRepository)(carritoItem_1.CarritoItem)),
+    __metadata("design:paramtypes", [typeorm_2.Repository,
+        typeorm_2.Repository,
+        typeorm_2.Repository,
+        typeorm_2.Repository,
+        usuario_service_1.UsuarioService,
         productos_service_1.ProductosService])
 ], CarritoDeComprasService);
 //# sourceMappingURL=carrito-de-compras.service.js.map

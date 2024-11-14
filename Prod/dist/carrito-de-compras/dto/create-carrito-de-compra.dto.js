@@ -10,26 +10,31 @@ var __metadata = (this && this.__metadata) || function (k, v) {
 };
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.CreateCarritoDeCompraDto = void 0;
+const class_validator_1 = require("class-validator");
+const class_transformer_1 = require("class-transformer");
+const create_carrito_item_dto_1 = require("./create-carrito-item.dto");
 const swagger_1 = require("@nestjs/swagger");
-const usuario_carrito_de_compra_dto_1 = require("./usuario-carrito-de-compra.dto");
 class CreateCarritoDeCompraDto {
 }
 exports.CreateCarritoDeCompraDto = CreateCarritoDeCompraDto;
 __decorate([
-    (0, swagger_1.ApiProperty)({ default: { id: 0 } }),
-    __metadata("design:type", usuario_carrito_de_compra_dto_1.UsuarioCarritoDeCompraDto)
-], CreateCarritoDeCompraDto.prototype, "usuario", void 0);
+    (0, swagger_1.ApiProperty)({
+        description: 'ID del usuario que realiza la compra',
+        example: 1,
+    }),
+    (0, class_validator_1.IsNumber)(),
+    (0, class_validator_1.IsNotEmpty)(),
+    __metadata("design:type", Number)
+], CreateCarritoDeCompraDto.prototype, "usuarioId", void 0);
 __decorate([
     (0, swagger_1.ApiProperty)({
-        default: [
-            {
-                producto: {
-                    productoId: 0,
-                },
-                cantidad: 0,
-            },
-        ],
+        description: 'Lista de items en el carrito de compras',
+        type: [create_carrito_item_dto_1.CreateCarritoItemDto],
     }),
+    (0, class_validator_1.IsArray)(),
+    (0, class_validator_1.ArrayNotEmpty)(),
+    (0, class_validator_1.ValidateNested)({ each: true }),
+    (0, class_transformer_1.Type)(() => create_carrito_item_dto_1.CreateCarritoItemDto),
     __metadata("design:type", Array)
 ], CreateCarritoDeCompraDto.prototype, "items", void 0);
 //# sourceMappingURL=create-carrito-de-compra.dto.js.map

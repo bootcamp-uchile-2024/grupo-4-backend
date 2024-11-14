@@ -10,7 +10,7 @@ export class TipoUsuario {
     @Column()
     nombreTipo: string;
    
-    @OneToMany(()=> Usuarios, (usuario) => usuario.tipoUsuarioId)
+    @OneToMany(()=> Usuarios, (usuario) => usuario.tipoUsuario)
     usuarios: Usuarios[];
     
 }

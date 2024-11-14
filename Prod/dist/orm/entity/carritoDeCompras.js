@@ -17,22 +17,18 @@ let CarritoDeCompras = class CarritoDeCompras {
 };
 exports.CarritoDeCompras = CarritoDeCompras;
 __decorate([
-    (0, typeorm_1.PrimaryColumn)(),
+    (0, typeorm_1.PrimaryGeneratedColumn)(),
     __metadata("design:type", Number)
 ], CarritoDeCompras.prototype, "id", void 0);
 __decorate([
-    (0, typeorm_1.Column)(),
-    __metadata("design:type", Number)
-], CarritoDeCompras.prototype, "usuarioId", void 0);
+    (0, typeorm_1.ManyToOne)(() => usuario_1.Usuarios, (usuario) => usuario.carritoDeCompras),
+    (0, typeorm_1.JoinColumn)({ name: 'usuarioId' }),
+    __metadata("design:type", usuario_1.Usuarios)
+], CarritoDeCompras.prototype, "usuario", void 0);
 __decorate([
-    (0, typeorm_1.OneToMany)(() => usuario_1.Usuarios, (usuario) => usuario.carritoDeCompras),
+    (0, typeorm_1.OneToMany)(() => carritoItem_1.CarritoItem, (carritoItem) => carritoItem.carritoDeCompras),
     __metadata("design:type", Array)
-], CarritoDeCompras.prototype, "usuarios", void 0);
-__decorate([
-    (0, typeorm_1.ManyToOne)(() => carritoItem_1.CarritoItem),
-    (0, typeorm_1.JoinColumn)({ name: 'id_carritoItem' }),
-    __metadata("design:type", carritoItem_1.CarritoItem)
-], CarritoDeCompras.prototype, "carritoItem", void 0);
+], CarritoDeCompras.prototype, "items", void 0);
 exports.CarritoDeCompras = CarritoDeCompras = __decorate([
     (0, typeorm_1.Entity)({ name: 'CarritoDeCompras' })
 ], CarritoDeCompras);

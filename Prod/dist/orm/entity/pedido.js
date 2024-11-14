@@ -29,7 +29,7 @@ __decorate([
     __metadata("design:type", Number)
 ], Pedido.prototype, "usuarioId", void 0);
 __decorate([
-    (0, typeorm_1.OneToMany)(() => usuario_1.Usuarios, (usuario) => usuario.pedido),
+    (0, typeorm_1.OneToMany)(() => usuario_1.Usuarios, (usuario) => usuario.id),
     __metadata("design:type", Array)
 ], Pedido.prototype, "usuarios", void 0);
 __decorate([

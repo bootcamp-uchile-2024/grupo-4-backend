@@ -17,29 +17,23 @@ let CarritoItem = class CarritoItem {
 };
 exports.CarritoItem = CarritoItem;
 __decorate([
-    (0, typeorm_1.PrimaryColumn)(),
+    (0, typeorm_1.PrimaryGeneratedColumn)(),
     __metadata("design:type", Number)
 ], CarritoItem.prototype, "id", void 0);
 __decorate([
     (0, typeorm_1.Column)(),
     __metadata("design:type", Number)
-], CarritoItem.prototype, "productoId", void 0);
-__decorate([
-    (0, typeorm_1.Column)(),
-    __metadata("design:type", Number)
 ], CarritoItem.prototype, "cantidad", void 0);
 __decorate([
-    (0, typeorm_1.Column)(),
-    __metadata("design:type", Number)
-], CarritoItem.prototype, "carritoDeComprasId", void 0);
+    (0, typeorm_1.ManyToOne)(() => producto_1.Productos, (producto) => producto.carritoItem),
+    (0, typeorm_1.JoinColumn)({ name: 'productoId' }),
+    __metadata("design:type", producto_1.Productos)
+], CarritoItem.prototype, "producto", void 0);
 __decorate([
-    (0, typeorm_1.OneToMany)(() => carritoDeCompras_1.CarritoDeCompras, (carritoDeCompras) => carritoDeCompras.carritoItem),
-    __metadata("design:type", Array)
-], CarritoItem.prototype, "carritosDeCompras", void 0);
-__decorate([
-    (0, typeorm_1.OneToMany)(() => producto_1.Productos, (producto) => producto.carritoItem),
-    __metadata("design:type", Array)
-], CarritoItem.prototype, "productos", void 0);
+    (0, typeorm_1.ManyToOne)(() => carritoDeCompras_1.CarritoDeCompras, (carritoDeCompras) => carritoDeCompras.items),
+    (0, typeorm_1.JoinColumn)({ name: 'carritoDeComprasId' }),
+    __metadata("design:type", carritoDeCompras_1.CarritoDeCompras)
+], CarritoItem.prototype, "carritoDeCompras", void 0);
 exports.CarritoItem = CarritoItem = __decorate([
     (0, typeorm_1.Entity)({ name: 'CarritoItem' })
 ], CarritoItem);

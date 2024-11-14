@@ -1,7 +1,29 @@
 "use strict";
+var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
+    var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
+    if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
+    else for (var i = decorators.length - 1; i >= 0; i--) if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
+    return c > 3 && r && Object.defineProperty(target, key, r), r;
+};
+var __metadata = (this && this.__metadata) || function (k, v) {
+    if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
+};
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.CarritoItemDTO = void 0;
-class CarritoItemDTO {
+exports.CarritoItemDto = void 0;
+const swagger_1 = require("@nestjs/swagger");
+class CarritoItemDto {
 }
-exports.CarritoItemDTO = CarritoItemDTO;
+exports.CarritoItemDto = CarritoItemDto;
+__decorate([
+    (0, swagger_1.ApiProperty)({ description: 'ID del item del carrito' }),
+    __metadata("design:type", Number)
+], CarritoItemDto.prototype, "id", void 0);
+__decorate([
+    (0, swagger_1.ApiProperty)({ description: 'Cantidad del producto' }),
+    __metadata("design:type", Number)
+], CarritoItemDto.prototype, "cantidad", void 0);
+__decorate([
+    (0, swagger_1.ApiProperty)({ description: 'ID del producto' }),
+    __metadata("design:type", Number)
+], CarritoItemDto.prototype, "productoId", void 0);
 //# sourceMappingURL=carrito-item.dto.js.map

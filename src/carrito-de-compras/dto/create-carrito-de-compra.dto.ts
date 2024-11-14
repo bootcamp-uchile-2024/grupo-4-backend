@@ -1,20 +1,24 @@
+import { IsNumber, IsNotEmpty, IsArray, ArrayNotEmpty, ValidateNested } from 'class-validator';
+import { Type } from 'class-transformer';
+import { CreateCarritoItemDto } from './create-carrito-item.dto';
 import { ApiProperty } from '@nestjs/swagger';
-import { UsuarioCarritoDeCompraDto } from './usuario-carrito-de-compra.dto';
-import { CarritoItemDTO } from './carrito-item.dto';
 
 export class CreateCarritoDeCompraDto {
-  @ApiProperty({ default: { id: 0 } })
-  usuario: UsuarioCarritoDeCompraDto;
+  @ApiProperty({
+    description: 'ID del usuario que realiza la compra',
+    example: 1,
+  })
+  @IsNumber()
+  @IsNotEmpty()
+  usuarioId: number;
 
   @ApiProperty({
-    default: [
-      {
-        producto: {
-          productoId: 0,
-        },
-        cantidad: 0,
-      },
-    ],
+    description: 'Lista de items en el carrito de compras',
+    type: [CreateCarritoItemDto],
   })
-  items: CarritoItemDTO[];//revisar
+  @IsArray()
+  @ArrayNotEmpty()
+  @ValidateNested({ each: true })
+  @Type(() => CreateCarritoItemDto)
+  items: CreateCarritoItemDto[];
 }
