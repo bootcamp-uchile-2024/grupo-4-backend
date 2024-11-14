@@ -7,6 +7,4 @@ export class CategoriaDTO {
   @ApiProperty()
   nombre: string;
 
-  @ApiProperty()
-  descripcion: string;
 }

@@ -1,15 +1,8 @@
 import { ApiProperty } from '@nestjs/swagger';
-import { Categoria } from 'src/productos/entities/categorias.entity';
-import { TiposProducto } from 'src/productos/enum/tiposProductoEnum';
 import { Type } from 'class-transformer';
-import {
-  IsString,
-  IsNotEmpty,
-  IsNumber,
-  Min,
-  IsEnum,
-  IsDate,
-} from 'class-validator';
+import {IsString, IsNotEmpty, IsNumber, Min, IsEnum, IsDate,} from 'class-validator';
+import { TipoCreateDTO } from './tipo-create-producto.dto';
+import { CategoriaCreateDTO } from './categoria.create-producto.dto';
 
 export class UpdateProductoDto {
   @ApiProperty({ description: 'Nombre del producto', example: 'Producto A' })
@@ -51,9 +44,8 @@ export class UpdateProductoDto {
   origen: string;
 
   @ApiProperty({ description: 'Tipo del producto', example: 'Bebidas' })
-  @IsEnum(TiposProducto)
   @IsNotEmpty()
-  tipo: TiposProducto;
+  tipo: string;
 
   @ApiProperty({ description: 'Formato del producto', example: 'Formato A' })
   @IsString()
@@ -71,11 +63,11 @@ export class UpdateProductoDto {
 
   @ApiProperty({
     description: 'Categorías del producto',
-    example: ['Categoría A', 'Categoría B'],
+    example: 'Categoría A',
   })
   @IsString({ each: true })
   @IsNotEmpty()
-  categorias: Categoria[];
+  categorias: string;
 
   @ApiProperty({ description: 'Producto destacado', example: true })
   @IsNotEmpty()

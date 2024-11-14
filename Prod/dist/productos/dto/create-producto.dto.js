@@ -13,7 +13,6 @@ exports.CreateProductoDto = void 0;
 const swagger_1 = require("@nestjs/swagger");
 const class_transformer_1 = require("class-transformer");
 const class_validator_1 = require("class-validator");
-const tiposProductoEnum_1 = require("../enum/tiposProductoEnum");
 class CreateProductoDto {
 }
 exports.CreateProductoDto = CreateProductoDto;
@@ -64,7 +63,6 @@ __decorate([
 ], CreateProductoDto.prototype, "origen", void 0);
 __decorate([
     (0, swagger_1.ApiProperty)({ description: 'Tipo del producto', example: 'Bebidas' }),
-    (0, class_validator_1.IsEnum)(tiposProductoEnum_1.TiposProducto),
     (0, class_validator_1.IsNotEmpty)(),
     __metadata("design:type", String)
 ], CreateProductoDto.prototype, "tipo", void 0);
@@ -87,11 +85,11 @@ __decorate([
 __decorate([
     (0, swagger_1.ApiProperty)({
         description: 'Categorías del producto',
-        example: ['Categoría A', 'Categoría B'],
+        example: 'Categoría A',
     }),
     (0, class_validator_1.IsString)({ each: true }),
     (0, class_validator_1.IsNotEmpty)(),
-    __metadata("design:type", Array)
+    __metadata("design:type", String)
 ], CreateProductoDto.prototype, "categorias", void 0);
 __decorate([
     (0, swagger_1.ApiProperty)({ description: 'Producto destacado', example: true }),

@@ -11,7 +11,8 @@ var __metadata = (this && this.__metadata) || function (k, v) {
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.ProductoDTO = void 0;
 const swagger_1 = require("@nestjs/swagger");
-const tiposProductoEnum_1 = require("../enum/tiposProductoEnum");
+const categoria_1 = require("../../orm/entity/categoria");
+const tipoProducto_1 = require("../../orm/entity/tipoProducto");
 class ProductoDTO {
 }
 exports.ProductoDTO = ProductoDTO;
@@ -49,7 +50,7 @@ __decorate([
 ], ProductoDTO.prototype, "origen", void 0);
 __decorate([
     (0, swagger_1.ApiProperty)(),
-    __metadata("design:type", String)
+    __metadata("design:type", tipoProducto_1.TipoProducto)
 ], ProductoDTO.prototype, "tipo", void 0);
 __decorate([
     (0, swagger_1.ApiProperty)(),
@@ -61,8 +62,8 @@ __decorate([
 ], ProductoDTO.prototype, "fecha", void 0);
 __decorate([
     (0, swagger_1.ApiProperty)(),
-    __metadata("design:type", Array)
-], ProductoDTO.prototype, "categorias", void 0);
+    __metadata("design:type", categoria_1.Categoria)
+], ProductoDTO.prototype, "categoria", void 0);
 __decorate([
     (0, swagger_1.ApiProperty)(),
     __metadata("design:type", Boolean)

@@ -1,5 +1,3 @@
-import { Categoria } from 'src/productos/entities/categorias.entity';
-import { TiposProducto } from 'src/productos/enum/tiposProductoEnum';
 export declare class UpdateProductoDto {
     nombre: string;
     descripcion: string;
@@ -8,9 +6,9 @@ export declare class UpdateProductoDto {
     stock: number;
     marca: string;
     origen: string;
-    tipo: TiposProducto;
+    tipo: string;
     formato: string;
     fecha: Date;
-    categorias: Categoria[];
+    categorias: string;
     destacado: boolean;
 }

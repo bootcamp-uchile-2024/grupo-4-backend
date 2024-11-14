@@ -1,6 +1,6 @@
 import { ApiProperty } from '@nestjs/swagger';
-import { CategoriaDTO } from './categoria.dto';
-import { TiposProducto } from '../enum/tiposProductoEnum';
+import { Categoria } from 'src/orm/entity/categoria';
+import { TipoProducto } from 'src/orm/entity/tipoProducto';
 
 export class ProductoDTO {
   @ApiProperty()
@@ -28,7 +28,7 @@ export class ProductoDTO {
   origen: string;
 
   @ApiProperty()
-  tipo: TiposProducto;
+  tipo: TipoProducto;
 
   @ApiProperty()
   formato: string;
@@ -37,7 +37,7 @@ export class ProductoDTO {
   fecha: Date;
 
   @ApiProperty()
-  categorias: CategoriaDTO[];
+  categoria: Categoria;
 
   @ApiProperty()
   destacado: boolean;

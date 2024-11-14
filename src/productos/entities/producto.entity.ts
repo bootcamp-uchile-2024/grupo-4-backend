@@ -1,58 +1,57 @@
-import {TiposProducto } from 'src/productos/enum/tiposProductoEnum';
-import { Categoria } from './categorias.entity';
-import { IsArray, IsBoolean, IsDate, IsEnum, IsInt, IsNumber, IsString, Length, Min } from 'class-validator';
+// src/orm/entity/producto.entity.ts
 
+import { Categoria } from 'src/orm/entity/categoria';
+import { TipoProducto } from 'src/orm/entity/tipoProducto';
+import {
+  Entity,
+  PrimaryGeneratedColumn,
+  Column,
+  ManyToOne,
+  ManyToMany,
+  JoinColumn,
+  JoinTable,
+} from 'typeorm';
 
-
+@Entity('Producto')
 export class Producto {
-
-  @IsInt()
+  @PrimaryGeneratedColumn()
   id: number;
 
-  @IsString()
-  @Length(1, 100)
+  @Column()
   nombre: string;
 
-  @IsString()
-  @Length(1, 500)
+  @Column()
   descripcion: string;
 
-  @IsNumber()
-  @Min(0)
+  @Column('decimal', { precision: 10, scale: 2 })
   precio: number;
 
-  @IsString()  
+  @Column()
   imagen: string;
 
-  @IsInt()
-  @Min(0)
+  @Column()
   stock: number;
 
-  @IsString()
-  @Length(1, 50)
+  @Column()
   marca: string;
 
-  @IsString()
-  @Length(1, 50)
+  @Column()
   origen: string;
 
-  @IsEnum(TiposProducto)
-  tipo: TiposProducto;
+  @ManyToOne(() => TipoProducto, (tipoProducto) => tipoProducto.productos)
+  @JoinColumn({ name: 'tipoProductoId' })
+  tipo: TipoProducto;
 
-  @IsString()
-  @Length(1, 50)
+  @Column()
   formato: string;
 
-  @IsDate()
+  @Column({ type: 'date' })
   fecha: Date;
 
-  @IsArray()
+  @ManyToMany(() => Categoria, (categoria) => categoria.productos)
+  @JoinColumn({ name: 'categoriaId' })
   categorias: Categoria[];
 
-  @IsBoolean()
+  @Column()
   destacado: boolean;
 }
-
-
-
-

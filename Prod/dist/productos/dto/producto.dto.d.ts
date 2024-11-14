@@ -1,5 +1,5 @@
-import { CategoriaDTO } from './categoria.dto';
-import { TiposProducto } from '../enum/tiposProductoEnum';
+import { Categoria } from 'src/orm/entity/categoria';
+import { TipoProducto } from 'src/orm/entity/tipoProducto';
 export declare class ProductoDTO {
     id: number;
     nombre: string;
@@ -9,9 +9,9 @@ export declare class ProductoDTO {
     stock: number;
     marca: string;
     origen: string;
-    tipo: TiposProducto;
+    tipo: TipoProducto;
     formato: string;
     fecha: Date;
-    categorias: CategoriaDTO[];
+    categoria: Categoria;
     destacado: boolean;
 }
