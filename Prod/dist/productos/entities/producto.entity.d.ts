@@ -1,5 +1,5 @@
-import { TiposProducto } from 'src/productos/enum/tiposProductoEnum';
-import { Categoria } from './categorias.entity';
+import { Categoria } from 'src/orm/entity/categoria';
+import { TipoProducto } from 'src/orm/entity/tipoProducto';
 export declare class Producto {
     id: number;
     nombre: string;
@@ -9,7 +9,7 @@ export declare class Producto {
     stock: number;
     marca: string;
     origen: string;
-    tipo: TiposProducto;
+    tipo: TipoProducto;
     formato: string;
     fecha: Date;
     categorias: Categoria[];

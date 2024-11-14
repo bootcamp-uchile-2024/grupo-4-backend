@@ -22,8 +22,4 @@ __decorate([
     (0, swagger_1.ApiProperty)(),
     __metadata("design:type", String)
 ], CategoriaDTO.prototype, "nombre", void 0);
-__decorate([
-    (0, swagger_1.ApiProperty)(),
-    __metadata("design:type", String)
-], CategoriaDTO.prototype, "descripcion", void 0);
 //# sourceMappingURL=categoria.dto.js.map

@@ -2,6 +2,9 @@
 /dist
 /node_modules
 /build
+/Prod
+/sql
+/bd-server
 
 # Logs
 logs
