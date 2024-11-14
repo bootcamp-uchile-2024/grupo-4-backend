@@ -30,8 +30,8 @@ exports.OrmModule = OrmModule = __decorate([
         imports: [
             typeorm_1.TypeOrmModule.forRoot({
                 type: 'mysql',
-                host: 'localhost',
-                port: 3700,
+                host: 'bd-server',
+                port: 3306,
                 username: 'root',
                 password: 'cafeinados24',
                 database: 'cafeinados',
