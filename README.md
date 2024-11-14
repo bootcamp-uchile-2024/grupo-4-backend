@@ -4,18 +4,18 @@ Somos una e-commerce diseñada para personalizar tu experiencia de café en casa
 
 ## Tabla de Contenidos
 
-1. [Requisitos Previos](#requisitos-previos)
-2. [Instalación](#instalación)
-3. [Configuración](#configuración)
-4. [Ejecución - Desarrollo](#ejecución---desarrollo)
-5. [Ejecución - Producción](#ejecución---producción)
-6. [Configuración del ORM](#conexión---base de datos)
-7. [Configuracion de MySql](#gestión---base de datos)
-8. [Configuracion de AWS Server](#conexión---base de datos)
-9. [Estructura del Proyecto](#estructura-del-proyecto)
-10. [Documentación de la API](#documentación-de-la-api)
-11. [Flujo de Trabajo](#flujo-de-trabajo)
-12. [Contacto](#contacto)
+1. [Requisitos Previos](#1-requisitos-previos)
+2. [Instalación](#2-instalación)
+3. [Configuración](#3-configuración)
+4. [Ejecución - Desarrollo](#4-ejecución---desarrollo)
+5. [Ejecución - Producción](#5-ejecución---producción)
+6. [Configuración del ORM](#6-configuración-del-orm)
+7. [Configuración de MySql](#7-configuación-de-mysql)
+8. [Configuracion de AWS Server](#8-configuración-aws-server)
+9. [Estructura del Proyecto](#9-estructura-del-proyecto)
+10. [Documentación de la API](#10-documentación-de-la-api)
+11. [Flujo de Trabajo](#11-flujo-de-trabajo)
+12. [Contacto](#12-contacto)
 
 ## 1. Requisitos Previos
 
