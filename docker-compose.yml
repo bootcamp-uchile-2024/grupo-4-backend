@@ -18,5 +18,11 @@ services:
     volumes:
       - ./bd-server/sql:/var/lib/mysql
     ports:
-      - '${MYSQL_HOST_PORT}:${MYSQL_CONTAINER_PORT}'
+      - '3700:3306'
+
+  flyway:
+    image: flyway/flyway:10.20.1-alpine
+    volumes:
+      - ./BBDD:/flyway/sql
+    command: -url=jdbc:mysql://${HOST_DB}:${MYSQL_CONTAINER_PORT}/${NAME_DB}?allowPublicKeyRetrieval=true -user=root -password=${MYSQL_ROOT_PASSWORD} -connectRetries=60 migrate
     

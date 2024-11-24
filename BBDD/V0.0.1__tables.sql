@@ -1,6 +1,3 @@
-USE cafeinados;
-
--- Tabla TipoUsuario
 CREATE TABLE TipoUsuario (
     id INT AUTO_INCREMENT PRIMARY KEY,
     nombreTipo VARCHAR(20) NOT NULL

@@ -1,4 +1,3 @@
--- Insertar datos en la tabla TipoUsuario
 INSERT INTO TipoUsuario (nombreTipo) VALUES
 ('ADMIN'),
 ('ADMIN_LECTURA'),
