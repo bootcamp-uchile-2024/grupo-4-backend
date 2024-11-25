@@ -18,7 +18,7 @@ services:
     volumes:
       - ./bd-server/sql:/var/lib/mysql
     ports:
-      - '3700:3306'
+      - ${MYSQL_HOST_PORT}:${MYSQL_CONTAINER_PORT}
 
   flyway:
     image: flyway/flyway:10.20.1-alpine
