@@ -73,7 +73,7 @@ export class CreateUsuarioDto {
     example: 'juan.perez@dominio.cl',
   })
   @IsEmail()
-  correo: string;
+  email: string;
 
   @ApiProperty({
     description: 'Contraseña del usuario',

@@ -21,24 +21,25 @@ export class UsuarioService {
     private readonly pedidoService: PedidoService,
   ) {}
 
-  create(createUsuarioDto: CreateUsuarioDto): UsuarioDTO {
+  async create(createUsuarioDto: CreateUsuarioDto): Promise<UsuarioDTO> {
     const usuario = new Usuario();
 
-    usuario.id = this.usuarios.length + 1;
+   
     usuario.nombre = createUsuarioDto.nombre;
     usuario.apellido = createUsuarioDto.apellido;
+    usuario.email = createUsuarioDto.email;
     usuario.direccion = createUsuarioDto.direccion;    
     usuario.comuna = createUsuarioDto.comuna;
     usuario.ciudad = createUsuarioDto.ciudad;
     usuario.region = createUsuarioDto.region;
-    usuario.telefono = createUsuarioDto.telefono;
-    usuario.correo = createUsuarioDto.correo;
+    usuario.telefono = createUsuarioDto.telefono;    
+    usuario.constrasenna = createUsuarioDto.contrasenna;
     usuario.rut = createUsuarioDto.rut;
     usuario.pedidos = [];
-    usuario.carritoDeCompras = new CarritoDeCompra();
+    usuario.carritoDeCompras = [];
 
-    this.usuarios.push(usuario);
-    return usuario;
+     const usuarioGuradado = await this.usuariosRepository.save(usuario);
+    return usuarioGuradado;
   }
 
   async findAll(): Promise<UsuarioDTO[]> {
@@ -82,7 +83,7 @@ export class UsuarioService {
     return true;
   }
 
-  updateCarrito(usuarioId: number, carrito: CarritoDeCompra): boolean {
+  /*updateCarrito(usuarioId: number, carrito: CarritoDeCompra): boolean {
     const usuario = this.findOne(usuarioId);
 
     if (!usuario) return false;
@@ -90,7 +91,7 @@ export class UsuarioService {
     usuario.carritoDeCompras = carrito;
 
     return true;
-  }
+  }*/
 
   deleteCarrito(usuarioId: number): boolean {
     const usuario = this.findOne(usuarioId);

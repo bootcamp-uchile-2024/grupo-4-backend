@@ -7,7 +7,7 @@ export class Usuario {
   nombre: string;  
   apellido: string;  
   direccion: string;
-  
+  email: string;
   comuna: string;  
   ciudad: string;  
   region: string;  
@@ -16,5 +16,5 @@ export class Usuario {
   constrasenna: string;  
   rut: string;
   pedidos: PedidoUsuario[];
-  carritoDeCompras: CarritoDeCompra;
+  carritoDeCompras: CarritoDeCompra[];
 }

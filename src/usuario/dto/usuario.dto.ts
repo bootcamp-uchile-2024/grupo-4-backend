@@ -12,8 +12,8 @@ export class UsuarioDTO {
   @ApiProperty()
   apellido: string;  
 
-  /*@ApiProperty()
-  email: string;*/  
+  @ApiProperty()
+  email: string; 
 
   @ApiProperty()
   comuna: string;  
@@ -40,5 +40,5 @@ export class UsuarioDTO {
   pedidos: PedidoUsuarioDto[];
 
   @ApiProperty()
-  carritoDeCompras: CarritoDeCompra;
+  carritoDeCompras: CarritoDeCompra[];
 }

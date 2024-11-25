@@ -17,6 +17,7 @@ import { CreateUsuarioDto } from './dto/create-usuario.dto';
 import { UpdateUsuarioDto } from './dto/update-usuario.dto';
 import { ApiResponse, ApiTags } from '@nestjs/swagger';
 import { Response } from 'express';
+import { UsuarioDTO } from './dto/usuario.dto';
 
 @ApiTags('usuarios')
 @Controller('usuario')
@@ -38,15 +39,12 @@ export class UsuarioController {
   @Get(':id')
   @ApiResponse({ status: 200, description: 'Usuario encontrado.' })
   @ApiResponse({ status: 404, description: 'Usuario no encontrado.' })
-  findOne(@Param('id') id: number) {
-    const usuario = this.usuarioService.findOne(id);
-    if (!usuario) {
-      throw new HttpException('Usuario no encontrado', HttpStatus.NOT_FOUND);
-    }
-    return usuario;
+  findOne(@Param('id') id: number): UsuarioDTO {
+    return this.usuarioService.findOne(id);
   }
+  
 
-  @Patch(':id')
+  /*@Patch(':id')
   @ApiResponse({ status: 200, description: 'Usuario modificado.' })
   @ApiResponse({ status: 404, description: 'Usuario no encontrado.' })
   @UsePipes(new ValidationPipe({ whitelist: true, forbidNonWhitelisted: true }))
@@ -59,7 +57,7 @@ export class UsuarioController {
       throw new HttpException('Usuario no encontrado', HttpStatus.NOT_FOUND);
     }
     return { message: 'Usuario modificado' };
-  }
+  }*/
 
   @Delete(':id')
   @ApiResponse({ status: 200, description: 'Usuario eliminado.' })
@@ -72,7 +70,7 @@ export class UsuarioController {
     return { message: 'Usuario eliminado' };
   }
 
-  @Patch(':id/carrito')
+  /*@Patch(':id/carrito')
   @ApiResponse({ status: 200, description: 'Carrito modificado.' })
   @ApiResponse({ status: 404, description: 'Usuario no encontrado.' })
   updateCarrito(@Param('id') id: number, @Body() updateCarritoDeCompraDto) {
@@ -84,9 +82,9 @@ export class UsuarioController {
       throw new HttpException('Usuario no encontrado', HttpStatus.NOT_FOUND);
     }
     return { message: 'Carrito modificado' };
-  }
+  }*/
 
-  @Delete(':id/carrito')
+  /*@Delete(':id/carrito')
   @ApiResponse({ status: 200, description: 'Carrito eliminado.' })
   @ApiResponse({ status: 404, description: 'Usuario no encontrado.' })
   deleteCarrito(@Param('id') id: number) {
@@ -95,5 +93,5 @@ export class UsuarioController {
       throw new HttpException('Usuario no encontrado', HttpStatus.NOT_FOUND);
     }
     return { message: 'Carrito eliminado' };
-  }
+  }*/
 }
