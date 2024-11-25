@@ -13,6 +13,7 @@ import { UsuarioMapper } from './mapper/usuario.mappers';
 
 @Injectable()
 export class UsuarioService {
+ 
   usuarios: Usuario[] = [];
 
   constructor(
@@ -47,29 +48,31 @@ export class UsuarioService {
     return UsuarioMapper.entityListToDtoList(listadoUsuarios);
   }
 
-  findOne(id: number): Usuario {
-    const usuario = this.usuarios.find((usuario) => usuario.id == id);
+  async findOne(rut: string): Promise<UsuarioDTO> {
+    const usuario:Usuarios = await this.usuariosRepository.findOneBy({rut});
 
-    return usuario ? usuario : null;
+    return UsuarioMapper.entityToDto(usuario);
   }
 
-  update(id: number, updateUsuarioDto: UpdateUsuarioDto): boolean {
-    const usuario = this.findOne(id);
+  /*update(id: number, updateUsuarioDto: UpdateUsuarioDto): boolean {
+    const usuario = await this.usuariosRepository.findOne(id);
 
     if (!usuario) return false;
 
-    usuario.direccion = updateUsuarioDto.direccion;
+    
+    
+    usuario.direccion = updateUsuarioDto.direccion;    
     usuario.comuna = updateUsuarioDto.comuna;
     usuario.ciudad = updateUsuarioDto.ciudad;
     usuario.region = updateUsuarioDto.region;
-    usuario.telefono = updateUsuarioDto.telefono;
-    usuario.correo = updateUsuarioDto.correo;
-    usuario.constrasenna = updateUsuarioDto.contrasenna;
-
+    usuario.telefono = updateUsuarioDto.telefono;    
+    usuario.constrasenna = updateUsuarioDto.contrasenna;    
+    usuario.pedidos = [];
+    usuario.carritoDeCompras = [];
     return true;
-  }
+  }*/
 
-  remove(id: number): boolean {
+  /*remove(id: number): boolean {
     const usuario = this.findOne(id);
 
     if (!usuario) return false;
@@ -81,7 +84,7 @@ export class UsuarioService {
     });
 
     return true;
-  }
+  }*/
 
   /*updateCarrito(usuarioId: number, carrito: CarritoDeCompra): boolean {
     const usuario = this.findOne(usuarioId);
@@ -93,7 +96,7 @@ export class UsuarioService {
     return true;
   }*/
 
-  deleteCarrito(usuarioId: number): boolean {
+  /*deleteCarrito(usuarioId: number): boolean {
     const usuario = this.findOne(usuarioId);
 
     if (!usuario) return false;
@@ -111,5 +114,5 @@ export class UsuarioService {
     usuario.pedidos.push(pedido);
 
     return true;
-  }
+  }*/
 }

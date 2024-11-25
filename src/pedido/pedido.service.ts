@@ -15,7 +15,7 @@ export class PedidoService {
     private readonly usuarioService: UsuarioService,
   ) {}
 
-  create(createPedidoDto: CreatePedidoDto): Pedido {
+  /*create(createPedidoDto: CreatePedidoDto): Pedido {
     const usuario = this.usuarioService.findOne(
       createPedidoDto.usuario.usuarioId,
     );
@@ -67,7 +67,7 @@ export class PedidoService {
     this.usuarioService.addPedido(usuario.id, pedido.usuario);
 
     return pedido;
-  }
+  }*/
 
   findAll(tipo: TipoDespacho): Pedido[] {
     if (tipo !== undefined) {

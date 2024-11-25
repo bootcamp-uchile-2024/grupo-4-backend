@@ -27,24 +27,24 @@ export class UsuarioController {
   @Post()
   @ApiResponse({ status: 201, description: 'Usuario creado exitosamente.' })
   @UsePipes(new ValidationPipe({ whitelist: true, forbidNonWhitelisted: true }))
-  create(@Body() createUsuarioDto: CreateUsuarioDto) {
+  async create(@Body() createUsuarioDto: CreateUsuarioDto): Promise<UsuarioDTO> {
     return this.usuarioService.create(createUsuarioDto);
   }
 
   @Get()
-  findAll() {
+  async findAll(): Promise<UsuarioDTO[]> {
     return this.usuarioService.findAll();
   }
 
-  @Get(':id')
+  @Get(':rut')
   @ApiResponse({ status: 200, description: 'Usuario encontrado.' })
   @ApiResponse({ status: 404, description: 'Usuario no encontrado.' })
-  findOne(@Param('id') id: number): UsuarioDTO {
-    return this.usuarioService.findOne(id);
+  async findOne(@Param('rut') rut: string): Promise<UsuarioDTO> {
+    return this.usuarioService.findOne(rut);
   }
   
 
-  /*@Patch(':id')
+ /* @Patch(':id')
   @ApiResponse({ status: 200, description: 'Usuario modificado.' })
   @ApiResponse({ status: 404, description: 'Usuario no encontrado.' })
   @UsePipes(new ValidationPipe({ whitelist: true, forbidNonWhitelisted: true }))
@@ -59,7 +59,7 @@ export class UsuarioController {
     return { message: 'Usuario modificado' };
   }*/
 
-  @Delete(':id')
+  /*@Delete(':id')
   @ApiResponse({ status: 200, description: 'Usuario eliminado.' })
   @ApiResponse({ status: 404, description: 'Usuario no encontrado.' })
   remove(@Param('id') id: number) {
@@ -68,7 +68,7 @@ export class UsuarioController {
       throw new HttpException('Usuario no encontrado', HttpStatus.NOT_FOUND);
     }
     return { message: 'Usuario eliminado' };
-  }
+  }*/
 
   /*@Patch(':id/carrito')
   @ApiResponse({ status: 200, description: 'Carrito modificado.' })

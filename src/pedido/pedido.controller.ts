@@ -25,7 +25,7 @@ import { TipoDespacho } from 'src/pedido/enum/tipoDespacho';
 export class PedidoController {
   constructor(private readonly pedidoService: PedidoService) {}
 
-  @Post()
+  /*@Post()
   @ApiResponse({ status: 201, description: 'Pedido creado exitosamente.' })
   @ApiResponse({ status: 404, description: 'Usuario no existe.' })
   @UsePipes(new ValidationPipe({ whitelist: true, forbidNonWhitelisted: true }))
@@ -35,7 +35,7 @@ export class PedidoController {
       throw new HttpException('Usuario no encontrado', HttpStatus.NOT_FOUND);
     }
     return pedido;
-  }
+  }*/
 
   @Get()
   @ApiResponse({ status: 200, description: 'Se entregan pedidos encontrados.' })

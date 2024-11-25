@@ -76,7 +76,7 @@ export class ProductosService {
     return { status: 201, data: productoDto };
 
 
-  }
+  }//here
 
   async findAll(page: number, pageSize: number): Promise<ResponseAllProductsDto<ProductoDTO[]>> {
     const [result, total] = await this.productosRepository.findAndCount({
