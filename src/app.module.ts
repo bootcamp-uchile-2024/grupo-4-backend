@@ -1,10 +1,4 @@
-import {
-  HttpException,
-  HttpStatus,
-  MiddlewareConsumer,
-  Module,
-  NestModule,
-} from '@nestjs/common';
+import {HttpException, HttpStatus, MiddlewareConsumer, Module, NestModule} from '@nestjs/common';
 import { AppController } from './app.controller';
 import { AppService } from './app.service';
 import { ProductosModule } from './productos/productos.module';
@@ -14,13 +8,19 @@ import { PedidoModule } from './pedido/pedido.module';
 import { CarritoDeComprasModule } from './carrito-de-compras/carrito-de-compras.module';
 import { ConfigModule } from '@nestjs/config';
 import { OrmModule } from './orm/orm.module';
+import { ServeStaticModule } from '@nestjs/serve-static';
 
 @Module({
   imports: [
+    ServeStaticModule.forRoot({
+      rootPath: './public',
+      serveRoot: '/estaticos',
+      
+    }),
     ProductosModule,
     UsuarioModule,
     PedidoModule,
-    CarritoDeComprasModule,
+    CarritoDeComprasModule,    
     ConfigModule.forRoot({
       envFilePath: '.env', 
       isGlobal: true,
@@ -42,8 +42,11 @@ import { OrmModule } from './orm/orm.module';
           AMBIENTE: config.AMBIENTE,
         };
       },
-    }),
-    OrmModule,
+    }),    
+    OrmModule,    
+    /*ServeStaticModule.forRoot({
+      rootPath: __dirname + '/public',
+    })*/
   ],
   controllers: [AppController],
   providers: [AppService],
