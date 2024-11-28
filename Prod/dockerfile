@@ -12,6 +12,8 @@ COPY package-lock.json home/node/nest/package-lock.json
 
 COPY estaticos home/node/nest/estaticos
 
+COPY BBDD home/node/nest/BBDD
+
 WORKDIR /home/node/nest
 
 RUN npm install --production
