@@ -10,6 +10,8 @@ COPY .env home/node/nest/.env
 
 COPY package-lock.json home/node/nest/package-lock.json
 
+COPY estaticos home/node/nest/estaticos
+
 WORKDIR /home/node/nest
 
 RUN npm install --production
