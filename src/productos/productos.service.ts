@@ -30,18 +30,28 @@ export class ProductosService {
 
   productos: Producto[] = [];
 
-  async create(createProductoDto: CreateProductoDto, imagen): Promise<ResponseDto<ProductoDTO>>  {
+  async create(createProductoDto: CreateProductoDto, imagen: Express.Multer.File): Promise<ResponseDto<ProductoDTO>>  {
 
     const tiposProductos = await this.getAllTiposProducto();
     const categoriasProductos = await this.getAllCategorias();
 
-    const carpeta: string = './estaticos'; //Carpeta donde se guardan las imagenes
+    console.log('tiposProductos', tiposProductos);
+    console.log('categoriasProductos', categoriasProductos);
 
+    const carpeta: string = './images'; //Carpeta donde se guardan las imagenes
+
+    // Crear el directorio si no existe
     if (!fs.existsSync(carpeta)) {
       fs.mkdirSync(carpeta, { recursive: true });
     }
 
-
+    // Procesar y guardar la imagen
+    if (imagen) {
+      console.log('imagen', imagen);
+      const rutaImagen = `${carpeta}/${Date.now()}-${imagen.originalname}`;
+      fs.writeFileSync(rutaImagen, imagen.buffer);
+      createProductoDto.imagen = rutaImagen; // Guardar la ruta en el DTO
+    }
 
     const nuevoProducto = new Productos();
 
@@ -53,11 +63,6 @@ export class ProductosService {
     nuevoProducto.marca = createProductoDto.marca;
     nuevoProducto.formato = createProductoDto.formato;
     nuevoProducto.fechaVencimiento = createProductoDto.fecha;
-
-    /*createProductoDto.imagen = imagen.originalname;
-    const carpetaImagen = `${carpeta}/${createProductoDto.imagen}`;
-    fs.writeFileSync(carpetaImagen, imagen.buffer);*/
-
 
 
     //Se verifica que el tipo y la categoria existan en la base de datos
@@ -91,7 +96,7 @@ export class ProductosService {
     return { status: 201, data: productoDto };
 
 
-  }//here
+  };
 
   async findAll(page: number, pageSize: number): Promise<ResponseAllProductsDto<ProductoDTO[]>> {
     const [result, total] = await this.productosRepository.findAndCount({

@@ -19,16 +19,16 @@ export class CreateProductoDto {
 
   @ApiProperty({ description: 'Precio del producto', example: 100 })
   @IsNumber()
+  @Type(() => Number) // Convierte el valor a número
   @Min(0)
   precio: number;
 
-  @ApiProperty({ description: 'Imagen del producto', example: 'imagen.jpg' })
-  @IsString()
-  @IsNotEmpty()
+  @ApiProperty({ description: 'Imagen del producto (archivo)', type: 'string', format: 'binary' })
   imagen: string;
 
   @ApiProperty({ description: 'Stock del producto', example: 10 })
   @IsNumber()
+  @Type(() => Number) // Convierte el valor a número
   @Min(0)
   stock: number;
 
@@ -56,19 +56,20 @@ export class CreateProductoDto {
     example: '2023-01-01T00:00:00.000Z',
   })
   @IsDate()
+  @Type(() => Date) // Convierte el valor a Date
   @IsNotEmpty()
-  @Type(() => Date)
   fecha: Date;
 
   @ApiProperty({
     description: 'Categorías del producto',
     example: 'Categoría A',
   })
-  @IsString({ each: true })
+  @IsString()
   @IsNotEmpty()
   categorias: string;
 
   @ApiProperty({ description: 'Producto destacado', example: true })
+  @Type(() => Boolean) // Convierte el valor a booleano
   @IsNotEmpty()
   destacado: boolean;
 }

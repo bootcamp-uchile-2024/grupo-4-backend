@@ -4,13 +4,13 @@ import {
   UploadedFile,} from '@nestjs/common';
 import { ProductosService } from './productos.service';
 import { CreateProductoDto } from './dto/create-producto.dto';
-import { ApiQuery, ApiResponse, ApiTags } from '@nestjs/swagger';
+import { ApiConsumes, ApiQuery, ApiResponse, ApiTags } from '@nestjs/swagger';
 import { ProductoDTO } from './dto/producto.dto';
 import { ResponseDto } from './outputDto/responseDto';
 import { Response } from 'express';
 import { ResponseAllProductsDto } from './outputDto/responseAllProductsDto';
 import { UpdateProductoDto } from './dto/update-producto.dto';
-import { FilesInterceptor } from '@nestjs/platform-express';
+import { FileInterceptor } from '@nestjs/platform-express';
 
 @ApiTags('productos')
 @Controller('productos')
@@ -18,7 +18,16 @@ export class ProductosController {
   constructor(private readonly productosService: ProductosService) {}
 
   @Post()
-  @UseInterceptors(FilesInterceptor('imagen'))  
+  @UseInterceptors(FileInterceptor('imagen', {
+    limits: { fileSize: 5 * 1024 * 1024 }, // Tamaño máximo: 5 MB
+    fileFilter: (req, file, callback) => {
+      if (!file.mimetype.match(/\/(jpg|jpeg|png)$/)) {
+        return callback(new Error('Solo se permiten imágenes JPG, JPEG y PNG'), false);
+      }
+      callback(null, true);
+    },
+  }))
+  @ApiConsumes('multipart/form-data')
   @ApiResponse({
     status: 201,
     description: 'Producto creado exitosamente.',
@@ -35,7 +44,11 @@ export class ProductosController {
     type: ResponseDto,
   })
   @UsePipes(new ValidationPipe({ whitelist: true, forbidNonWhitelisted: true }))
-  async create(@Body() createProductoDto: CreateProductoDto,@Res() res: Response, @UploadedFile() imagen): Promise<Response> {
+  async create(
+    @Body() createProductoDto: CreateProductoDto,
+    @Res() res: Response, 
+    @UploadedFile() imagen: Express.Multer.File, 
+  ): Promise<Response> {
     const result = await this.productosService.create(createProductoDto, imagen);
 
     if (result.status == 201) {
