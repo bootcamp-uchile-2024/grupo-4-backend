@@ -278,11 +278,7 @@ Posteriormente, le llevará a la interfaz de Swagger; donde podrá acceder a los
 
     Posteriormente se deberá configurar en el Module de la aplicación:
 
-
- ServeStaticModule.forRoot({
-      rootPath: './estaticos',
-      serveRoot: '/estaticos',
-      })
+   ![Estatico](/Imagenes/estatico.jpg)
  
     Se deja un ejemplo del link de estáticos del proyecto:
 
