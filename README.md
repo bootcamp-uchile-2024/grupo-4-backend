@@ -14,8 +14,9 @@ Somos una e-commerce diseñada para personalizar tu experiencia de café en casa
 8. [Configuracion de AWS Server](#8-configuración-aws-server)
 9. [Estructura del Proyecto](#9-estructura-del-proyecto)
 10. [Documentación de la API](#10-documentación-de-la-api)
-11. [Flujo de Trabajo](#11-flujo-de-trabajo)
-12. [Contacto](#12-contacto)
+11. [Implementación de servidor de estáticos](#11-servidor-de-estáticos)
+12. [Flujo de Trabajo](#11-flujo-de-trabajo)
+13. [Contacto](#12-contacto)
 
 ## 1. Requisitos Previos
 
@@ -175,6 +176,9 @@ En esta etapa se deberá agregar las reglas que permitirán el acceso a la insta
 - Ya teniendo las variables de entorno y el compose, se procede a dar inicio al contenedor.
 - Finalmente quedará apta la instancia con los archivos ingresados para dar funcionalidad a la App en conjunto con el EC2.
 
+### Conexión con Produccón a traves del servidor:
+http://http://44.201.117.138:3000/api#/
+
 ## 9. Estructura del Proyecto
 
 A continuación se presentará un diagrama de árbol de la estructura actual del proyecto:
@@ -266,11 +270,28 @@ La documentación de esta API esta hecha en SWAGGER. Puedes acceder a la documen
 
 Posteriormente, le llevará a la interfaz de Swagger; donde podrá acceder a los endpoints diseñados para la API.
 
-## 11. Flujo de Trabajo
+## 11 . Implementación de servidor de estáticos
+    Instalar dependencia
+    ```bash
+     npm install @nestjs/serve-static
+    ```
+    Posteriormente se deberá configurar en el Module de la aplicación:
+
+      ```bash
+ ServeStaticModule.forRoot({
+      rootPath: './estaticos',
+      serveRoot: '/estaticos',
+      })
+ ```
+    Se deja un ejemplo del link de estáticos del proyecto:
+
+    http://44.201.117.138:3000/estaticos/molinillo_cafe.jpg
+
+## 12. Flujo de Trabajo
 
 Actualmente el flujo de trabajo se ha ido realizando conforme a las exigencias del desarrollo del proyecto. Cada rama representa el avance del proyecto con respecto a las solicitudes para cada entrega del mismo. Las actividades de avance realizadas en cada rama, posteriormente se unen en la rama principal `main` de trabajo.
 
-## 12. Contacto
+## 13. Contacto
 
 Si tienes alguna duda, puedes contactarnos a través de:
 
