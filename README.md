@@ -258,15 +258,14 @@ La documentación de esta API esta hecha en SWAGGER. Puedes acceder a la documen
 
 - 7.1. Se inicia el proyecto, segun el ambiente:
 
-```bash
+
  docker compose up
-```
 
 - 7.2. Accede al Swagger desde el navegador:
 
-```bash
+
  Debe dirigirse a la siguiente URL: http://localhost:3000/api (se deberá ajustar el puerto según sea el ambiente seleccionado)
-```
+
 
 Posteriormente, le llevará a la interfaz de Swagger; donde podrá acceder a los endpoints diseñados para la API.
 
@@ -281,8 +280,10 @@ Posteriormente, le llevará a la interfaz de Swagger; donde podrá acceder a los
 
  
  ServeStaticModule.forRoot({
+ 
       rootPath: './estaticos',
       serveRoot: '/estaticos',
+      
       }) 
 
  
