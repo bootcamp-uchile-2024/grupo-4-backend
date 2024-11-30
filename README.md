@@ -271,6 +271,7 @@ La documentación de esta API esta hecha en SWAGGER. Puedes acceder a la documen
 Posteriormente, le llevará a la interfaz de Swagger; donde podrá acceder a los endpoints diseñados para la API.
 
 ## 11 . Implementación de servidor de estáticos
+
     Instalar dependencia
     
      npm install @nestjs/serve-static
@@ -278,11 +279,12 @@ Posteriormente, le llevará a la interfaz de Swagger; donde podrá acceder a los
 
     Posteriormente se deberá configurar en el Module de la aplicación:
 
-
+ ```bash
  ServeStaticModule.forRoot({
       rootPath: './estaticos',
       serveRoot: '/estaticos',
       })
+    ```
  
     Se deja un ejemplo del link de estáticos del proyecto:
 
