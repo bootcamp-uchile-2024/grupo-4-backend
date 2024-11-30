@@ -283,8 +283,8 @@ Posteriormente, le llevará a la interfaz de Swagger; donde podrá acceder a los
  ServeStaticModule.forRoot({
       rootPath: './estaticos',
       serveRoot: '/estaticos',
-      })
-    ```
+      }) ```
+
  
     Se deja un ejemplo del link de estáticos del proyecto:
 
