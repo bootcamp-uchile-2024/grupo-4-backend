@@ -13,7 +13,7 @@ import { ServeStaticModule } from '@nestjs/serve-static';
 @Module({
   imports: [
     ServeStaticModule.forRoot({
-      rootPath: './public',
+      rootPath: './estaticos',
       serveRoot: '/estaticos',
       
     }),

@@ -11,6 +11,7 @@ import { Categoria } from 'src/orm/entity/categoria';
 import { ResponseDto } from './outputDto/responseDto';
 import { ProductoDTO } from './dto/producto.dto';
 import { ResponseAllProductsDto } from './outputDto/responseAllProductsDto';
+import * as fs from 'fs';
 
 @Injectable()
 export class ProductosService {
@@ -29,10 +30,18 @@ export class ProductosService {
 
   productos: Producto[] = [];
 
-  async create(createProductoDto: CreateProductoDto): Promise<ResponseDto<ProductoDTO>>  {
+  async create(createProductoDto: CreateProductoDto, imagen): Promise<ResponseDto<ProductoDTO>>  {
 
     const tiposProductos = await this.getAllTiposProducto();
     const categoriasProductos = await this.getAllCategorias();
+
+    const carpeta: string = './estaticos'; //Carpeta donde se guardan las imagenes
+
+    if (!fs.existsSync(carpeta)) {
+      fs.mkdirSync(carpeta, { recursive: true });
+    }
+
+
 
     const nuevoProducto = new Productos();
 
@@ -44,6 +53,12 @@ export class ProductosService {
     nuevoProducto.marca = createProductoDto.marca;
     nuevoProducto.formato = createProductoDto.formato;
     nuevoProducto.fechaVencimiento = createProductoDto.fecha;
+
+    /*createProductoDto.imagen = imagen.originalname;
+    const carpetaImagen = `${carpeta}/${createProductoDto.imagen}`;
+    fs.writeFileSync(carpetaImagen, imagen.buffer);*/
+
+
 
     //Se verifica que el tipo y la categoria existan en la base de datos
 

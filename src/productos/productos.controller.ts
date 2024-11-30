@@ -1,6 +1,7 @@
 import {
   Controller, Get, Post, Body, Param, Delete, Query,  HttpStatus, Res, UseInterceptors, HttpException, UsePipes, ValidationPipe,
-  Put,} from '@nestjs/common';
+  Put,
+  UploadedFile,} from '@nestjs/common';
 import { ProductosService } from './productos.service';
 import { CreateProductoDto } from './dto/create-producto.dto';
 import { ApiQuery, ApiResponse, ApiTags } from '@nestjs/swagger';
@@ -9,6 +10,7 @@ import { ResponseDto } from './outputDto/responseDto';
 import { Response } from 'express';
 import { ResponseAllProductsDto } from './outputDto/responseAllProductsDto';
 import { UpdateProductoDto } from './dto/update-producto.dto';
+import { FilesInterceptor } from '@nestjs/platform-express';
 
 @ApiTags('productos')
 @Controller('productos')
@@ -16,6 +18,7 @@ export class ProductosController {
   constructor(private readonly productosService: ProductosService) {}
 
   @Post()
+  @UseInterceptors(FilesInterceptor('imagen'))  
   @ApiResponse({
     status: 201,
     description: 'Producto creado exitosamente.',
@@ -32,11 +35,8 @@ export class ProductosController {
     type: ResponseDto,
   })
   @UsePipes(new ValidationPipe({ whitelist: true, forbidNonWhitelisted: true }))
-  async create(
-    @Body() createProductoDto: CreateProductoDto,
-    @Res() res: Response,
-  ): Promise<Response> {
-    const result = await this.productosService.create(createProductoDto);
+  async create(@Body() createProductoDto: CreateProductoDto,@Res() res: Response, @UploadedFile() imagen): Promise<Response> {
+    const result = await this.productosService.create(createProductoDto, imagen);
 
     if (result.status == 201) {
       return res.status(HttpStatus.CREATED).json(result);

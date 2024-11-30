@@ -3,8 +3,8 @@ services:
   node-api:
     image: ${NODE_APP_IMAGE_PROD}
     environment:
-      - ARCHIVO_ENV=.production
-    ports:
+      - ARCHIVO_ENV=.env
+    ports:      
       - '${NODE_APP_PORT_PROD}:${NODE_APP_CONTAINER_PORT_PROD}'
 
   bd-server:
@@ -14,11 +14,11 @@ services:
     volumes:
       - ./bd-server/sql:/var/lib/mysql
     ports:
-      - '4700:3306'
+      - '${MYSQL_HOST_PORT_PROD}:${MYSQL_CONTAINER_PORT_PROD}'
   
   flyway:
     image: flyway/flyway:10.20.1-alpine
     volumes:
       - ./BBDD:/flyway/sql
-    command: -url=jdbc:mysql://${HOST_DB}:${MYSQL_CONTAINER_PORT}/${NAME_DB}?allowPublicKeyRetrieval=true -user=root -password=${MYSQL_ROOT_PASSWORD} -connectRetries=60 migrate
+    command: -url=jdbc:mysql://${HOST_DB}:${MYSQL_CONTAINER_PORT_PROD}/${NAME_DB}?allowPublicKeyRetrieval=true -user=root -password=${MYSQL_ROOT_PASSWORD} -connectRetries=60 migrate
     
