@@ -272,10 +272,13 @@ Posteriormente, le llevará a la interfaz de Swagger; donde podrá acceder a los
 
 ## 11 . Implementación de servidor de estáticos
     Instalar dependencia
+
     ```bash
      npm install @nestjs/serve-static
     ```
+
     Posteriormente se deberá configurar en el Module de la aplicación:
+
 
       ```bash
  ServeStaticModule.forRoot({
@@ -286,6 +289,7 @@ Posteriormente, le llevará a la interfaz de Swagger; donde podrá acceder a los
     Se deja un ejemplo del link de estáticos del proyecto:
 
     http://44.201.117.138:3000/estaticos/molinillo_cafe.jpg
+    
 
 ## 12. Flujo de Trabajo
 
