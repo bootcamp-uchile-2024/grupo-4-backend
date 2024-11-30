@@ -279,11 +279,11 @@ Posteriormente, le llevará a la interfaz de Swagger; donde podrá acceder a los
 
     Posteriormente se deberá configurar en el Module de la aplicación:
 
- ```bash
+ 
  ServeStaticModule.forRoot({
       rootPath: './estaticos',
       serveRoot: '/estaticos',
-      }) ```
+      }) 
 
  
     Se deja un ejemplo del link de estáticos del proyecto:
