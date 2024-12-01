@@ -51,7 +51,7 @@ INSERT INTO Usuario (nombre, apellido, email, constrasenna, rut, tipoUsuarioId) 
 ('Diego', 'Cruz', 'diego.cruz@example.com', 'pass1234', '66677889-0', 2);
 
 -- Insertar datos en la tabla Producto
-INSERT INTO Producto (nombre, descripcion, imagen, marca, formato, fechaVencimiento, precio, stock, categoriaId, tipoProductoId, paisOrigenId, destacado) VALUES
+INSERT INTO Producto (nombre, descripcion, imagen, marca, formato, fechaVencimiento, precio, stock, categoriaId, tipoProductoId, paisOrigenId, habilitado) VALUES
 ('Café Arábica', 'Café de grano Arábica de alta calidad', 'estaticos/cafe_arabica.jpg', 'Café Premium', 'Grano', NULL, 10000, 100, 1, 1, 1, 0),
 ('Café Robusta', 'Café de grano Robusta con un sabor fuerte', 'estaticos/cafe_robusta.jpg', 'Café Fuerte', 'Grano', NULL, 5990, 150, 1, 1, 2, 0),
 ('Máquina de Café Espresso', 'Máquina de café espresso de alta presión', 'estaticos/maquina_espresso.jpg', 'CaféTech', 'Eléctrica', NULL, 299990, 50, 2, 1, 1, 0),
