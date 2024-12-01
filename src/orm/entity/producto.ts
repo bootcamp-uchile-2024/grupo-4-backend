@@ -43,6 +43,9 @@ export class Productos {
 
     @Column()
     paisOrigenId: number;
+    
+    @Column()
+    habilitado: boolean;
  
     @ManyToOne(()=> Categoria)
     @JoinColumn({name: 'categoriaId'})

@@ -63,7 +63,7 @@ export class ProductosService {
     nuevoProducto.marca = createProductoDto.marca;
     nuevoProducto.formato = createProductoDto.formato;
     nuevoProducto.fechaVencimiento = createProductoDto.fecha;
-
+    nuevoProducto.habilitado = false; //Por defecto el producto se habilita
 
     //Se verifica que el tipo y la categoria existan en la base de datos
 
@@ -100,6 +100,7 @@ export class ProductosService {
 
   async findAll(page: number, pageSize: number): Promise<ResponseAllProductsDto<ProductoDTO[]>> {
     const [result, total] = await this.productosRepository.findAndCount({
+      where: { habilitado: true }, 
       skip: (page - 1) * pageSize,
       take: pageSize,
     });
@@ -162,6 +163,9 @@ export class ProductosService {
     }
     if (updateProductoDto.fecha) {
       producto.fechaVencimiento = updateProductoDto.fecha;
+    }
+    if(updateProductoDto.habilitado) {
+      producto.habilitado = updateProductoDto.habilitado;
     }
 
     // Actualizar el tipo si se proporciona
@@ -230,5 +234,64 @@ export class ProductosService {
   
   async getAllCategorias(): Promise<Categoria[]> {
     return await this.categoriaRepository.find();
+  }
+
+  async updateImagen(id: number, imagen: Express.Multer.File): Promise<ResponseDto<null>> {
+    const producto = await this.productosRepository.findOneBy({ id });
+  
+    if (!producto) {
+      return { status: 404, message: 'Producto no encontrado' };
+    }
+  
+    const carpeta = './estaticos';
+  
+    if (producto.imagen) {
+      const rutaAntigua = producto.imagen;
+      if (fs.existsSync(rutaAntigua)) {
+        fs.unlinkSync(rutaAntigua); 
+      }
+    }
+  
+    if (imagen) {
+      const nuevaRuta = `${carpeta}/${Date.now()}-${imagen.originalname}`;
+      fs.writeFileSync(nuevaRuta, imagen.buffer);
+      producto.imagen = nuevaRuta; 
+    }
+  
+    await this.productosRepository.save(producto);
+  
+    return { status: 200, message: 'Imagen actualizada correctamente' };
+  }
+
+  async deleteImagen(id: number): Promise<ResponseDto<null>> {
+    const producto = await this.productosRepository.findOneBy({ id });
+  
+    if (!producto) {
+      return { status: 404, message: 'Producto no encontrado' };
+    }
+  
+    if (producto.imagen) {
+      const rutaImagen = producto.imagen;
+      if (fs.existsSync(rutaImagen)) {
+        fs.unlinkSync(rutaImagen);
+      }
+      producto.imagen = null; 
+      await this.productosRepository.save(producto);
+    }
+  
+    return { status: 200, message: 'Imagen eliminada correctamente' };
+  }
+
+  async actualizarHabilitado(id: number, habilitado: boolean): Promise<ResponseDto<null>> {
+    const producto = await this.productosRepository.findOneBy({ id });
+  
+    if (!producto) {
+      return { status: 404, message: 'Producto no encontrado' };
+    }
+  
+    producto.habilitado = habilitado;
+    await this.productosRepository.save(producto);
+  
+    return { status: 200, message: 'Estado de habilitado actualizado exitosamente' };
   }
 }

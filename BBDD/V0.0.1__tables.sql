@@ -47,6 +47,7 @@ CREATE TABLE Producto (
     categoriaId INT,
     tipoProductoId INT,
     paisOrigenId INT,
+    habilitado BOOLEAN NOT NULL DEFAULT FALSE,
     FOREIGN KEY (categoriaId) REFERENCES Categoria(id),
     FOREIGN KEY (tipoProductoId) REFERENCES TipoProducto(id),
     FOREIGN KEY (paisOrigenId) REFERENCES PaisOrigen(id)

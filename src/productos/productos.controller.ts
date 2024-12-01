@@ -1,16 +1,19 @@
 import {
   Controller, Get, Post, Body, Param, Delete, Query,  HttpStatus, Res, UseInterceptors, HttpException, UsePipes, ValidationPipe,
   Put,
-  UploadedFile,} from '@nestjs/common';
+  UploadedFile,
+  Patch,} from '@nestjs/common';
 import { ProductosService } from './productos.service';
 import { CreateProductoDto } from './dto/create-producto.dto';
-import { ApiConsumes, ApiQuery, ApiResponse, ApiTags } from '@nestjs/swagger';
+import { ApiBody, ApiConsumes, ApiQuery, ApiResponse, ApiTags } from '@nestjs/swagger';
 import { ProductoDTO } from './dto/producto.dto';
 import { ResponseDto } from './outputDto/responseDto';
 import { Response } from 'express';
 import { ResponseAllProductsDto } from './outputDto/responseAllProductsDto';
 import { UpdateProductoDto } from './dto/update-producto.dto';
 import { FileInterceptor } from '@nestjs/platform-express';
+import { UpdateHabilitadoDto } from './dto/update-habilitado.dto';
+import { UpdateImagenDto } from './dto/update-imagen.dto';
 
 @ApiTags('productos')
 @Controller('productos')
@@ -120,4 +123,55 @@ export class ProductosController {
       return res.status(HttpStatus.BAD_REQUEST).json(result);
     }
   }
+
+  @Put(':id/imagen')
+  @UseInterceptors(FileInterceptor('imagen')) 
+  @ApiConsumes('multipart/form-data')
+  @ApiBody({ type: UpdateImagenDto })
+  @ApiResponse({ status: 200, description: 'Imagen actualizada correctamente' })
+  @ApiResponse({ status: 404, description: 'Producto no encontrado' })
+  async updateImagen(
+    @Param('id') id: number,
+    @UploadedFile() imagen: Express.Multer.File,
+    @Res() res: Response,
+  ) {
+    try {
+      const result = await this.productosService.updateImagen(id, imagen);
+      return res.status(result.status).json(result);
+    } catch (error) {
+      console.error(error);
+      return res.status(500).json({ message: 'Error interno del servidor' });
+    }
+  }
+
+  @Delete(':id/imagen')
+  @ApiResponse({ status: 200, description: 'Imagen eliminada correctamente' })
+  @ApiResponse({ status: 404, description: 'Producto no encontrado' })
+  async deleteImagen(@Param('id') id: number, @Res() res: Response) {
+    try {
+      const result = await this.productosService.deleteImagen(id);
+      return res.status(result.status).json(result);
+    } catch (error) {
+      console.error(error);
+      return res.status(500).json({ message: 'Error interno del servidor' });
+    }
+  }
+
+  @Patch(':id/habilitado')
+  @ApiResponse({ status: 200, description: 'Estado de habilitado actualizado exitosamente.' })
+  @ApiResponse({ status: 404, description: 'Producto no encontrado.' })
+  async actualizarHabilitado(
+    @Param('id') id: number,
+    @Body() updateHabilitadoDto: UpdateHabilitadoDto, 
+    @Res() res: Response,
+  ) {
+    try {
+      const result = await this.productosService.actualizarHabilitado(id, updateHabilitadoDto.habilitado);
+      return res.status(result.status).json(result);
+    } catch (error) {
+      console.error(error);
+      return res.status(500).json({ message: 'Error interno del servidor' });
+    }
+  }
+
 }

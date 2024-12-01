@@ -51,17 +51,17 @@ INSERT INTO Usuario (nombre, apellido, email, constrasenna, rut, tipoUsuarioId) 
 ('Diego', 'Cruz', 'diego.cruz@example.com', 'pass1234', '66677889-0', 2);
 
 -- Insertar datos en la tabla Producto
-INSERT INTO Producto (nombre, descripcion, imagen, marca, formato, fechaVencimiento, precio, stock, categoriaId, tipoProductoId, paisOrigenId) VALUES
-('Café Arábica', 'Café de grano Arábica de alta calidad', 'estaticos/cafe_arabica.jpg', 'Café Premium', 'Grano', NULL, 10000, 100, 1, 1, 1),
-('Café Robusta', 'Café de grano Robusta con un sabor fuerte', 'estaticos/cafe_robusta.jpg', 'Café Fuerte', 'Grano', NULL, 5990, 150, 1, 1, 2),
-('Máquina de Café Espresso', 'Máquina de café espresso de alta presión', 'estaticos/maquina_espresso.jpg', 'CaféTech', 'Eléctrica', NULL, 299990, 50, 2, 1, 1),
-('Molinillo de Café', 'Molinillo de café manual', 'estaticos/molinillo_cafe.jpg', 'CaféMaster', 'Manual', NULL, 30000, 75, 3, 1, 1),
-('Taza de Café', 'Taza de cerámica para café', 'estaticos/taza_cafe.jpg', 'CaféArt', 'Cerámica', NULL, 15000, 200, 4, 1, 1),
-('Libro sobre Café', 'Todo sobre la preparación del café', 'estaticos/libro_cafe.jpg', 'Editorial Café', 'Libro', NULL, 20000, 150, 6, 1, 3),
-('Filtro de Café', 'Filtro reutilizable para preparar café', 'estaticos/filtro_cafe.jpg', 'EcoCafé', 'Accesorio', NULL, 10000, 100, 3, 1, 1),
-('Café Orgánico', 'Café orgánico certificado de especialidad', 'estaticos/cafe_organico.jpg', 'Café Verde', 'Grano', NULL, 12990, 80, 1, 1, 1),
-('Café de Especialidad', 'Café de especialidad de origen único', 'estaticos/cafe_especialidad.jpg', 'Café Único', 'Grano', NULL, 14990, 60, 1, 1, 1),
-('Máquina de Café de Goteo', 'Máquina de café de goteo, ideal para casa', 'estaticos/maquina_goteo.jpg', 'CaféEasy', 'Eléctrica', NULL, 49990, 100, 2, 1, 1);
+INSERT INTO Producto (nombre, descripcion, imagen, marca, formato, fechaVencimiento, precio, stock, categoriaId, tipoProductoId, paisOrigenId, destacado) VALUES
+('Café Arábica', 'Café de grano Arábica de alta calidad', 'estaticos/cafe_arabica.jpg', 'Café Premium', 'Grano', NULL, 10000, 100, 1, 1, 1, 0),
+('Café Robusta', 'Café de grano Robusta con un sabor fuerte', 'estaticos/cafe_robusta.jpg', 'Café Fuerte', 'Grano', NULL, 5990, 150, 1, 1, 2, 0),
+('Máquina de Café Espresso', 'Máquina de café espresso de alta presión', 'estaticos/maquina_espresso.jpg', 'CaféTech', 'Eléctrica', NULL, 299990, 50, 2, 1, 1, 0),
+('Molinillo de Café', 'Molinillo de café manual', 'estaticos/molinillo_cafe.jpg', 'CaféMaster', 'Manual', NULL, 30000, 75, 3, 1, 1, 0),
+('Taza de Café', 'Taza de cerámica para café', 'estaticos/taza_cafe.jpg', 'CaféArt', 'Cerámica', NULL, 15000, 200, 4, 1, 1, 0),
+('Libro sobre Café', 'Todo sobre la preparación del café', 'estaticos/libro_cafe.jpg', 'Editorial Café', 'Libro', NULL, 20000, 150, 6, 1, 3, 0),
+('Filtro de Café', 'Filtro reutilizable para preparar café', 'estaticos/filtro_cafe.jpg', 'EcoCafé', 'Accesorio', NULL, 10000, 100, 3, 1, 1, 0),
+('Café Orgánico', 'Café orgánico certificado de especialidad', 'estaticos/cafe_organico.jpg', 'Café Verde', 'Grano', NULL, 12990, 80, 1, 1, 1, 0),
+('Café de Especialidad', 'Café de especialidad de origen único', 'estaticos/cafe_especialidad.jpg', 'Café Único', 'Grano', NULL, 14990, 60, 1, 1, 1, 0),
+('Máquina de Café de Goteo', 'Máquina de café de goteo, ideal para casa', 'estaticos/maquina_goteo.jpg', 'CaféEasy', 'Eléctrica', NULL, 49990, 100, 2, 1, 1, 0);
 
 -- Insertar datos en la tabla CarritoDeCompras
 INSERT INTO CarritoDeCompras (usuarioId) VALUES

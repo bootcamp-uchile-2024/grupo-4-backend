@@ -69,7 +69,7 @@ export class UpdateProductoDto {
   @IsNotEmpty()
   categorias: string;
 
-  @ApiProperty({ description: 'Producto destacado', example: true })
+  @ApiProperty({ description: 'Producto habilitado', example: true })
   @IsNotEmpty()
-  destacado: boolean;
+  habilitado: boolean;
 }

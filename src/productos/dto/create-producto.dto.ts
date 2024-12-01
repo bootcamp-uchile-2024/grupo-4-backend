@@ -68,8 +68,13 @@ export class CreateProductoDto {
   @IsNotEmpty()
   categorias: string;
 
-  @ApiProperty({ description: 'Producto destacado', example: true })
+  // @ApiProperty({ description: 'Producto destacado', example: true })
+  // @Type(() => Boolean) // Convierte el valor a booleano
+  // @IsNotEmpty()
+  // destacado: boolean;
+
+  @ApiProperty({ description: 'Producto habilitado', example: true })
   @Type(() => Boolean) // Convierte el valor a booleano
   @IsNotEmpty()
-  destacado: boolean;
+  habilitado: boolean;
 }
