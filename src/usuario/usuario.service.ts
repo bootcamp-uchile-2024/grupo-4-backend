@@ -1,4 +1,5 @@
 import { forwardRef, Inject, Injectable } from '@nestjs/common';
+import * as bcrypt from 'bcrypt';
 import { CreateUsuarioDto } from './dto/create-usuario.dto';
 import { UpdateUsuarioDto } from './dto/update-usuario.dto';
 import { Usuario } from './entities/usuario.entity';
@@ -34,7 +35,11 @@ export class UsuarioService {
     usuario.ciudad = createUsuarioDto.ciudad;
     usuario.region = createUsuarioDto.region;
     usuario.telefono = createUsuarioDto.telefono;    
-    usuario.constrasenna = createUsuarioDto.contrasenna;
+   
+      // Hashear la contraseña antes de guardarla
+    const salt = await bcrypt.genSalt(10);
+    usuario.constrasenna = await bcrypt.hash(createUsuarioDto.contrasenna, salt);
+
     usuario.rut = createUsuarioDto.rut;
     usuario.pedidos = [];
     usuario.carritoDeCompras = [];
@@ -52,6 +57,13 @@ export class UsuarioService {
     const usuario:Usuarios = await this.usuariosRepository.findOneBy({rut});
 
     return UsuarioMapper.entityToDto(usuario);
+  }
+
+  async findByEmail(email: string): Promise<UsuarioDTO> {
+    const usuario: Usuarios = await this.usuariosRepository.findOne({ where: { email } });
+
+    return UsuarioMapper.entityToDto(usuario);
+
   }
 
   /*update(id: number, updateUsuarioDto: UpdateUsuarioDto): boolean {

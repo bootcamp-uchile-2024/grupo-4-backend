@@ -42,6 +42,13 @@ export class UsuarioController {
   async findOne(@Param('rut') rut: string): Promise<UsuarioDTO> {
     return this.usuarioService.findOne(rut);
   }
+
+  @Get(':email')
+  @ApiResponse({ status: 200, description: 'Usuario encontrado.' })
+  @ApiResponse({ status: 404, description: 'Usuario no encontrado.' })
+  async findByEmail(@Param('email') email: string): Promise<UsuarioDTO> {
+    return this.usuarioService.findByEmail(email);
+  }
   
 
  /* @Patch(':id')
