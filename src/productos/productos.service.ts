@@ -1,4 +1,4 @@
-import { Injectable } from '@nestjs/common';
+import { HttpException, HttpStatus, Injectable } from '@nestjs/common';
 import { CreateProductoDto } from './dto/create-producto.dto';
 import { UpdateProductoDto } from './dto/update-producto.dto';
 import { Producto} from './entities/producto.entity';
@@ -12,6 +12,8 @@ import { ResponseDto } from './outputDto/responseDto';
 import { ProductoDTO } from './dto/producto.dto';
 import { ResponseAllProductsDto } from './outputDto/responseAllProductsDto';
 import * as fs from 'fs';
+import { CategoriaDTO } from './dto/categoria.dto';
+import { TipoDto } from './dto/tipo-producto.dto';
 
 @Injectable()
 export class ProductosService {
@@ -294,4 +296,56 @@ export class ProductosService {
   
     return { status: 200, message: 'Estado de habilitado actualizado exitosamente' };
   }
+//----------Metodos para buscar productos por categoria--------------------------------------------------------
+  async buscarProductosPorCategoria(categoria: string): Promise<CategoriaDTO[]> {
+    console.log('categoria', categoria);
+  
+    if (!categoria) {
+      throw new HttpException('Categoría no proporcionada', HttpStatus.BAD_REQUEST);
+    }
+  
+    try {
+      const productosEncontrados = await this.productosRepository.find({
+        where: { categoria: { nombre: categoria } },
+        relations: ['categoria'], // Asegúrate de que la relación esté correctamente configurada
+      });
+      return productosEncontrados;
+    } catch (error) {
+      console.error('Error al buscar los productos:', error);
+      throw new HttpException('Error al buscar los productos', HttpStatus.INTERNAL_SERVER_ERROR);
+    }
+  }
+
+  //----------Metodos para buscar productos por tipo--------------------------------------------------------
+
+  async buscarProductosPorTipo(tipo: string): Promise<TipoDto[]> {
+    console.log('tipo', tipo);
+  
+    if (!tipo) {
+      throw new HttpException('Tipo no proporcionado', HttpStatus.BAD_REQUEST);
+    }
+  
+    try {
+      const productosEncontrados = await this.productosRepository.find({
+        where: { tipo:{nombre: tipo} },
+        relations: ['tipo'], // Asegúrate de que la relación esté correctamente configurada
+      });
+  
+      if (!productosEncontrados || productosEncontrados.length === 0) {
+        throw new HttpException('Tipo no encontrado', HttpStatus.NOT_FOUND);
+      }
+  
+      const productos = productosEncontrados.map(producto => ({
+        id: producto.id,
+        nombre: producto.nombre,
+        tipo: producto.tipo,
+      }));
+  
+      return productos;
+    } catch (error) {
+      console.error('Error al buscar los productos:', error);
+      throw new HttpException('Error al buscar los productos', HttpStatus.INTERNAL_SERVER_ERROR);
+    }
+  }
+
 }

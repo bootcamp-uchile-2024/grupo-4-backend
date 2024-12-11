@@ -14,6 +14,8 @@ import { UpdateProductoDto } from './dto/update-producto.dto';
 import { FileInterceptor } from '@nestjs/platform-express';
 import { UpdateHabilitadoDto } from './dto/update-habilitado.dto';
 import { UpdateImagenDto } from './dto/update-imagen.dto';
+import { CategoriaDTO } from './dto/categoria.dto';
+import { TipoDto } from './dto/tipo-producto.dto';
 
 @ApiTags('productos')
 @Controller('productos')
@@ -172,6 +174,40 @@ export class ProductosController {
       console.error(error);
       return res.status(500).json({ message: 'Error interno del servidor' });
     }
+  }
+
+  @Get('categoria/:categoria')
+  @ApiResponse({ status: 200, description: 'Productos por categoría obtenidos exitosamente.' })
+  @ApiResponse({ status: 404, description: 'Categoría no encontrada.' })
+  async listaDeProductosPorCategoria(@Param('categoria') categoria: string): Promise<CategoriaDTO[]> {
+    console.log('esta es: ' + categoria);
+
+    if (!categoria) {
+      throw new HttpException('Categoría no proporcionada', HttpStatus.BAD_REQUEST);
+    }
+
+    const productosEncontrados = await this.productosService.buscarProductosPorCategoria(categoria);
+    if (!productosEncontrados || productosEncontrados.length === 0) {
+      throw new HttpException('Categoría no encontrada', HttpStatus.NOT_FOUND);
+    }
+    return productosEncontrados;
+  }
+
+  @Get('tipo/:tipo')
+  @ApiResponse({ status: 200, description: 'Productos por tipo obtenidos exitosamente.' })
+  @ApiResponse({ status: 404, description: 'Tipo no encontrado.' })
+  async listaDeProductosPorTipo(@Param('tipo') tipo: string): Promise<TipoDto[]> {
+    console.log('esta es: ' + tipo);
+
+    if (!tipo) {
+      throw new HttpException('Tipo no proporcionado', HttpStatus.BAD_REQUEST);
+    }
+
+    const productosEncontrados = await this.productosService.buscarProductosPorTipo(tipo);
+    if (!productosEncontrados || productosEncontrados.length === 0) {
+      throw new HttpException('Tipo no encontrado', HttpStatus.NOT_FOUND);
+    }
+    return productosEncontrados;
   }
 
 }
