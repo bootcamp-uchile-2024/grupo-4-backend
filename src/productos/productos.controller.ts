@@ -176,17 +176,17 @@ export class ProductosController {
     }
   }
 
-  @Get('categoria/:categoria')
+  @Get('/categoria/:id')
   @ApiResponse({ status: 200, description: 'Productos por categoría obtenidos exitosamente.' })
   @ApiResponse({ status: 404, description: 'Categoría no encontrada.' })
-  async listaDeProductosPorCategoria(@Param('categoria') categoria: string): Promise<CategoriaDTO[]> {
-    console.log('esta es: ' + categoria);
+  async listaDeProductosPorCategoria(@Param('id') idCategoria: number): Promise<CategoriaDTO[]> {
+    console.log('esta es: ' + idCategoria);
 
-    if (!categoria) {
+    if (!idCategoria) {
       throw new HttpException('Categoría no proporcionada', HttpStatus.BAD_REQUEST);
     }
 
-    const productosEncontrados = await this.productosService.buscarProductosPorCategoria(categoria);
+    const productosEncontrados = await this.productosService.buscarProductosPorCategoria(idCategoria);
     if (!productosEncontrados || productosEncontrados.length === 0) {
       throw new HttpException('Categoría no encontrada', HttpStatus.NOT_FOUND);
     }
@@ -196,7 +196,7 @@ export class ProductosController {
   @Get('tipo/:tipo')
   @ApiResponse({ status: 200, description: 'Productos por tipo obtenidos exitosamente.' })
   @ApiResponse({ status: 404, description: 'Tipo no encontrado.' })
-  async listaDeProductosPorTipo(@Param('tipo') tipo: string): Promise<TipoDto[]> {
+  async listaDeProductosPorTipo(@Param('tipo') tipo: number): Promise<TipoDto[]> {
     console.log('esta es: ' + tipo);
 
     if (!tipo) {
@@ -208,6 +208,17 @@ export class ProductosController {
       throw new HttpException('Tipo no encontrado', HttpStatus.NOT_FOUND);
     }
     return productosEncontrados;
+  }
+
+  @Get('categorias')
+  @ApiResponse({ status: 200, description: 'Listado de categorías obtenido exitosamente.' })
+  @ApiResponse({ status: 404, description: 'No se encontraron categorías.' })
+  async listaDeCategorias(): Promise<CategoriaDTO[]> {
+    const categoriasEncontradas = await this.productosService.buscarTodasLasCategorias();
+    if (!categoriasEncontradas || categoriasEncontradas.length === 0) {
+      throw new HttpException('No se encontraron categorías', HttpStatus.NOT_FOUND);
+    }
+    return categoriasEncontradas;
   }
 
 }

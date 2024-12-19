@@ -297,16 +297,16 @@ export class ProductosService {
     return { status: 200, message: 'Estado de habilitado actualizado exitosamente' };
   }
 //----------Metodos para buscar productos por categoria--------------------------------------------------------
-  async buscarProductosPorCategoria(categoria: string): Promise<CategoriaDTO[]> {
-    console.log('categoria', categoria);
+  async buscarProductosPorCategoria(idCategoria: number): Promise<CategoriaDTO[]> {
+    console.log('categoria', idCategoria);
   
-    if (!categoria) {
+    if (!idCategoria) {
       throw new HttpException('Categoría no proporcionada', HttpStatus.BAD_REQUEST);
     }
   
     try {
       const productosEncontrados = await this.productosRepository.find({
-        where: { categoria: { nombre: categoria } },
+        where: { categoria: { id: idCategoria } },
         relations: ['categoria'], // Asegúrate de que la relación esté correctamente configurada
       });
       return productosEncontrados;
@@ -318,7 +318,7 @@ export class ProductosService {
 
   //----------Metodos para buscar productos por tipo--------------------------------------------------------
 
-  async buscarProductosPorTipo(tipo: string): Promise<TipoDto[]> {
+  async buscarProductosPorTipo(tipo: number): Promise<TipoDto[]> {
     console.log('tipo', tipo);
   
     if (!tipo) {
@@ -327,7 +327,7 @@ export class ProductosService {
   
     try {
       const productosEncontrados = await this.productosRepository.find({
-        where: { tipo:{nombre: tipo} },
+        where: { tipo:{id: tipo} },
         relations: ['tipo'], // Asegúrate de que la relación esté correctamente configurada
       });
   
@@ -346,6 +346,13 @@ export class ProductosService {
       console.error('Error al buscar los productos:', error);
       throw new HttpException('Error al buscar los productos', HttpStatus.INTERNAL_SERVER_ERROR);
     }
+  }
+
+
+  async buscarTodasLasCategorias(): Promise<CategoriaDTO[]> {
+    
+    const listadoCategorias:CategoriaDTO[] = await this.categoriaRepository.find();
+    return listadoCategorias;    
   }
 
 }
