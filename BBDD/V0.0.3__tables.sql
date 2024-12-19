@@ -114,3 +114,41 @@ CREATE TABLE Despacho (
     FOREIGN KEY (direccionEnvioId) REFERENCES DireccionEnvio(id),
     FOREIGN KEY (estado) REFERENCES EstadoDespacho(id)
 );
+
+-- Tabla TipoDespacho
+CREATE TABLE TipoDespacho (
+    id INT AUTO_INCREMENT PRIMARY KEY,
+    nombre VARCHAR(50) NOT NULL
+);
+
+-- Tabla Colaboradores
+CREATE TABLE Colaboradores (
+    id INT AUTO_INCREMENT PRIMARY KEY,
+    nombre VARCHAR(50) NOT NULL
+);
+
+-- Tabla TipoFacturacion
+CREATE TABLE TipoFacturacion (
+    id INT AUTO_INCREMENT PRIMARY KEY,
+    nombre VARCHAR(50) NOT NULL
+);
+
+-- Tabla Compra
+CREATE TABLE Compra (
+    id INT AUTO_INCREMENT PRIMARY KEY,
+    email VARCHAR(100) NOT NULL,
+    tipoDespachoId INT NOT NULL,
+    colaboradorId INT NOT NULL,
+    direccion VARCHAR(200) NOT NULL,
+    telefono VARCHAR(15) NOT NULL,
+    tipoFacturacion INT NOT NULL,
+    nombre VARCHAR(50) NOT NULL,
+    apellido VARCHAR(50) NOT NULL,
+    comuna VARCHAR(50) NOT NULL,
+    region VARCHAR(50) NOT NULL,
+    carritoId INT NOT NULL,
+    FOREIGN KEY (tipoDespachoId) REFERENCES TipoDespacho(id),
+    FOREIGN KEY (colaboradorId) REFERENCES Colaboradores(id),
+    FOREIGN KEY (tipoFacturacion) REFERENCES TipoFacturacion(id),
+    FOREIGN KEY (carritoId) REFERENCES CarritoDeCompras(id)
+);

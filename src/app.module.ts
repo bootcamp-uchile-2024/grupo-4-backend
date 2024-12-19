@@ -10,6 +10,7 @@ import { ConfigModule } from '@nestjs/config';
 import { OrmModule } from './orm/orm.module';
 import { ServeStaticModule } from '@nestjs/serve-static';
 import { AutenticacionModule } from './autenticacion/autenticacion.module';
+import { CompraModule } from './compra/compra.module';
 
 @Module({
   imports: [
@@ -44,7 +45,7 @@ import { AutenticacionModule } from './autenticacion/autenticacion.module';
         };
       },
     }),    
-    OrmModule, AutenticacionModule,    
+    OrmModule, AutenticacionModule, CompraModule,    
     /*ServeStaticModule.forRoot({
       rootPath: __dirname + '/public',
     })*/

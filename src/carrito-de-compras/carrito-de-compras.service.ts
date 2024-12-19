@@ -133,9 +133,10 @@ export class CarritoDeComprasService {
   
     // Mapear los carritos a DTOs
     const carritoDtos = carritos.map(carrito => {
+      console.log('carrito', JSON.stringify(carrito));
       const carritoDto = new CarritoDeComprasDto();
       carritoDto.id = carrito.id;
-      carritoDto.usuarioId = carrito.usuario.id;
+      carritoDto.usuarioId = usuarioId;
       carritoDto.items = carrito.items.map(item => {
         const itemDto = new CarritoItemDto();
         itemDto.id = item.id;

@@ -34,6 +34,7 @@ export class AutenticacionService {
         }
       
         const validPassword = await bcrypt.compare(contrasenna, usuario.constrasenna);
+        console.log('validPassword', validPassword);
         if (!validPassword) {
           throw new HttpException('Credenciales inválidas', HttpStatus.UNAUTHORIZED);
         }
