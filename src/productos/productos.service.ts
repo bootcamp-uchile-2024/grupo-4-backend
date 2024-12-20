@@ -298,7 +298,7 @@ export class ProductosService {
   }
 //----------Metodos para buscar productos por categoria--------------------------------------------------------
   async buscarProductosPorCategoria(idCategoria: number): Promise<CategoriaDTO[]> {
-    console.log('categoria', idCategoria);
+    
   
     if (!idCategoria) {
       throw new HttpException('Categoría no proporcionada', HttpStatus.BAD_REQUEST);
@@ -319,7 +319,7 @@ export class ProductosService {
   //----------Metodos para buscar productos por tipo--------------------------------------------------------
 
   async buscarProductosPorTipo(tipo: number): Promise<TipoDto[]> {
-    console.log('tipo', tipo);
+   
   
     if (!tipo) {
       throw new HttpException('Tipo no proporcionado', HttpStatus.BAD_REQUEST);
