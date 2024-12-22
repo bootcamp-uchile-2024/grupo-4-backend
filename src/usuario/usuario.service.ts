@@ -1,11 +1,8 @@
 import { forwardRef, Inject, Injectable } from '@nestjs/common';
 import * as bcrypt from 'bcrypt';
 import { CreateUsuarioDto } from './dto/create-usuario.dto';
-import { UpdateUsuarioDto } from './dto/update-usuario.dto';
 import { Usuario } from './entities/usuario.entity';
-import { CarritoDeCompra } from 'src/carrito-de-compras/entities/carrito-de-compra.entity';
 import { PedidoService } from 'src/pedido/pedido.service';
-import { PedidoUsuarioDto } from './dto/pedido-usuario.dto';
 import { Usuarios } from 'src/orm/entity/usuario';
 import { Repository } from 'typeorm';
 import { InjectRepository } from '@nestjs/typeorm';
@@ -34,17 +31,20 @@ export class UsuarioService {
     usuario.comuna = createUsuarioDto.comuna;
     usuario.ciudad = createUsuarioDto.ciudad;
     usuario.region = createUsuarioDto.region;
-    usuario.telefono = createUsuarioDto.telefono;    
+    usuario.telefono = createUsuarioDto.telefono; 
+    usuario.tipoUsuarioId = createUsuarioDto.tipoUsuarioId;   
    
       // Hashear la contraseña antes de guardarla
     const salt = await bcrypt.genSalt(10);
+    console.log('contrasenna antes: ', usuario.constrasenna);
     usuario.constrasenna = await bcrypt.hash(createUsuarioDto.contrasenna, salt);
+    console.log('contrasenna despues: ', usuario.constrasenna);
 
     usuario.rut = createUsuarioDto.rut;
     usuario.pedidos = [];
     usuario.carritoDeCompras = [];
 
-     const usuarioGuradado = await this.usuariosRepository.save(usuario);
+    const usuarioGuradado = await this.usuariosRepository.save(usuario);
     return usuarioGuradado;
   }
 

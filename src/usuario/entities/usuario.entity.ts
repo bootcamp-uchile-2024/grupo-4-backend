@@ -15,6 +15,7 @@ export class Usuario {
   correo: string; 
   constrasenna: string;  
   rut: string;
+  tipoUsuarioId: number;
   pedidos: PedidoUsuario[];
   carritoDeCompras: CarritoDeCompra[];
 }

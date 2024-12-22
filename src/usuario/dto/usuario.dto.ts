@@ -37,6 +37,10 @@ export class UsuarioDTO {
   rut: string;
 
   @ApiProperty()
+  tipoUsuarioId: number;
+
+
+  @ApiProperty()
   pedidos: PedidoUsuarioDto[];
 
   @ApiProperty()

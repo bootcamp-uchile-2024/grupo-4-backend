@@ -93,6 +93,15 @@ export class CreateUsuarioDto {
   rut: string;
 
   @ApiProperty({
+    description: 'Rol del usuario',
+    default: '1, 2, 3, 4',
+    example: '1',
+  })
+  @IsNotEmpty()
+  @IsNumber()  
+  tipoUsuarioId: number;
+
+  @ApiProperty({
     description: 'Pedidos del usuario',
     type: [Pedido],
     example: [],

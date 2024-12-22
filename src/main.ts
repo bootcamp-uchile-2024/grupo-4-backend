@@ -23,6 +23,7 @@ async function bootstrap() {
     .addTag('usuarios')
     .addTag('pedidos')
     .addTag('carrito-de-compras')
+    .addBearerAuth()
     .build();
   console.log('PORT:', configService.get('PORT')); //Impresion de la variable de entorno
   console.log('Ambiente:', configService.get('AMBIENTE')); //Impresion de la variable de entorno

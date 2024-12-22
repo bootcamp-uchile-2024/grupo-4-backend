@@ -12,6 +12,8 @@ import { ResponseDto } from './outputDto/responseDto';
 import { ProductoDTO } from './dto/producto.dto';
 import { ResponseAllProductsDto } from './outputDto/responseAllProductsDto';
 import * as fs from 'fs';
+import { JwtService } from '@nestjs/jwt';
+import { UsuarioService } from 'src/usuario/usuario.service';
 
 @Injectable()
 export class ProductosService {
@@ -25,6 +27,9 @@ export class ProductosService {
 
     @InjectRepository(Categoria)
     private categoriaRepository: Repository<Categoria>,
+
+    private usuariosService: UsuarioService, private jwtService: JwtService,
+    
   ) {}
 
 

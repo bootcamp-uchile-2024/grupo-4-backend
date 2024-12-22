@@ -23,6 +23,9 @@ export class Usuarios {
   @Column()
   rut: string;
 
+  @Column()
+  tipoUsuarioId: number;
+
   @ManyToOne(() => TipoUsuario)
   @JoinColumn({ name: 'tipoUsuarioId' })
   tipoUsuario: TipoUsuario;
