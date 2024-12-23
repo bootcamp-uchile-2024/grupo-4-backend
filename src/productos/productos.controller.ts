@@ -2,10 +2,11 @@ import {
   Controller, Get, Post, Body, Param, Delete, Query,  HttpStatus, Res, UseInterceptors, HttpException, UsePipes, ValidationPipe,
   Put,
   UploadedFile,
-  Patch,} from '@nestjs/common';
+  Patch,
+  UseGuards,} from '@nestjs/common';
 import { ProductosService } from './productos.service';
 import { CreateProductoDto } from './dto/create-producto.dto';
-import { ApiBody, ApiConsumes, ApiQuery, ApiResponse, ApiTags } from '@nestjs/swagger';
+import { ApiBearerAuth, ApiBody, ApiConsumes, ApiOperation, ApiQuery, ApiResponse, ApiTags } from '@nestjs/swagger';
 import { ProductoDTO } from './dto/producto.dto';
 import { ResponseDto } from './outputDto/responseDto';
 import { Response } from 'express';
@@ -16,6 +17,9 @@ import { UpdateHabilitadoDto } from './dto/update-habilitado.dto';
 import { UpdateImagenDto } from './dto/update-imagen.dto';
 import { CategoriaDTO } from './dto/categoria.dto';
 import { TipoDto } from './dto/tipo-producto.dto';
+import { JwtGuard } from 'src/guard/jwt.guard';
+import { RolesPermitidos } from 'src/decorador/roles.decorador';
+import { RolesGuard } from 'src/guard/roles.guard';
 
 @ApiTags('productos')
 @Controller('productos')
@@ -23,6 +27,10 @@ export class ProductosController {
   constructor(private readonly productosService: ProductosService) {}
 
   @Post()
+  @ApiOperation({ summary: 'Creacion de productos. Acceso solo administradores' })
+  @ApiBearerAuth()
+  @UseGuards(JwtGuard, RolesGuard)
+  @RolesPermitidos(1)
   @UseInterceptors(FileInterceptor('imagen', {
     limits: { fileSize: 5 * 1024 * 1024 }, // Tamaño máximo: 5 MB
     fileFilter: (req, file, callback) => {
@@ -63,6 +71,7 @@ export class ProductosController {
     }
   }
 
+  @ApiOperation({ summary: 'Listado de productos' })
   @Get()
   @ApiResponse({
     status: 200,
@@ -82,6 +91,7 @@ export class ProductosController {
   }
 
   @Get(':id')
+  @ApiOperation({ summary: 'Búsqueda de producto por id' })
   @ApiResponse({ status: 200, description: 'Producto encontrado.' })
   @ApiResponse({ status: 404, description: 'Producto no encontrado.' })
   async findOne(@Param('id') id: string): Promise<ProductoDTO> {
@@ -92,6 +102,7 @@ export class ProductosController {
     return producto;
   }
 
+  @ApiOperation({ summary: 'Actualización de producto por id' })
   @Put(':id')
   @ApiResponse({
     status: 200,
@@ -111,6 +122,7 @@ export class ProductosController {
     return await this.productosService.update(id, updateProductoDto);
   }
 
+  @ApiOperation({ summary: 'Eliminar de producto por id' })
   @Delete(':id')
   @ApiResponse({ status: 200, description: 'Producto eliminado.' })
   @ApiResponse({ status: 404, description: 'Producto no encontrado.' })
@@ -126,6 +138,7 @@ export class ProductosController {
     }
   }
 
+  @ApiOperation({ summary: 'Agregar imagen a producto por id' })
   @Put(':id/imagen')
   @UseInterceptors(FileInterceptor('imagen')) 
   @ApiConsumes('multipart/form-data')
@@ -146,6 +159,7 @@ export class ProductosController {
     }
   }
 
+  @ApiOperation({ summary: 'Eliminar imagen a producto por id' })
   @Delete(':id/imagen')
   @ApiResponse({ status: 200, description: 'Imagen eliminada correctamente' })
   @ApiResponse({ status: 404, description: 'Producto no encontrado' })
@@ -159,6 +173,7 @@ export class ProductosController {
     }
   }
 
+  @ApiOperation({ summary: 'Habilitar / deshabilitar producto por id' })
   @Patch(':id/habilitado')
   @ApiResponse({ status: 200, description: 'Estado de habilitado actualizado exitosamente.' })
   @ApiResponse({ status: 404, description: 'Producto no encontrado.' })

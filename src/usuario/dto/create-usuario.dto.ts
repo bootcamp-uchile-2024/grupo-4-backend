@@ -1,6 +1,6 @@
 import { ApiProperty } from '@nestjs/swagger';
 import { Type } from 'class-transformer';
-import {IsString, IsNumber, IsEmail, Length, Matches, IsArray, ValidateNested, IsNotEmpty,} from 'class-validator';
+import {IsString, IsNumber, IsEmail, Length, Matches, IsArray, ValidateNested, IsNotEmpty, IsIn,} from 'class-validator';
 import { CarritoDeCompra } from 'src/carrito-de-compras/entities/carrito-de-compra.entity';
 import { Pedido } from 'src/pedido/entities/pedido.entity';
 
@@ -91,6 +91,16 @@ export class CreateUsuarioDto {
   })
   @IsString()
   rut: string;
+
+  @ApiProperty({
+    description: 'Rol del usuario',
+    default: '1, 2, 3, 4',
+    example: '1',
+  })
+  @IsNotEmpty()
+  @IsNumber()
+  @IsIn([1, 2, 3, 4], { message: 'El tipoUsuarioId debe ser uno de los valores: 1, 2, 3 o 4.' })
+  tipoUsuarioId: number;
 
   @ApiProperty({
     description: 'Pedidos del usuario',

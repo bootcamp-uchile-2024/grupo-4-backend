@@ -21,6 +21,7 @@ console.log(process.env.DB_PORT);
 console.log(process.env.USER_DB);
 console.log(process.env.NODE_APP_PORT);
 console.log(process.env.AMBIENTE);
+import { Compra } from 'src/compra/entities/compra.entity';
 
 @Module({
     imports: [
@@ -32,21 +33,22 @@ console.log(process.env.AMBIENTE);
          password: 'cafeinados24',//process.env.MYSQL_ROOT_PASSWORD,
          database:  'cafeinados',//process.env.NAME_DB,
         entities: [
-        Categoria, 
-        EstadoDespacho, 
-        PaisOrigen, 
-        TipoProducto, 
-        TipoUsuario, 
-        PedidoItem,
-        CarritoItem,
-        CarritoDeCompras,
-        Despacho,
-        Pedido,
-        DireccionEnvio,
-        Usuarios,
-        Productos
+            Categoria, 
+            EstadoDespacho, 
+            PaisOrigen, 
+            TipoProducto, 
+            TipoUsuario, 
+            PedidoItem,
+            CarritoItem,
+            CarritoDeCompras,
+            Despacho,
+            Pedido,
+            DireccionEnvio,
+            Usuarios,
+            Productos,
+            Compra
              
-         ],
+        ],
     }),
     OrmModule
     ],
