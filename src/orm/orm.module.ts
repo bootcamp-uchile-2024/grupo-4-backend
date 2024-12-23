@@ -27,8 +27,8 @@ import { Compra } from 'src/compra/entities/compra.entity';
     imports: [
         TypeOrmModule.forRoot({
          type: 'mysql',
-         host: 'localhost',//process.env.DB_HOST || 'localhost',
-         port: 3700, //.env.DB_PORT || 3306,
+         host: 'bd-server',//process.env.DB_HOST || 'localhost',
+         port: 3306, //.env.DB_PORT || 3306,
          username: 'root',//.env.USER_DB || 'root',
          password: 'cafeinados24',//process.env.MYSQL_ROOT_PASSWORD,
          database:  'cafeinados',//process.env.NAME_DB,

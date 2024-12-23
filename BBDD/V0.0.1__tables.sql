@@ -1,22 +1,22 @@
-CREATE TABLE TipoUsuario (
+CREATE TABLE IF NOT EXISTS TipoUsuario (
     id INT AUTO_INCREMENT PRIMARY KEY,
     nombreTipo VARCHAR(20) NOT NULL
 );
 
 -- Tabla PaisOrigen
-CREATE TABLE PaisOrigen (
+CREATE TABLE IF NOT EXISTS PaisOrigen (
     id INT AUTO_INCREMENT PRIMARY KEY,
     nombre VARCHAR(30) NOT NULL
 );
 
 -- Tabla Categoria
-CREATE TABLE Categoria (
+CREATE TABLE IF NOT EXISTS Categoria (
     id INT AUTO_INCREMENT PRIMARY KEY,
     nombre VARCHAR(100) NOT NULL
 );
 
 -- Tabla TipoProducto
-CREATE TABLE TipoProducto (
+CREATE TABLE IF NOT EXISTS TipoProducto (
     id INT AUTO_INCREMENT PRIMARY KEY,
     nombre VARCHAR(100) NOT NULL
 );
@@ -34,7 +34,7 @@ CREATE TABLE Usuario (
 );
 
 -- Tabla Producto
-CREATE TABLE Producto (
+CREATE TABLE IF NOT EXISTS Producto (
     id INT AUTO_INCREMENT PRIMARY KEY,
     nombre VARCHAR(100) NOT NULL,
     descripcion VARCHAR(200),
@@ -54,14 +54,14 @@ CREATE TABLE Producto (
 );
 
 -- Tabla CarritoDeCompras
-CREATE TABLE CarritoDeCompras (
+CREATE TABLE IF NOT EXISTS CarritoDeCompras (
     id INT AUTO_INCREMENT PRIMARY KEY,
     usuarioId INT,
     FOREIGN KEY (usuarioId) REFERENCES Usuario(id)
 );
 
 -- Tabla CarritoItem
-CREATE TABLE CarritoItem (
+CREATE TABLE IF NOT EXISTS CarritoItem (
     id INT AUTO_INCREMENT PRIMARY KEY,
     productoId INT,
     cantidad INT NOT NULL,
@@ -71,7 +71,7 @@ CREATE TABLE CarritoItem (
 );
 
 -- Tabla Pedido
-CREATE TABLE Pedido (
+CREATE TABLE IF NOT EXISTS Pedido (
     id INT AUTO_INCREMENT PRIMARY KEY,
     fecha DATE NOT NULL,
     usuarioId INT,
@@ -79,7 +79,7 @@ CREATE TABLE Pedido (
 );
 
 -- Tabla PedidoItem
-CREATE TABLE PedidoItem (
+CREATE TABLE IF NOT EXISTS PedidoItem (
     id INT AUTO_INCREMENT PRIMARY KEY,
     productoId INT,
     cantidad INT NOT NULL,
@@ -89,7 +89,7 @@ CREATE TABLE PedidoItem (
 );
 
 -- Tabla DireccionEnvio
-CREATE TABLE DireccionEnvio (
+CREATE TABLE IF NOT EXISTS DireccionEnvio (
     id INT AUTO_INCREMENT PRIMARY KEY,
     direccion VARCHAR(100) NOT NULL,
     ciudad VARCHAR(50) NOT NULL,
@@ -99,13 +99,13 @@ CREATE TABLE DireccionEnvio (
 );
 
 -- Tabla EstadoDespacho
-CREATE TABLE EstadoDespacho (
+CREATE TABLE IF NOT EXISTS EstadoDespacho (
     id INT AUTO_INCREMENT PRIMARY KEY,
     nombreEstado VARCHAR(20) NOT NULL
 );
 
 -- Tabla Despacho
-CREATE TABLE Despacho (
+CREATE TABLE IF NOT EXISTS Despacho (
     id INT AUTO_INCREMENT PRIMARY KEY,
     estado INT,
     fechaDespacho DATE,
@@ -113,4 +113,42 @@ CREATE TABLE Despacho (
     direccionEnvioId INT,
     FOREIGN KEY (direccionEnvioId) REFERENCES DireccionEnvio(id),
     FOREIGN KEY (estado) REFERENCES EstadoDespacho(id)
+);
+
+-- Tabla TipoDespacho
+CREATE TABLE IF NOT EXISTS TipoDespacho (
+    id INT AUTO_INCREMENT PRIMARY KEY,
+    nombre VARCHAR(50) NOT NULL
+);
+
+-- Tabla Colaboradores
+CREATE TABLE IF NOT EXISTS Colaboradores (
+    id INT AUTO_INCREMENT PRIMARY KEY,
+    nombre VARCHAR(50) NOT NULL
+);
+
+-- Tabla TipoFacturacion
+CREATE TABLE IF NOT EXISTS TipoFacturacion (
+    id INT AUTO_INCREMENT PRIMARY KEY,
+    nombre VARCHAR(50) NOT NULL
+);
+
+-- Tabla Compra
+CREATE TABLE IF NOT EXISTS Compra (
+    id INT AUTO_INCREMENT PRIMARY KEY,
+    email VARCHAR(100) NOT NULL,
+    tipoDespachoId INT NOT NULL,
+    colaboradorId INT NOT NULL,
+    direccion VARCHAR(200) NOT NULL,
+    telefono VARCHAR(15) NOT NULL,
+    tipoFacturacion INT NOT NULL,
+    nombre VARCHAR(50) NOT NULL,
+    apellido VARCHAR(50) NOT NULL,
+    comuna VARCHAR(50) NOT NULL,
+    region VARCHAR(50) NOT NULL,
+    carritoId INT NOT NULL,
+    FOREIGN KEY (tipoDespachoId) REFERENCES TipoDespacho(id),
+    FOREIGN KEY (colaboradorId) REFERENCES Colaboradores(id),
+    FOREIGN KEY (tipoFacturacion) REFERENCES TipoFacturacion(id),
+    FOREIGN KEY (carritoId) REFERENCES CarritoDeCompras(id)
 );

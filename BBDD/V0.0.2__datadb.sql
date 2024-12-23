@@ -3,6 +3,7 @@ INSERT INTO TipoUsuario (nombreTipo) VALUES
 ('ADMIN_LECTURA'),
 ('INVITADO'),
 ('USUARIO_LOGGEADO');
+-- ('USUARIO');
 
 -- Insertar datos en la tabla PaisOrigen
 INSERT INTO PaisOrigen (nombre) VALUES
