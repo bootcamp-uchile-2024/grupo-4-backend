@@ -1,6 +1,5 @@
-import { HttpException, HttpStatus, Inject, Injectable } from '@nestjs/common';
+import { HttpException, HttpStatus, Injectable } from '@nestjs/common';
 import { JwtService } from '@nestjs/jwt';
-import * as bcrypt from 'bcrypt';
 import { UsuarioService } from 'src/usuario/usuario.service';
 import { LoginDto } from './dto/login.dto';
 
@@ -14,50 +13,25 @@ export class AutenticacionService {
         private jwtService: JwtService,
     ){}
 
-    /*async validateUser(correo: string, password: string): Promise<any> {
-        const user = await this.userService.findByEmail(correo);
+   
 
-        if (user && await bcrypt.compare(password, user.constrasenna)) {
-          const { constrasenna, ...result } = user;        
-          console.log('result', result);  
-          return result;
-        }
-        return null;
-    };*/
-
-    async login(loginDto: LoginDto): Promise<{ access_token: string, usuario: { nombre: string, apellido: string, correo: string } }> {
-        const { email, contrasenna } = loginDto;
+    async login(loginDto: LoginDto): Promise<string> {
+        
         // Obtenemos la entidad completa para tener la contraseña hasheada
-        const usuario = await this.userService.findByEmail(email);        
-      
-        if (!usuario.id) {
-          throw new HttpException('Credenciales inválidasss', HttpStatus.UNAUTHORIZED);
-        }        
-        
-        const validPassword = await bcrypt.compare(contrasenna, usuario.constrasenna);        
-        if (!validPassword) {
-          throw new HttpException('Credenciales inválidas', HttpStatus.UNAUTHORIZED);
-        }
-      
-        const payload = { sub: usuario.id, email: usuario.email, tipoUsuarioId:usuario.tipoUsuarioId };
-        console.log('payload', payload);
-        const access_token = this.jwtService.sign(payload);
-        
+        const user = await this.userService.findByEmail(loginDto.email);
 
-        const { 
-            nombre, 
-            apellido,
-            email: correo,
-        } = usuario;
-      
-        return { 
-            access_token,
-            usuario: {
-                nombre,
-                apellido,
-                correo,
-            }
-        };
+        if (!user) {
+            throw new HttpException('Usuario no encontrado', HttpStatus.UNAUTHORIZED);
+        }
+
+        if(user.constrasenna !== loginDto.contrasenna){
+            throw new HttpException('Contraseña incorrecta', HttpStatus.UNAUTHORIZED);
+        }
+
+        const payload = { email: user.email, sub: user.id, tipoUsuarioId: user.tipoUsuarioId };
+        const jwt = this.jwtService.sign(payload);
+       
+       return jwt; 
     }
 
     

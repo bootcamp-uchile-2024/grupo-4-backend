@@ -1,5 +1,4 @@
 import { forwardRef, Inject, Injectable } from '@nestjs/common';
-import * as bcrypt from 'bcrypt';
 import { CreateUsuarioDto } from './dto/create-usuario.dto';
 import { Usuario } from './entities/usuario.entity';
 import { PedidoService } from 'src/pedido/pedido.service';
@@ -32,13 +31,14 @@ export class UsuarioService {
     usuario.ciudad = createUsuarioDto.ciudad;
     usuario.region = createUsuarioDto.region;
     usuario.telefono = createUsuarioDto.telefono; 
-    usuario.tipoUsuarioId = createUsuarioDto.tipoUsuarioId;   
+    usuario.tipoUsuarioId = createUsuarioDto.tipoUsuarioId;  
+    usuario.constrasenna = createUsuarioDto.contrasenna; 
    
       // Hashear la contraseña antes de guardarla
-    const salt = await bcrypt.genSalt(10);
+    /*const salt = await bcrypt.genSalt(10);
     console.log('contrasenna antes: ', usuario.constrasenna);
     usuario.constrasenna = await bcrypt.hash(createUsuarioDto.contrasenna, salt);
-    console.log('contrasenna despues: ', usuario.constrasenna);
+    console.log('contrasenna despues: ', usuario.constrasenna);*/
 
     usuario.rut = createUsuarioDto.rut;
     usuario.pedidos = [];

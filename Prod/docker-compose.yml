@@ -1,24 +1,41 @@
 # Contenedor para la produccion de la aplicacion
 services:
-  node-api:
+  node-app:
     image: ${NODE_APP_IMAGE_PROD}
+    command: npm run start:prod
+    user: node
+    working_dir: /home/node/nest
     environment:
-      - ARCHIVO_ENV=.env
-    ports:      
+      - NODE_ENV=${AMBIENTE}
+      - JWT_SECRET=${JWT_SECRET}
+      - PORT=${NODE_APP_CONTAINER_PORT_PROD}
+    volumes:
+      - ./:/home/node/nest
+    ports:
       - '${NODE_APP_PORT_PROD}:${NODE_APP_CONTAINER_PORT_PROD}'
+    env_file: 
+      - .env
 
   bd-server:
     image: ${MYSQL_IMAGE_PROD}
     environment:
-      MYSQL_ROOT_PASSWORD: ${MYSQL_ROOT_PASSWORD} 
+      MYSQL_ROOT_PASSWORD: ${MYSQL_ROOT_PASSWORD}
     volumes:
       - ./bd-server/sql:/var/lib/mysql
     ports:
       - '${MYSQL_HOST_PORT_PROD}:${MYSQL_CONTAINER_PORT_PROD}'
-  
+    env_file: 
+      - .env
+
   flyway:
     image: flyway/flyway:10.20.1-alpine
+    command: >
+      -url=jdbc:mysql://${HOST_DB}:${MYSQL_CONTAINER_PORT_PROD}/${NAME_DB}?allowPublicKeyRetrieval=true
+      -user=root
+      -password=${MYSQL_ROOT_PASSWORD}
+      -connectRetries=60
+      migrate
     volumes:
       - ./BBDD:/flyway/sql
-    command: -url=jdbc:mysql://${HOST_DB}:${MYSQL_CONTAINER_PORT_PROD}/${NAME_DB}?allowPublicKeyRetrieval=true -user=root -password=${MYSQL_ROOT_PASSWORD} -connectRetries=60 migrate
-    
+    env_file: 
+      - .env

@@ -14,24 +14,17 @@ import { Pedido } from './entity/pedido';
 import { DireccionEnvio } from './entity/direccionEnvio';
 import { Usuarios } from './entity/usuario';
 import { Productos } from './entity/producto';
-dotenv.config();
-console.log(process.env.NAME_DB);
-console.log(process.env.HOST_DB);
-console.log(process.env.DB_PORT);
-console.log(process.env.USER_DB);
-console.log(process.env.NODE_APP_PORT);
-console.log(process.env.AMBIENTE);
 import { Compra } from 'src/compra/entities/compra.entity';
 
 @Module({
     imports: [
         TypeOrmModule.forRoot({
          type: 'mysql',
-         host: 'bd-server',//process.env.DB_HOST || 'localhost',
-         port: 3306, //.env.DB_PORT || 3306,
-         username: 'root',//.env.USER_DB || 'root',
-         password: 'cafeinados24',//process.env.MYSQL_ROOT_PASSWORD,
-         database:  'cafeinados',//process.env.NAME_DB,
+         host: 'bd-server',
+         port: 3306, 
+         username: 'root',
+         password: 'cafeinados24',
+         database:  'cafeinados',
         entities: [
             Categoria, 
             EstadoDespacho, 
