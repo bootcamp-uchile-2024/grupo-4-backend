@@ -8,9 +8,10 @@ import { ConfigService } from '@nestjs/config';
 import { WinstonModule } from 'nest-winston';
 import * as winston from 'winston';
 import { utilities as nestWinstonModuleUtilities } from 'nest-winston';
-import DailyRotateFile from 'winston-daily-rotate-file';
+const DailyRotateFile = require('winston-daily-rotate-file');
 
-const produccionEnv:string = process.env.NODE_ENV;
+console.log('NODE_ENV:', process.env.AMBIENTE);
+const produccionEnv:string = process.env.AMBIENTE;
 const produccion = produccionEnv === 'produccion';
 
 async function bootstrap() {

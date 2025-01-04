@@ -16,15 +16,23 @@ import { Usuarios } from './entity/usuario';
 import { Productos } from './entity/producto';
 import { Compra } from 'src/compra/entities/compra.entity';
 
+dotenv.config();
+console.log(process.env.HOST_DB);
+console.log(process.env.MYSQL_CONTAINER_PORT);
+console.log(process.env.USER_DB);
+console.log(process.env.MYSQL_ROOT_PASSWORD);
+console.log(process.env.NAME_DB);
+
+
 @Module({
     imports: [
         TypeOrmModule.forRoot({
          type: 'mysql',
-         host: 'bd-server',
-         port: 3306, 
-         username: 'root',
-         password: 'cafeinados24',
-         database:  'cafeinados',
+         host: process.env.HOST_DB ?? 'localhost',
+         port: Number(process.env.MYSQL_CONTAINER_PORT) ?? 3306, 
+         username: process.env.USER_DB ?? 'root',
+         password: process.env.MYSQL_ROOT_PASSWORD ?? 'cafeinados24',
+         database:  process.env.NAME_DB ?? 'cafeinados',
         entities: [
             Categoria, 
             EstadoDespacho, 

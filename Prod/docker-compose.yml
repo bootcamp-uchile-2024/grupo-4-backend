@@ -1,36 +1,40 @@
 # Contenedor para la produccion de la aplicacion
 services:
   node-app:
-    image: ${NODE_APP_IMAGE_PROD}
+    image: ${NODE_APP_IMAGE}
     command: npm run start:prod
     user: node
     working_dir: /home/node/nest
     environment:
       - NODE_ENV=${AMBIENTE}
       - JWT_SECRET=${JWT_SECRET}
-      - PORT=${NODE_APP_CONTAINER_PORT_PROD}
+      - PORT=${NODE_APP_CONTAINER_PORT}      
+      - HOST_DB=${HOST_DB}
+      - NAME_DB=${NAME_DB}
+      - MYSQL_ROOT_PASSWORD=${MYSQL_ROOT_PASSWORD}
+      - USER_DB=${USER_DB}
     volumes:
-      - ./:/home/node/nest
+      - .:/home/node/nest
     ports:
-      - '${NODE_APP_PORT_PROD}:${NODE_APP_CONTAINER_PORT_PROD}'
+      - '${NODE_APP_PORT}:${NODE_APP_CONTAINER_PORT}'
     env_file: 
       - .env
 
   bd-server:
-    image: ${MYSQL_IMAGE_PROD}
+    image: ${MYSQL_IMAGE}
     environment:
       MYSQL_ROOT_PASSWORD: ${MYSQL_ROOT_PASSWORD}
     volumes:
       - ./bd-server/sql:/var/lib/mysql
     ports:
-      - '${MYSQL_HOST_PORT_PROD}:${MYSQL_CONTAINER_PORT_PROD}'
+      - '${MYSQL_HOST_PORT}:${MYSQL_CONTAINER_PORT}'
     env_file: 
       - .env
 
   flyway:
     image: flyway/flyway:10.20.1-alpine
     command: >
-      -url=jdbc:mysql://${HOST_DB}:${MYSQL_CONTAINER_PORT_PROD}/${NAME_DB}?allowPublicKeyRetrieval=true
+      -url=jdbc:mysql://${HOST_DB}:${MYSQL_CONTAINER_PORT}/${NAME_DB}?allowPublicKeyRetrieval=true
       -user=root
       -password=${MYSQL_ROOT_PASSWORD}
       -connectRetries=60
