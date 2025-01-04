@@ -14,7 +14,7 @@ import { Pedido } from './entity/pedido';
 import { DireccionEnvio } from './entity/direccionEnvio';
 import { Usuarios } from './entity/usuario';
 import { Productos } from './entity/producto';
-import { Compra } from 'src/compra/entities/compra.entity';
+import { Compra } from './entity/compra';
 
 dotenv.config();
 console.log(process.env.HOST_DB);
