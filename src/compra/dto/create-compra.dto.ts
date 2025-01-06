@@ -29,7 +29,7 @@ export class CreateCompraDto {
   direccion: string;
 
   @ApiProperty({ description: 'Teléfono de contacto' })
-  @IsPhoneNumber('CL') // o @IsString() si prefieres
+  @IsString()
   @IsNotEmpty()
   telefono: string;
 
