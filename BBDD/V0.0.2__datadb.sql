@@ -171,12 +171,4 @@ VALUES
     ('boleta'),
     ('factura');
 
--- Insertar datos en la tabla Colaboradores 
-INSERT INTO Colaboradores (nombre)
-VALUES
-    ('starken'),
-<<<<<<< HEAD
-    ('bluexpress');
-=======
-    ('bluexpress');
->>>>>>> 421c0c4ab635e2135dc2baa75a673101a04aa417
+
