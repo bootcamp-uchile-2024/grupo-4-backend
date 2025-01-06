@@ -7,6 +7,7 @@ import {
   ValidationPipe,
   UsePipes,
   UseGuards,
+  Req,
 } from '@nestjs/common';
 import { UsuarioService } from './usuario.service';
 import { CreateUsuarioDto } from './dto/create-usuario.dto';
@@ -38,12 +39,14 @@ export class UsuarioController {
     return this.usuarioService.findAll();
   }
 
-  @ApiOperation({ summary: 'Búsqueda de usuario por RUT' })
+  @ApiBearerAuth()
+  @UseGuards(JwtGuard)
+  @ApiOperation({ summary: 'Búsqueda de usuario por RUT' }) 
   @Get(':rut')
   @ApiResponse({ status: 200, description: 'Usuario encontrado.' })
   @ApiResponse({ status: 404, description: 'Usuario no encontrado.' })
-  async findOne(@Param('rut') rut: string): Promise<UsuarioDTO> {
-    return this.usuarioService.findOne(rut);
+  async findOne(@Param('rut') rut: string, @Req() req): Promise<UsuarioDTO> {
+    return this.usuarioService.findOne(rut, req);
   }
 
   @ApiOperation({ summary: 'Búsqueda de usuario por email' })

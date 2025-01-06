@@ -7,6 +7,7 @@ import { Repository } from 'typeorm';
 import { InjectRepository } from '@nestjs/typeorm';
 import { UsuarioDTO } from './dto/usuario.dto';
 import { UsuarioMapper } from './mapper/usuario.mappers';
+import { BadRequestException } from '@nestjs/common/exceptions';
 
 @Injectable()
 export class UsuarioService {
@@ -53,7 +54,11 @@ export class UsuarioService {
     return UsuarioMapper.entityListToDtoList(listadoUsuarios);
   }
 
-  async findOne(rut: string): Promise<UsuarioDTO> {
+  async findOne(rut: string, req:any): Promise<UsuarioDTO> {
+   
+    if(req.user.rut != rut && req.user.tipoUsuarioId != 1){
+      throw new BadRequestException('No tienes permisos para ver este usuario');
+    }
     const usuario:Usuarios = await this.usuariosRepository.findOneBy({rut});
 
     return UsuarioMapper.entityToDto(usuario);
