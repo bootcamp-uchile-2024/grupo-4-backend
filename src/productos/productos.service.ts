@@ -70,7 +70,7 @@ export class ProductosService {
     nuevoProducto.marca = createProductoDto.marca;
     nuevoProducto.formato = createProductoDto.formato;
     nuevoProducto.fechaVencimiento = createProductoDto.fecha;
-    nuevoProducto.habilitado = false; //Por defecto el producto se habilita
+    nuevoProducto.habilitado = true; //Por defecto el producto se habilita
 
     //Se verifica que el tipo y la categoria existan en la base de datos
 
