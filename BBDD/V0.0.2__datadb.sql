@@ -172,3 +172,10 @@ VALUES
     ('factura');
 
 
+-- Insertar datos en la tabla Colaboradores 
+INSERT INTO Colaboradores (nombre)
+VALUES
+    ('starken'),
+    ('bluexpress');
+
+
