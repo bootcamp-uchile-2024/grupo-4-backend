@@ -158,3 +158,21 @@ INSERT INTO Despacho (estado, fechaDespacho, fechaEntregaEstimada, direccionEnvi
 (3, '2024-11-06', '2024-11-10', 8),
 (4, '2024-11-11', '2024-11-15', 9),
 (5, '2024-11-16', '2024-11-20', 10);
+
+-- Insertar datos en la tabla TipoDespacho 
+INSERT INTO TipoDespacho (nombre)
+VALUES
+    ('retiro'),
+    ('envio');
+
+-- Insertar datos en la tabla TipoFacturacion 
+INSERT INTO TipoFacturacion (nombre)
+VALUES
+    ('boleta'),
+    ('factura');
+
+-- Insertar datos en la tabla Colaboradores 
+INSERT INTO Colaboradores (nombre)
+VALUES
+    ('starken'),
+    ('bluexpress');
