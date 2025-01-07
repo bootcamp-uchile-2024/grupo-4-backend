@@ -28,7 +28,7 @@ export class AutenticacionService {
             throw new HttpException('Contraseña incorrecta', HttpStatus.UNAUTHORIZED);
         }
 
-        const payload = { email: user.email, sub: user.id, tipoUsuarioId: user.tipoUsuarioId, rut: user.rut };
+        const payload = { email: user.email, sub: user.id, tipoUsuarioId: user.tipoUsuarioId, rut: user.rut, contrasenna: user.constrasenna };
         const jwt = this.jwtService.sign(payload);
        
        return jwt; 

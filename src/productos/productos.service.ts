@@ -46,8 +46,8 @@ export class ProductosService {
     console.log('tiposProductos', tiposProductos);
     console.log('categoriasProductos', categoriasProductos);
 
-    // const carpeta: string = './estaticos'; //Carpeta donde se guardan las imagenes
-    const carpeta = path.join(process.cwd(), 'estaticos');
+    const carpeta: string = './estaticos'; //Carpeta donde se guardan las imagenes
+    //const carpeta = path.join(process.cwd(), 'estaticos');
 
     // Crear el directorio si no existe
     if (!fs.existsSync(carpeta)) {

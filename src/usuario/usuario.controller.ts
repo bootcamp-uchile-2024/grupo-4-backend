@@ -69,54 +69,5 @@ export class UsuarioController {
   }
   
 
- /* @Patch(':id')
-  @ApiResponse({ status: 200, description: 'Usuario modificado.' })
-  @ApiResponse({ status: 404, description: 'Usuario no encontrado.' })
-  @UsePipes(new ValidationPipe({ whitelist: true, forbidNonWhitelisted: true }))
-  update(@Param('id') id: number, @Body() updateUsuarioDto: UpdateUsuarioDto) {
-    const usuarioFueModificado = this.usuarioService.update(
-      id,
-      updateUsuarioDto,
-    );
-    if (!usuarioFueModificado) {
-      throw new HttpException('Usuario no encontrado', HttpStatus.NOT_FOUND);
-    }
-    return { message: 'Usuario modificado' };
-  }*/
-
-  /*@Delete(':id')
-  @ApiResponse({ status: 200, description: 'Usuario eliminado.' })
-  @ApiResponse({ status: 404, description: 'Usuario no encontrado.' })
-  remove(@Param('id') id: number) {
-    const usuarioFueEliminado = this.usuarioService.remove(id);
-    if (!usuarioFueEliminado) {
-      throw new HttpException('Usuario no encontrado', HttpStatus.NOT_FOUND);
-    }
-    return { message: 'Usuario eliminado' };
-  }*/
-
-  /*@Patch(':id/carrito')
-  @ApiResponse({ status: 200, description: 'Carrito modificado.' })
-  @ApiResponse({ status: 404, description: 'Usuario no encontrado.' })
-  updateCarrito(@Param('id') id: number, @Body() updateCarritoDeCompraDto) {
-    const carritoFueModificado = this.usuarioService.updateCarrito(
-      id,
-      updateCarritoDeCompraDto,
-    );
-    if (!carritoFueModificado) {
-      throw new HttpException('Usuario no encontrado', HttpStatus.NOT_FOUND);
-    }
-    return { message: 'Carrito modificado' };
-  }*/
-
-  /*@Delete(':id/carrito')
-  @ApiResponse({ status: 200, description: 'Carrito eliminado.' })
-  @ApiResponse({ status: 404, description: 'Usuario no encontrado.' })
-  deleteCarrito(@Param('id') id: number) {
-    const carritoFueEliminado = this.usuarioService.deleteCarrito(id);
-    if (!carritoFueEliminado) {
-      throw new HttpException('Usuario no encontrado', HttpStatus.NOT_FOUND);
-    }
-    return { message: 'Carrito eliminado' };
-  }*/
+ 
 }
