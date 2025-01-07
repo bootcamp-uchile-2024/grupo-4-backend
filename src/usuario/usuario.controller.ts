@@ -17,6 +17,7 @@ import { JwtGuard } from 'src/guard/jwt.guard';
 import { RolesGuard } from 'src/guard/roles.guard';
 import { RolesPermitidos } from 'src/decorador/roles.decorador';
 import { CreateUsuarioRegisterDto } from './dto/create-usuario-register.dto';
+import { UsuarioRegisterDTO } from './dto/usuarioRegister.dto';
 
 @ApiTags('usuarios')
 @Controller('usuario')
@@ -40,7 +41,7 @@ export class UsuarioController {
   @UsePipes(new ValidationPipe({ whitelist: true, forbidNonWhitelisted: true }))
   async createBasic(
     @Body() dto: CreateUsuarioRegisterDto
-  ): Promise<UsuarioDTO> {
+  ): Promise<UsuarioRegisterDTO> {
     return this.usuarioService.createUserRegister(dto);
   }
 

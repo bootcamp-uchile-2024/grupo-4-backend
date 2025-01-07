@@ -9,6 +9,7 @@ import { UsuarioDTO } from './dto/usuario.dto';
 import { UsuarioMapper } from './mapper/usuario.mappers';
 import { BadRequestException } from '@nestjs/common/exceptions';
 import { CreateUsuarioRegisterDto } from './dto/create-usuario-register.dto';
+import { UsuarioRegisterDTO } from './dto/usuarioRegister.dto';
 
 @Injectable()
 export class UsuarioService {
@@ -50,7 +51,7 @@ export class UsuarioService {
     return usuarioGuradado;
   }
 
-  async createUserRegister(dto: CreateUsuarioRegisterDto): Promise<UsuarioDTO> {
+  async createUserRegister(dto: CreateUsuarioRegisterDto): Promise<UsuarioRegisterDTO> {
     const nuevoUsuario = new Usuario();
 
     // Asignamos campos con la data que viene en el dto
