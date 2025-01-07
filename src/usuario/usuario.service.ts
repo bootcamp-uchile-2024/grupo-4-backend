@@ -59,7 +59,7 @@ export class UsuarioService {
     nuevoUsuario.direccion = dto.direccion;
     nuevoUsuario.email = dto.correo;
     nuevoUsuario.constrasenna = dto.contrasenna;
-    nuevoUsuario.rut = '';
+    nuevoUsuario.rut = dto.rut;
     nuevoUsuario.tipoUsuarioId = 2; // 2 = usuario normal
     nuevoUsuario.pedidos = [];
     nuevoUsuario.carritoDeCompras = [];
