@@ -34,7 +34,7 @@ export class UsuarioController {
     return this.usuarioService.create(createUsuarioDto);
   }
 
-  @Post('basic')
+  @Post('registro')
   @ApiOperation({ summary: 'Crear registro de usuario' })
   @ApiResponse({ status: 201, description: 'Cuenta creada exitosamente.' })
   @UsePipes(new ValidationPipe({ whitelist: true, forbidNonWhitelisted: true }))

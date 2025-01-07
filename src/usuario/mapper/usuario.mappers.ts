@@ -9,6 +9,7 @@ export class UsuarioMapper {
         dto.nombre = entity.nombre;
         dto.apellido = entity.apellido;
         dto.email = entity.email;
+        dto.constrasenna = entity.constrasenna;
         dto.rut = entity.rut; 
         dto.tipoUsuarioId = entity.tipoUsuarioId;       
         return dto;
