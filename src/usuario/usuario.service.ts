@@ -8,6 +8,7 @@ import { InjectRepository } from '@nestjs/typeorm';
 import { UsuarioDTO } from './dto/usuario.dto';
 import { UsuarioMapper } from './mapper/usuario.mappers';
 import { BadRequestException } from '@nestjs/common/exceptions';
+import { CreateUsuarioRegisterDto } from './dto/create-usuario-register.dto';
 
 @Injectable()
 export class UsuarioService {
@@ -48,6 +49,26 @@ export class UsuarioService {
     const usuarioGuradado = await this.usuariosRepository.save(usuario);
     return usuarioGuradado;
   }
+
+  async createUserRegister(dto: CreateUsuarioRegisterDto): Promise<UsuarioDTO> {
+    const nuevoUsuario = new Usuario();
+
+    // Asignamos campos con la data que viene en el dto
+    nuevoUsuario.nombre = dto.nombre;
+    nuevoUsuario.apellido = dto.apellido;
+    nuevoUsuario.direccion = dto.direccion;
+    nuevoUsuario.email = dto.correo;
+    nuevoUsuario.constrasenna = dto.contrasenna;
+    nuevoUsuario.rut = '';
+    nuevoUsuario.tipoUsuarioId = 2; // 2 = usuario normal
+    nuevoUsuario.pedidos = [];
+    nuevoUsuario.carritoDeCompras = [];
+
+    const usuarioGuardado = await this.usuariosRepository.save(nuevoUsuario);
+
+    return UsuarioMapper.entityToDto(usuarioGuardado);
+  }
+
 
   async findAll(): Promise<UsuarioDTO[]> {
     const listadoUsuarios: Usuarios[] = await this.usuariosRepository.find();

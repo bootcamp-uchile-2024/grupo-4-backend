@@ -16,6 +16,7 @@ import { UsuarioDTO } from './dto/usuario.dto';
 import { JwtGuard } from 'src/guard/jwt.guard';
 import { RolesGuard } from 'src/guard/roles.guard';
 import { RolesPermitidos } from 'src/decorador/roles.decorador';
+import { CreateUsuarioRegisterDto } from './dto/create-usuario-register.dto';
 
 @ApiTags('usuarios')
 @Controller('usuario')
@@ -31,6 +32,16 @@ export class UsuarioController {
   @UsePipes(new ValidationPipe({ whitelist: true, forbidNonWhitelisted: true }))
   async create(@Body() createUsuarioDto: CreateUsuarioDto): Promise<UsuarioDTO> {
     return this.usuarioService.create(createUsuarioDto);
+  }
+
+  @Post('basic')
+  @ApiOperation({ summary: 'Crear registro de usuario' })
+  @ApiResponse({ status: 201, description: 'Cuenta creada exitosamente.' })
+  @UsePipes(new ValidationPipe({ whitelist: true, forbidNonWhitelisted: true }))
+  async createBasic(
+    @Body() dto: CreateUsuarioRegisterDto
+  ): Promise<UsuarioDTO> {
+    return this.usuarioService.createUserRegister(dto);
   }
 
   @ApiOperation({ summary: 'Listado de usuarios registrados' })
