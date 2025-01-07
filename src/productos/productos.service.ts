@@ -16,6 +16,7 @@ import { CategoriaDTO } from './dto/categoria.dto';
 import { TipoDto } from './dto/tipo-producto.dto';
 import { JwtService } from '@nestjs/jwt';
 import { UsuarioService } from 'src/usuario/usuario.service';
+import * as path from 'path';
 
 @Injectable()
 export class ProductosService {
@@ -45,7 +46,8 @@ export class ProductosService {
     console.log('tiposProductos', tiposProductos);
     console.log('categoriasProductos', categoriasProductos);
 
-    const carpeta: string = './estaticos'; //Carpeta donde se guardan las imagenes
+    // const carpeta: string = './estaticos'; //Carpeta donde se guardan las imagenes
+    const carpeta = path.join(process.cwd(), 'estaticos');
 
     // Crear el directorio si no existe
     if (!fs.existsSync(carpeta)) {
@@ -55,7 +57,8 @@ export class ProductosService {
     // Procesar y guardar la imagen
     if (imagen) {
       console.log('imagen', imagen);
-      const rutaImagen = `${carpeta}/${Date.now()}-${imagen.originalname}`;
+      // const rutaImagen = `${carpeta}/${Date.now()}-${imagen.originalname}`;
+      const rutaImagen = path.join(carpeta, `${Date.now()}-${imagen.originalname}`);
       fs.writeFileSync(rutaImagen, imagen.buffer);
       createProductoDto.imagen = rutaImagen; // Guardar la ruta en el DTO
     }
