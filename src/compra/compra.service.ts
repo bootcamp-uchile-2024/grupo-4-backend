@@ -2,9 +2,9 @@ import { Injectable } from '@nestjs/common';
 import { CreateCompraDto } from './dto/create-compra.dto';
 import { InjectRepository } from '@nestjs/typeorm';
 import { Repository } from 'typeorm';
-import { Compra } from './entities/compra.entity';
 import { CompraDto } from './dto/compra.dto';
 import { ResponseDto } from './outputDto/responseDto';
+import { Compra } from 'src/orm/entity/compra';
 
 @Injectable()
 export class CompraService {

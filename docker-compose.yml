@@ -9,8 +9,12 @@ services:
       - NODE_ENV=${AMBIENTE}
       - JWT_SECRET=${JWT_SECRET}
       - PORT=${NODE_APP_CONTAINER_PORT}
+      - HOST_DB=${HOST_DB}
+      - NAME_DB=${NAME_DB}
+      - MYSQL_ROOT_PASSWORD=${MYSQL_ROOT_PASSWORD}
+      - USER_DB=${USER_DB}
     volumes:
-      - ./:/home/node/nest
+      - . :/home/node/nest
     ports:
       - '${NODE_APP_PORT}:${NODE_APP_CONTAINER_PORT}'
     env_file: 

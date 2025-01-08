@@ -8,9 +8,6 @@ import {
   Delete,
   Res,
   HttpStatus,
-  HttpException,
-  UseInterceptors,
-  ClassSerializerInterceptor,
   UsePipes,
   ValidationPipe,
 } from '@nestjs/common';

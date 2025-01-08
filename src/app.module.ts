@@ -1,4 +1,4 @@
-import {HttpException, HttpStatus, MiddlewareConsumer, Module, NestModule} from '@nestjs/common';
+import {HttpException, HttpStatus, MiddlewareConsumer, Module, NestModule, RequestMethod} from '@nestjs/common';
 import { AppController } from './app.controller';
 import { AppService } from './app.service';
 import { ProductosModule } from './productos/productos.module';
@@ -57,6 +57,7 @@ export class AppModule implements NestModule {
   configure(consumer: MiddlewareConsumer) {
     consumer
       .apply(GeneralMiddleware) // MIDDLEWARE A APLICAR
+      .exclude({ path: 'usuario', method: RequestMethod.POST }) // RUTAS A EXCLUIR
       .forRoutes('*'); // RUTAS A LAS QUE APLICA
   }
 }

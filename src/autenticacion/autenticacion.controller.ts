@@ -13,7 +13,7 @@ export class AutenticacionController {
   @ApiResponse({ status: 401, description: 'Credenciales inválidas.' })
   @ApiBody({ type: LoginDto })
   @UsePipes(new ValidationPipe({ whitelist: true, forbidNonWhitelisted: true }))
-  async login(@Body() loginDto: LoginDto): Promise<{ access_token: string }> {
+  async login(@Body() loginDto: LoginDto): Promise<string> {
     // Lógica de login:
     // 1. Verificar usuario y contraseña
     // 2. Generar el JWT si las credenciales son correctas
